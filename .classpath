@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-15">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Administrator.DESKTOP-S59OT49/eclipse-workspace/jars/JavaFxLib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="/home/nas-wks01/users/uapv2000258/JavaFxLib/javafx.swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
