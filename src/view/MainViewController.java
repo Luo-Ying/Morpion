@@ -43,20 +43,11 @@ public class MainViewController {
     @FXML
     void task(ActionEvent event) throws InterruptedException {
     	System.out.println("ok");
-//    	worker = createWorker();
-    	pgbar.setProgress(0.5);
-//    	pgIndicator.setProgress(0);
-//    	pgbar.progressProperty().unbind();
-//    	pgbar.progressProperty().bind(worker.progressProperty());
-    	double count = 0.1;
-    	for(int i=0; i<1000000000; i++) {
-    		
-    		if(i%100000000 == 0) { 
-    			System.out.println(count);
-	    		pgbar.setProgress(count);
-    			count+=0.1;
-    		}
-    	}
+    	worker = createWorker();
+    	pgbar.setProgress(0);
+    	pgbar.progressProperty().unbind();
+    	pgbar.progressProperty().bind(worker.progressProperty());
+    	new Thread(worker).start();
     }
     
     @FXML
@@ -70,18 +61,19 @@ public class MainViewController {
         
     }
     
-//    public Task createWorker() {
-//        return new Task() {
-//        	@Override
-//            protected Object call() throws Exception {
-////        		int count = 0;
-////                for (int i=0; i<10; i++) {
-////                    this.updateProgress(i, count);
-////                }
-//                return true;
-//            }
-//        };
-//    }
+    public Task createWorker() {
+        return new Task() {
+        	@Override
+            protected Object call() throws Exception {
+        		for(int i = 0; i < 100; i++){
+                    Thread.sleep(50);
+                    updateProgress(i + 1, 100);
+                }
+                updateMessage("Finish");
+                return null;
+            }
+        };
+    }
 
 
 }
