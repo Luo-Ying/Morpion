@@ -34,8 +34,8 @@ public class MainViewController {
     @FXML
     private ProgressBar pgbar;
     
-//    @FXML
-//    private ProgressIndicator pgIndicator;
+ //   @FXML
+//   private ProgressIndicator pgIndicator;
     
     
     Task worker;
@@ -48,6 +48,8 @@ public class MainViewController {
     	pgbar.progressProperty().unbind();
     	pgbar.progressProperty().bind(worker.progressProperty());
     	new Thread(worker).start();
+    	
+			
     }
     
     @FXML
