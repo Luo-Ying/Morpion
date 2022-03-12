@@ -8,7 +8,7 @@
 
 <Pane fx:id="sc1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
    <children>
-      <TextField fx:id="textfield" alignment="CENTER" layoutX="140.0" layoutY="232.0" prefHeight="25.0" prefWidth="578.0">
+      <TextField fx:id="textfield" alignment="CENTER" editable="false" layoutX="140.0" layoutY="232.0" prefHeight="25.0" prefWidth="578.0">
          <font>
             <Font name="System Italic" size="13.0" />
          </font></TextField>
