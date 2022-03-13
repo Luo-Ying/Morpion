@@ -56,13 +56,9 @@ public class MainViewController  extends Preloader implements Initializable {
    
     @FXML
     void task(ActionEvent event) throws InterruptedException {
-    	System.out.println("ok");
-    	worker = createWorker();
-    	pgbar.setProgress(0);
-    	pgbar.progressProperty().unbind();
-    	pgbar.progressProperty().bind(worker.progressProperty());
-    	new Thread(worker).start();
-    	
+    	//Enable the button cancel each time that I start the task
+		cancel.setDisable(false);    
+		
     	// Part for initialisation of the test
     	int size =9;
     	double lr=0.01;
@@ -83,6 +79,10 @@ public class MainViewController  extends Preloader implements Initializable {
 		
 		//Creation of a new task to display text progress
 		displayText=displayProgressText(mapTrain,layers,lr);
+		worker = displayProgressText(mapTrain,layers,lr);
+		pgbar.progressProperty().unbind();
+    	pgbar.progressProperty().bind(worker.progressProperty());
+    	new Thread(worker).start();
 		
 		//Add a listener to the task so that as it progresses the text shows the progress 
     	displayText.messageProperty().addListener((observer, oldVal, newVal) -> {
@@ -112,20 +112,6 @@ public class MainViewController  extends Preloader implements Initializable {
         
     }
     
-    public Task createWorker() {
-        return new Task() {
-        	@Override
-            protected Object call() throws Exception {
-        		for(int i = 0; i < 100; i++){
-                    Thread.sleep(50);
-                    updateProgress(i + 1, 100);
-                }
-                updateMessage("Finish");
-                return null;
-            }
-        };
-    }
-    
     // The function used to create the task
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
         return new Task<Object>() {
@@ -143,11 +129,15 @@ public class MainViewController  extends Preloader implements Initializable {
 
         			error += net.backPropagate(c.in, c.out);
         			
-        			if ( i % 10000 == 0 ) updateMessage("Error at step "+i+" is "+ (error/(double)i));
+        			if ( i % 10000 == 0 ) { 
+        				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message
+        				updateProgress((100/epochs)*i,100); //update progress bar 
+        			}
+        					
         		}
 
         		updateMessage("Task is finished");
-        		//Disable the button cancel
+        		//Disable the button cancel once task is finished
         		cancel.setDisable(true);        		
 				return null;
             }
