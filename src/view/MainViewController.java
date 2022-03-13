@@ -56,12 +56,8 @@ public class MainViewController  extends Preloader implements Initializable {
    
     @FXML
     void task(ActionEvent event) throws InterruptedException {
-    	System.out.println("ok");
-    	worker = createWorker();
-    	pgbar.setProgress(0);
-    	pgbar.progressProperty().unbind();
-    	pgbar.progressProperty().bind(worker.progressProperty());
-    	new Thread(worker).start();
+    	//Enable the button cancel
+		cancel.setDisable(false); 
     	
     	// Part for initialisation of the test
     	int size =9;
@@ -81,8 +77,14 @@ public class MainViewController  extends Preloader implements Initializable {
 		HashMap<Integer, Coup> mapDev = ai.Test.loadCoupsFromFile("./resources/train_dev_test/dev.txt");
 		HashMap<Integer, Coup> mapTest = ai.Test.loadCoupsFromFile("./resources/train_dev_test/test.txt");
 		
-		//Creation of a new task to display text progress
+		//Creation of a new task to display text progress and  progress bar
 		displayText=displayProgressText(mapTrain,layers,lr);
+		
+		worker = displayProgressText(mapTrain,layers,lr);
+    	pgbar.progressProperty().unbind();
+    	pgbar.progressProperty().bind(worker.progressProperty());
+    	new Thread(worker).start();
+    	
 		
 		//Add a listener to the task so that as it progresses the text shows the progress 
     	displayText.messageProperty().addListener((observer, oldVal, newVal) -> {
@@ -112,20 +114,6 @@ public class MainViewController  extends Preloader implements Initializable {
         
     }
     
-    public Task createWorker() {
-        return new Task() {
-        	@Override
-            protected Object call() throws Exception {
-        		for(int i = 0; i < 100; i++){
-                    Thread.sleep(50);
-                    updateProgress(i + 1, 100);
-                }
-                updateMessage("Finish");
-                return null;
-            }
-        };
-    }
-    
     // The function used to create the task
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
         return new Task<Object>() {
@@ -134,7 +122,7 @@ public class MainViewController  extends Preloader implements Initializable {
         		double error = 0.0 ;
         		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
         		//changed the epochs so that it finishes earlier
-        		double epochs = 1000000 ;
+        		double epochs = 10000000 ;
         		for(int i = 0; i < epochs; i++){
 
         			Coup c = null ;
@@ -143,7 +131,10 @@ public class MainViewController  extends Preloader implements Initializable {
 
         			error += net.backPropagate(c.in, c.out);
         			
-        			if ( i % 10000 == 0 ) updateMessage("Error at step "+i+" is "+ (error/(double)i));
+        			if ( i % 10000 == 0 ) {
+        				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in texfield
+        				updateProgress((100/epochs)*i,100);//update progressbar
+        			}
         		}
 
         		updateMessage("Task is finished");
