@@ -56,9 +56,13 @@ public class MainViewController  extends Preloader implements Initializable {
    
     @FXML
     void task(ActionEvent event) throws InterruptedException {
-    	//Enable the button cancel
-		cancel.setDisable(false); 
-		
+    	System.out.println("ok");
+    	worker = createWorker();
+    	pgbar.setProgress(0);
+    	pgbar.progressProperty().unbind();
+    	pgbar.progressProperty().bind(worker.progressProperty());
+    	new Thread(worker).start();
+    	
     	// Part for initialisation of the test
     	int size =9;
     	double lr=0.01;
@@ -79,10 +83,6 @@ public class MainViewController  extends Preloader implements Initializable {
 		
 		//Creation of a new task to display text progress
 		displayText=displayProgressText(mapTrain,layers,lr);
-		worker = displayProgressText(mapTrain,layers,lr);
-		pgbar.progressProperty().unbind();
-    	pgbar.progressProperty().bind(worker.progressProperty());
-    	new Thread(worker).start();
 		
 		//Add a listener to the task so that as it progresses the text shows the progress 
     	displayText.messageProperty().addListener((observer, oldVal, newVal) -> {
@@ -143,10 +143,7 @@ public class MainViewController  extends Preloader implements Initializable {
 
         			error += net.backPropagate(c.in, c.out);
         			
-        			if ( i % 10000 == 0 ) {
-        				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in textfield
-        				updateProgress((100/epochs)*i,100); //update progress bar
-        			}
+        			if ( i % 10000 == 0 ) updateMessage("Error at step "+i+" is "+ (error/(double)i));
         		}
 
         		updateMessage("Task is finished");
