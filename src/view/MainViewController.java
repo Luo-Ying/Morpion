@@ -56,6 +56,7 @@ public class MainViewController  extends Preloader implements Initializable {
    
     @FXML
     void task(ActionEvent event) throws InterruptedException {
+<<<<<<< HEAD
     	//Enable the button cancel each time that I start the task
 		cancel.setDisable(false);    
 		
@@ -94,6 +95,24 @@ public class MainViewController  extends Preloader implements Initializable {
     	th.start();
 	} 
 	
+=======
+    	System.out.println("ok");
+//    	worker = createWorker();
+    	pgbar.setProgress(0.5);
+//    	pgIndicator.setProgress(0);
+//    	pgbar.progressProperty().unbind();
+//    	pgbar.progressProperty().bind(worker.progressProperty());
+    	double count = 0.1;
+    	for(int i=0; i<1000000000; i++) {
+    		
+    		if(i%100000000 == 0) { 
+    			System.out.println(count);
+	    		pgbar.setProgress(count);
+    			count+=0.1;
+    		}
+    	}
+    }
+>>>>>>> parent of 1b187fa... -progressBar
     
     @SuppressWarnings("deprecation")
 	@FXML
@@ -112,6 +131,7 @@ public class MainViewController  extends Preloader implements Initializable {
         
     }
     
+<<<<<<< HEAD
     // The function used to create the task
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
         return new Task<Object>() {
@@ -151,6 +171,20 @@ public class MainViewController  extends Preloader implements Initializable {
 			
 	}
 
+=======
+//    public Task createWorker() {
+//        return new Task() {
+//        	@Override
+//            protected Object call() throws Exception {
+////        		int count = 0;
+////                for (int i=0; i<10; i++) {
+////                    this.updateProgress(i, count);
+////                }
+//                return true;
+//            }
+//        };
+//    }
+>>>>>>> parent of 1b187fa... -progressBar
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
