@@ -16,13 +16,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Morpion");
+		this.primaryStage.setTitle("Jeu de Morpion");
 		showMainView();
 	}
 
 	private void showMainView() throws IOException {
 	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(Main.class.getResource("/view/MainView.fxml"));
+	loader.setLocation(Main.class.getResource("/view/Apprentissage.fxml"));
 	mainLayout = loader.load();
 	Scene scene = new Scene(mainLayout);
 	primaryStage.setScene(scene);

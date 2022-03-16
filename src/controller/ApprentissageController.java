@@ -28,7 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MainViewController  extends Preloader implements Initializable {
+public class ApprentissageController  extends Preloader implements Initializable {
 
     @FXML
     private Pane sc1;
