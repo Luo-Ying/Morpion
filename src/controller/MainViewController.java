@@ -148,14 +148,6 @@ public class MainViewController  extends Preloader implements Initializable {
         		//Disable the button cancel
         		cancel.setDisable(true);
         		
-        	
-        		try {
-					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-        			oos.writeObject(net);
-        		} catch (Exception e) {
-        			e.printStackTrace();
-        		}
-        		
 				return null;
             }
         };
