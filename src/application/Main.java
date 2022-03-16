@@ -1,4 +1,4 @@
-package view;
+package application;
 	
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class Main extends Application {
 
 	private void showMainView() throws IOException {
 	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(Main.class.getResource("MainView.fxml"));
+	loader.setLocation(Main.class.getResource("/view/MainView.fxml"));
 	mainLayout = loader.load();
 	Scene scene = new Scene(mainLayout);
 	primaryStage.setScene(scene);
