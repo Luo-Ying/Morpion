@@ -1,5 +1,8 @@
 package view;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +59,7 @@ public class MainViewController  extends Preloader implements Initializable {
    
     @FXML
     void task(ActionEvent event) throws InterruptedException {
+    	
     	//Enable the button cancel
 		cancel.setDisable(false); 
     	
@@ -116,13 +120,16 @@ public class MainViewController  extends Preloader implements Initializable {
     
     // The function used to create the task
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
+    	File file= new File("src/resultat/mlp.ser");
+    	
+    	
         return new Task<Object>() {
         	@Override
             protected Object call() throws Exception {
         		double error = 0.0 ;
         		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
         		//changed the epochs so that it finishes earlier
-        		double epochs = 10000000 ;
+        		double epochs = 1000000 ;
         		for(int i = 0; i < epochs; i++){
 
         			Coup c = null ;
@@ -139,7 +146,16 @@ public class MainViewController  extends Preloader implements Initializable {
 
         		updateMessage("Task is finished");
         		//Disable the button cancel
-        		cancel.setDisable(true);        		
+        		cancel.setDisable(true);
+        		
+        	
+        		try {
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+        			oos.writeObject(net);
+        		} catch (Exception e) {
+        			e.printStackTrace();
+        		}
+        		
 				return null;
             }
         };
