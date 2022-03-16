@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,6 +125,8 @@ public class MainViewController  extends Preloader implements Initializable {
     	
         return new Task<Object>() {
         	
+        	File fichier =  new File("./src/result/mlp.ser") ;
+        	
         	@Override
             protected Object call() throws Exception {
         		double error = 0.0 ;
@@ -142,6 +146,14 @@ public class MainViewController  extends Preloader implements Initializable {
         				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in texfield
         				updateProgress((100/epochs)*i,100);//update progressbar
         			}
+        		}
+        		
+        		try {
+        			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+        			oos.writeObject(net) ;
+        		} catch (Exception e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
         		}
 
         		updateMessage("Task is finished");
