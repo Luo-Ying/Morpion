@@ -1,5 +1,6 @@
-package view;
+package controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,6 +118,7 @@ public class MainViewController  extends Preloader implements Initializable {
     // The function used to create the task
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
         return new Task<Object>() {
+        	
         	@Override
             protected Object call() throws Exception {
         		double error = 0.0 ;
@@ -132,6 +134,7 @@ public class MainViewController  extends Preloader implements Initializable {
         			error += net.backPropagate(c.in, c.out);
         			
         			if ( i % 10000 == 0 ) {
+//        				System.out.println("Error at step "+i+" is "+ (error/(double)i));
         				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in texfield
         				updateProgress((100/epochs)*i,100);//update progressbar
         			}
