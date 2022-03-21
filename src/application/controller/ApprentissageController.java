@@ -49,11 +49,8 @@ import javafx.util.Duration;
 public class ApprentissageController  extends Preloader implements Initializable {
 
     @FXML
-    private Pane sc1; //sc1=Apprentissage
+    private Pane sc1;
     
-    @FXML
-    private Pane sc2; //sc2=MenuAdversaire
-
     @FXML
     private TextField textfield;
 
@@ -71,23 +68,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     private Task<?> displayText;
     
     private Thread th;
-    
-    @FXML
-    private Button colorGreen;
-    
-    @FXML
-    private Button colorPink;
-    
-    @FXML
-    private Button colorYellow;
-    
-    @FXML
-    private Button buttonVs;
-
-    @FXML
-    private Button buttonVs2;
-    
-    
+     
    //on click start of learning IA
     @FXML
     void task(ActionEvent event) throws InterruptedException {
@@ -196,66 +177,7 @@ public class ApprentissageController  extends Preloader implements Initializable
             }
         };
     }
-    public class ToggleSwitch extends Parent {
-    	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
-    	public TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
-    	public FillTransition fillAnimation= new FillTransition(Duration.seconds(0.25));
-    	public ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
-    	
-    	
-    	public BooleanProperty switchedOnProperty() {
-    		return switchedOn;
-    	}
-    	
-    	
-    	
-    	ToggleSwitch() {
-    		Rectangle background = new Rectangle(50,25);
-    		background.setArcWidth(25);
-    		background.setArcHeight(25);
-    		background.setFill(Color.LIGHTBLUE);
-    		background.setStroke(Color.LIGHTGREY);
-    		
-    		Circle trigger = new Circle(12.5);
-    		trigger.setCenterX(40);
-    		trigger.setCenterY(12.5);
-    		trigger.setFill(Color.WHITE);
-    		trigger.setStroke(Color.LIGHTGREY);
-    		
-    		translateAnimation.setNode(trigger);
-    		fillAnimation.setShape(background);
-    	
-    		getChildren().addAll(background,trigger);
-    		
-    		switchedOn.addListener((observer, oldVal, newVal) -> {
-    			boolean isOn = newVal.booleanValue();
-    			translateAnimation.setToX(isOn ? -30 : 0);
-    			animation.play();
-    			fillAnimation.setFromValue(isOn ? Color.LIGHTBLUE : Color.WHITE);
-    			fillAnimation.setToValue(isOn ? Color.WHITE : Color.LIGHTBLUE);
-    			});
-    		setOnMouseClicked(event ->{
-    			switchedOn.set(!switchedOn.get());
-    		});
-    	}
-    }
     
-    @FXML
-    void changePink(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
-    }
-
-    @FXML
-    void changeGreen(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
-    }
-
-    @FXML
-    void changeYellow(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-    }
-
-
 	@Override
 	public void start(Stage arg0) throws Exception {
 			
@@ -264,22 +186,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-		
-		ToggleSwitch toggle= new ToggleSwitch();
-		toggle.setTranslateY(68);
-		toggle.setTranslateX(770);
-		colorGreen.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
-		colorGreen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		colorPink.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
-		colorPink.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		colorYellow.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-		colorYellow.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		buttonVs.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		buttonVs.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		buttonVs2.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		buttonVs2.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		sc2.getChildren().add(toggle);
+		sc1.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
 		
 	}
 
