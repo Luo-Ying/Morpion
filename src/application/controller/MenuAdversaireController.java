@@ -6,9 +6,6 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-
-
-
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -34,18 +31,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MenuAdversaireController  extends Preloader implements Initializable {
+public class MenuAdversaireController extends Preloader implements Initializable {
 	@FXML
     private Pane sc2;
+	
+	@FXML
+    private Button pink;
+	
+	@FXML
+    private Button green;
+	
+	@FXML
+    private Button yellow;
 
-    @FXML
-    private Button colorGreen;
-
-    @FXML
-    private Button colorPink;
-
-    @FXML
-    private Button colorYellow;
 
     @FXML
     private Button buttonVs;
@@ -53,22 +51,26 @@ public class MenuAdversaireController  extends Preloader implements Initializabl
     @FXML
     private Button buttonVs2;
     
-    @FXML
-    void backgroundGreen(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
-    }
+    
 
     @FXML
-    void backgroundPink(ActionEvent event) {
+    void colorPink(ActionEvent event) {
     	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
 
     }
-
+    
     @FXML
-    void backgroundYellow(ActionEvent event) {
+    void colorGreen(ActionEvent event) {
+    	sc2.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
+
+    }
+    
+    @FXML
+    void colorYellow(ActionEvent event) {
     	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
 
     }
+   
     
     public class ToggleSwitch extends Parent {
     	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
@@ -127,12 +129,12 @@ public class MenuAdversaireController  extends Preloader implements Initializabl
 		ToggleSwitch toggle= new ToggleSwitch();
 		toggle.setTranslateY(68);
 		toggle.setTranslateX(770);
-		colorGreen.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
-		colorGreen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		colorPink.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
-		colorPink.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		colorYellow.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-		colorYellow.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		green.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
+		green.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		pink.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
+		pink.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		yellow.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
+		yellow.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		buttonVs.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		buttonVs.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		buttonVs2.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));

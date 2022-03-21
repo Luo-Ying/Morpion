@@ -17,21 +17,6 @@
             <Image url="@../../images/iconMusiaue.png" />
          </image>
       </ImageView>
-      <Button fx:id="colorGreen" layoutX="690.0" layoutY="658.0" mnemonicParsing="false" onAction="#backgroundPink" prefHeight="37.0" prefWidth="34.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="colorPink" layoutX="742.0" layoutY="658.0" mnemonicParsing="false" onAction="#backgroundPink" prefHeight="37.0" prefWidth="34.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="colorYellow" layoutX="794.0" layoutY="658.0" mnemonicParsing="false" onAction="#backgroundYellow" prefHeight="37.0" prefWidth="34.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button fx:id="buttonVs" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="423.0" text="Vs">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -72,5 +57,20 @@
             <Image url="@../../images/panda.png" />
          </image>
       </ImageView>
+      <Button fx:id="pink" layoutX="646.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorPink" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="green" layoutX="704.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorGreen" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="yellow" layoutX="760.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorYellow" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>
