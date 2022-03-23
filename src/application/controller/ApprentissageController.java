@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
-
+import ai.Config;
+import ai.ConfigFileLoader;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
@@ -25,6 +25,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -68,8 +69,14 @@ public class ApprentissageController  extends Preloader implements Initializable
     private Task<?> displayText;
     
     private Thread th;
+
+    private Config config;
      
    //on click start of learning IA
+    
+    void setConfig(Config config) {
+    	this.config=config;
+    }
     @FXML
     void task(ActionEvent event) throws InterruptedException {
     	
@@ -77,10 +84,11 @@ public class ApprentissageController  extends Preloader implements Initializable
 		cancel.setDisable(false); 
     	
     	// Part for initialisation of the test
+		System.out.println(config.level);
     	int size =9;
-    	double lr=0.01;
-    	int l=2;
-    	int h=6;
+    	double lr=config.learningRate;
+    	int l=config.numberOfhiddenLayers;
+    	int h=config.hiddenLayerSize;
     	
     	int[] layers = new int[l+2];
 		layers[0] = size ;
@@ -95,9 +103,9 @@ public class ApprentissageController  extends Preloader implements Initializable
 		HashMap<Integer, Coup> mapTest = ai.Test.loadCoupsFromFile("./resources/train_dev_test/test.txt");
 		
 		//Creation of a new task to display text progress and  progress bar
-		displayText=displayProgressText(mapTrain,layers,lr);
+		displayText=displayProgressText(mapTrain,layers,lr,config.level);
 		
-		worker = displayProgressText(mapTrain,layers,lr);
+		worker = displayProgressText(mapTrain,layers,lr,config.level);
     	pgbar.progressProperty().unbind();
     	pgbar.progressProperty().bind(worker.progressProperty());
     	new Thread(worker).start();
@@ -132,20 +140,28 @@ public class ApprentissageController  extends Preloader implements Initializable
     }
     
     // The function used to create the task
-    public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr) {
-    	File file= new File("src/resultat/mlp.ser");
+    public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr,String level) {
+    	File fichier;
+    	if (level.equals("F")) {
+    		fichier =  new File("./src/result/mlp_facile.ser") ;
+    	}
+    	else if (level.equals("M")) {
+    		fichier =  new File("./src/result/mlp_moyen.ser") ;
+    	}
+    	else {
+    		fichier =  new File("./src/result/mlp_difficile.ser") ;
+    	}
     	
     	
         return new Task<Object>() {
         	
-        	File fichier =  new File("./src/result/mlp.ser") ;
         	
         	@Override
             protected Object call() throws Exception {
         		double error = 0.0 ;
         		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
         		//changed the epochs so that it finishes earlier
-        		double epochs = 1000000 ;
+        		double epochs = 100000 ;
         		for(int i = 0; i < epochs; i++){
 
         			Coup c = null ;
@@ -154,7 +170,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 
         			error += net.backPropagate(c.in, c.out);
         			
-        			if ( i % 10000 == 0 ) {
+        			if ( i % 1000 == 0 ) {
 //        				System.out.println("Error at step "+i+" is "+ (error/(double)i));
         				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in texfield
         				updateProgress((100/epochs)*i,100);//update progressbar
@@ -187,7 +203,5 @@ public class ApprentissageController  extends Preloader implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		sc1.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-		
 	}
-
 }

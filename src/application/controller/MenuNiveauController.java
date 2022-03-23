@@ -7,6 +7,9 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import ai.Config;
+import ai.ConfigFileLoader;
+import application.Main;
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -15,8 +18,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -32,7 +38,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MenuAdversaireController extends Preloader implements Initializable {
+public class MenuNiveauController extends Preloader implements Initializable {
 	@FXML
     private Pane sc2;
 	
@@ -44,15 +50,18 @@ public class MenuAdversaireController extends Preloader implements Initializable
 	
 	@FXML
     private Button yellow;
-
+	
+	@FXML
+    private Button facile;
 
     @FXML
-    private Button buttonVs;
+    private Button moyen;
 
     @FXML
-    private Button buttonVs2;
+    private Button difficile;
     
-    
+    private Config config;
+
 
     @FXML
     void colorPink(ActionEvent event) {
@@ -71,13 +80,38 @@ public class MenuAdversaireController extends Preloader implements Initializable
     	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
 
     }
+    void setIALevel(String level) throws IOException {
+    	ConfigFileLoader cfl = new ConfigFileLoader();
+		cfl.loadConfigFile("./resources/config.txt");
+		this.config = cfl.get(level);
+    }
+    
+    public Config getIALevel() {
+    	return this.config;
+    }
     
     @FXML
-    void switchToMenuNiveau(ActionEvent event) throws IOException {
+    void setIADifficult(ActionEvent event) throws IOException {
+    	setIALevel("D");
     	SceneController sController = new SceneController();
-		sController.switchToMenuNiveauController(event);
+		sController.switchToApprentissageController(event,getIALevel());
+    	
     }
-   
+
+    @FXML
+    void setIAEasy(ActionEvent event) throws IOException {
+    	setIALevel("F");
+    	SceneController sController = new SceneController();
+		sController.switchToApprentissageController(event,getIALevel());
+    }
+
+    @FXML
+    void setIANormal(ActionEvent event) throws IOException {
+    	setIALevel("M");
+    	SceneController sController = new SceneController();
+		sController.switchToApprentissageController(event,getIALevel());
+
+    }
     
     public class ToggleSwitch extends Parent {
     	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
@@ -119,7 +153,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     			});
     		setOnMouseClicked(event ->{
     			switchedOn.set(!switchedOn.get());
-    		});
+    		});	       
     	}
     }
     
@@ -142,10 +176,12 @@ public class MenuAdversaireController extends Preloader implements Initializable
 		pink.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		yellow.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
 		yellow.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		buttonVs.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		buttonVs.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		buttonVs2.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		buttonVs2.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		facile.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		facile.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		moyen.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		moyen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		difficile.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		difficile.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		sc2.getChildren().add(toggle);
 		
 	}

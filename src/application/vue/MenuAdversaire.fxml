@@ -19,8 +19,11 @@
       </ImageView>
       <Button fx:id="buttonVs" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="423.0" text="Vs">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="MV Boli" size="24.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <ImageView fitHeight="99.0" fitWidth="109.0" layoutX="272.0" layoutY="206.0" pickOnBounds="true">
          <image>
@@ -32,10 +35,13 @@
             <Image url="@../../images/littlegirl.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttonVs2" layoutX="218.0" layoutY="383.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="423.0" text="Vs">
+      <Button fx:id="buttonVs2" layoutX="218.0" layoutY="383.0" mnemonicParsing="false" onAction="#switchToMenuNiveau" prefHeight="92.0" prefWidth="423.0" text="Vs">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="MV Boli" size="24.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <ImageView fitHeight="99.0" fitWidth="119.0" layoutX="272.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
          <image>

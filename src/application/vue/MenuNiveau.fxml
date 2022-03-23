@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="sc2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MenuNiveauController">
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <children>
+      <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/iconMusiaue.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="186.0" fitWidth="157.0" layoutX="646.0" layoutY="429.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../images/bamboo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="224.0" fitWidth="235.0" layoutX="642.0" layoutY="471.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../images/panda.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="pink" layoutX="646.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorPink" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="green" layoutX="704.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorGreen" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="yellow" layoutX="760.0" layoutY="656.0" mnemonicParsing="false" onAction="#colorYellow" prefHeight="41.0" prefWidth="41.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="facile" layoutX="237.0" layoutY="194.0" mnemonicParsing="false" onAction="#setIAEasy" prefHeight="89.0" prefWidth="389.0" text="Facile" textFill="#199850">
+         <font>
+            <Font name="MV Boli" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="moyen" layoutX="237.0" layoutY="303.0" mnemonicParsing="false" onAction="#setIANormal" prefHeight="89.0" prefWidth="389.0" text="Moyen" textFill="#dba91e">
+         <font>
+            <Font name="MV Boli" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="difficile" layoutX="235.0" layoutY="411.0" mnemonicParsing="false" onAction="#setIADifficult" prefHeight="89.0" prefWidth="389.0" text="Difficile" textFill="#d00d0d">
+         <font>
+            <Font name="MV Boli" size="24.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
