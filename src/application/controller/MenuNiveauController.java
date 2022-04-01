@@ -2,7 +2,10 @@ package application.controller;
 
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,9 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -58,9 +63,15 @@ public class MenuNiveauController extends Preloader implements Initializable {
 
     @FXML
     private Button moyen;
+    
+    @FXML
+    private Button maison;
 
     @FXML
     private Button difficile;
+    
+    @FXML
+    private Button btnMaison;
     
     @FXML
     private ImageView panda1;
@@ -70,9 +81,6 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
     @FXML
     private ImageView bamboo;
-    
-    @FXML
-    private ImageView soleil;
     
     @FXML
     private ImageView petitPrince1;
@@ -85,6 +93,16 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
     @FXML
     private ImageView pawPatrolIcon;
+    
+    @FXML
+    private ImageView maisonJaune;
+
+    @FXML
+    private ImageView maisonVert;
+
+    @FXML
+    private ImageView maisonRose;
+    
     
     private Config config;
     
@@ -145,6 +163,11 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		sController.switchToApprentissageController(event,getIALevel(),getColor());
 
     }
+    @FXML
+    void returnHome(MouseEvent event) throws IOException {
+    	SceneController sController = new SceneController();
+		sController.switchToMenuAdversaireController(event,getColor());
+    }
     
     public class ToggleSwitch extends Parent {
     	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
@@ -194,21 +217,24 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
-		yellowTheme.add(soleil);
+		yellowTheme.add(maisonJaune);
     }
     
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
+    	pinkTheme.add(maisonRose);
     }
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
+    	greenTheme.add(maisonVert);
     }
     
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) {
     	sc2.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
+    	
     	for(int i=0;i<yellowTheme.size();i++) {
     		yellowTheme.get(i).setVisible(yellow);
     	}
@@ -255,7 +281,8 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		moyen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		difficile.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		difficile.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		
+		btnMaison.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		btnMaison.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
 		sc2.getChildren().add(toggle);
 		

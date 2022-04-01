@@ -3,6 +3,7 @@ package application.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -63,6 +65,9 @@ public class ApprentissageController  extends Preloader implements Initializable
     private Button cancel;
     
     @FXML
+    private Button btnMaison;
+    
+    @FXML
     private ProgressBar pgbar;
      
     private Task<?> worker;
@@ -81,9 +86,6 @@ public class ApprentissageController  extends Preloader implements Initializable
     private ImageView bamboo;
     
     @FXML
-    private ImageView soleil;
-    
-    @FXML
     private ImageView petitPrince1;
     
     @FXML
@@ -95,6 +97,15 @@ public class ApprentissageController  extends Preloader implements Initializable
     @FXML
     private ImageView pawPatrolIcon;
     
+    @FXML
+    private ImageView maisonJaune;
+
+    @FXML
+    private ImageView maisonVert;
+
+    @FXML
+    private ImageView maisonRose;
+    
     private Config config;
     
     private List <ImageView> yellowTheme = new ArrayList<>();
@@ -102,6 +113,8 @@ public class ApprentissageController  extends Preloader implements Initializable
     private List <ImageView> pinkTheme = new ArrayList<>();
     
     private List <ImageView> greenTheme = new ArrayList<>();
+    
+    private Color color;
 
      
    //on click start of learning IA
@@ -230,20 +243,23 @@ public class ApprentissageController  extends Preloader implements Initializable
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
-		yellowTheme.add(soleil);
+		yellowTheme.add(maisonJaune);
     }
     
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
+    	pinkTheme.add(maisonRose);
     }
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
+    	greenTheme.add(maisonVert);
     }
     
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
+    	setColor(color);
     	if(color==Color.LIGHTYELLOW) {
     		pgbar.setStyle("-fx-accent: gold;");
 		}
@@ -266,6 +282,20 @@ public class ApprentissageController  extends Preloader implements Initializable
     	}
     }
     
+    @FXML
+    void returnHome(MouseEvent event) throws IOException {
+    	SceneController sController = new SceneController();
+		sController.switchToMenuAdversaireController(event,getColor());
+    }
+    
+    public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
 	@Override
 	public void start(Stage arg0) throws Exception {
 			
@@ -279,6 +309,8 @@ public class ApprentissageController  extends Preloader implements Initializable
 		start.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		cancel.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		cancel.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		btnMaison.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		btnMaison.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();

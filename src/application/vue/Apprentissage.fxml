@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -41,11 +43,6 @@
             <Image url="@../../images/panda2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="soleil" fitHeight="175.0" fitWidth="182.0" layoutX="14.0" layoutY="28.0" pickOnBounds="true" visible="false">
-         <image>
-            <Image url="@../../images/soleil.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="petitPrince1" fitHeight="248.0" fitWidth="217.0" layoutY="438.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../../images/petitprince.png" />
@@ -65,6 +62,44 @@
          <image>
             <Image url="@../../images/pawpatrolicon.png" />
          </image>
+      </ImageView>
+      <Button fx:id="btnMaison" layoutX="24.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#returnHome" prefHeight="65.0" prefWidth="66.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="maisonVert" fitHeight="79.0" fitWidth="52.0" layoutX="31.0" layoutY="65.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/maison-verte.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="maisonRose" fitHeight="79.0" fitWidth="52.0" layoutX="31.0" layoutY="65.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/maison-rose.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="maisonJaune" fitHeight="52.0" fitWidth="52.0" layoutX="31.0" layoutY="64.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/maison-jaune.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
       </ImageView>
 	</children>
 </Pane>
