@@ -12,17 +12,22 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <children>
+      <ImageView fx:id="pawPatrol" fitHeight="194.0" fitWidth="649.0" layoutX="132.0" layoutY="486.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/pawpatrol.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/iconMusiaue.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="186.0" fitWidth="157.0" layoutX="646.0" layoutY="429.0" pickOnBounds="true">
+      <ImageView fx:id="bamboo" fitHeight="186.0" fitWidth="157.0" layoutX="646.0" layoutY="429.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../../images/bamboo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="224.0" fitWidth="235.0" layoutX="642.0" layoutY="471.0" pickOnBounds="true">
+      <ImageView fx:id="panda1" fitHeight="224.0" fitWidth="235.0" layoutX="642.0" layoutY="471.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../../images/panda.png" />
          </image>
@@ -57,5 +62,30 @@
             <Font name="MV Boli" size="24.0" />
          </font>
       </Button>
+      <ImageView fx:id="panda2" fitHeight="239.0" fitWidth="217.0" layoutY="456.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/panda2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="soleil" fitHeight="175.0" fitWidth="182.0" layoutX="14.0" layoutY="28.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/soleil.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="petitPrince2" fitHeight="248.0" fitWidth="217.0" layoutY="438.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/petitprince.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="petitPrince1" fitHeight="284.0" fitWidth="217.0" layoutX="642.0" layoutY="191.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/petitprince3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pawPatrolIcon" fitHeight="194.0" fitWidth="337.0" layoutX="261.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/pawpatrolicon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

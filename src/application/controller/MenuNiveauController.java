@@ -4,7 +4,8 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import ai.Config;
@@ -24,6 +25,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -60,24 +62,55 @@ public class MenuNiveauController extends Preloader implements Initializable {
     @FXML
     private Button difficile;
     
+    @FXML
+    private ImageView panda1;
+    
+    @FXML
+    private ImageView panda2;
+    
+    @FXML
+    private ImageView bamboo;
+    
+    @FXML
+    private ImageView soleil;
+    
+    @FXML
+    private ImageView petitPrince1;
+    
+    @FXML
+    private ImageView petitPrince2;
+    
+    @FXML
+    private ImageView pawPatrol;
+    
+    @FXML
+    private ImageView pawPatrolIcon;
+    
     private Config config;
+    
+    private List <ImageView> yellowTheme = new ArrayList<>();
+    
+    private List <ImageView> pinkTheme = new ArrayList<>();
+    
+    private List <ImageView> greenTheme = new ArrayList<>();
+    
+    private Color color;
 
 
     @FXML
     void colorPink(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
-
+    	setTheme(Color.LIGHTPINK,false,true,false);
     }
     
     @FXML
     void colorGreen(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
+    	setTheme(Color.rgb(210,252,209),false,false,true);
 
     }
     
     @FXML
     void colorYellow(ActionEvent event) {
-    	sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
+    	setTheme(Color.LIGHTYELLOW,true,false,false);
 
     }
     void setIALevel(String level) throws IOException {
@@ -94,7 +127,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
     void setIADifficult(ActionEvent event) throws IOException {
     	setIALevel("D");
     	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel());
+		sController.switchToApprentissageController(event,getIALevel(),getColor());
     	
     }
 
@@ -102,14 +135,14 @@ public class MenuNiveauController extends Preloader implements Initializable {
     void setIAEasy(ActionEvent event) throws IOException {
     	setIALevel("F");
     	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel());
+		sController.switchToApprentissageController(event,getIALevel(),getColor());
     }
 
     @FXML
     void setIANormal(ActionEvent event) throws IOException {
     	setIALevel("M");
     	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel());
+		sController.switchToApprentissageController(event,getIALevel(),getColor());
 
     }
     
@@ -157,6 +190,45 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	}
     }
     
+    public void addImageToYellowTheme() {
+    	yellowTheme.add(panda1);
+		yellowTheme.add(panda2);
+		yellowTheme.add(bamboo);
+		yellowTheme.add(soleil);
+    }
+    
+    public void addImageToPinkTheme() {
+    	pinkTheme.add(petitPrince1);
+    	pinkTheme.add(petitPrince2);
+    }
+    public void addImageToGreenTheme() {
+    	greenTheme.add(pawPatrol);
+    	greenTheme.add(pawPatrolIcon);
+    }
+    
+    public void setTheme(Color color,boolean yellow,boolean pink,boolean green) {
+    	sc2.setBackground(new Background(new BackgroundFill(color, null, null)));
+    	setColor(color);
+    	for(int i=0;i<yellowTheme.size();i++) {
+    		yellowTheme.get(i).setVisible(yellow);
+    	}
+    	
+    	for(int i=0;i<pinkTheme.size();i++) {
+    		pinkTheme.get(i).setVisible(pink);
+    	}
+    	
+    	for(int i=0;i<greenTheme.size();i++) {
+    		greenTheme.get(i).setVisible(green);
+    	}
+    }
+    public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
 	@Override
 	public void start(Stage arg0) throws Exception {
 			
@@ -165,11 +237,12 @@ public class MenuNiveauController extends Preloader implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
 		
 		ToggleSwitch toggle= new ToggleSwitch();
 		toggle.setTranslateY(68);
 		toggle.setTranslateX(770);
+		
+		
 		green.setBackground(new Background(new BackgroundFill(Color.rgb(210,252,209), null, null)));
 		green.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		pink.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
@@ -182,7 +255,13 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		moyen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		difficile.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		difficile.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
+		
 		sc2.getChildren().add(toggle);
+		
+		addImageToYellowTheme();
+		addImageToPinkTheme();
+		addImageToGreenTheme();
 		
 	}
 

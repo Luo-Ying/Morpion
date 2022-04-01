@@ -7,11 +7,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="sc2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MenuAdversaireController">
+<Pane fx:id="sc2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MenuAdversaireController">
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <children>
+      <ImageView fx:id="pawPatrol" fitHeight="194.0" fitWidth="649.0" layoutX="132.0" layoutY="479.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/pawpatrol.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/iconMusiaue.png" />
@@ -25,17 +30,23 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="99.0" fitWidth="109.0" layoutX="272.0" layoutY="206.0" pickOnBounds="true">
+      <ImageView fx:id="panda1" fitHeight="205.0" fitWidth="203.0" layoutX="217.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/littleman.png" />
+            <Image url="@../../images/panda.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="99.0" fitWidth="119.0" layoutX="494.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="panda2" fitHeight="99.0" fitWidth="116.0" layoutX="474.0" layoutY="211.0" pickOnBounds="true">
          <image>
-            <Image url="@../../images/littlegirl.png" />
+            <Image url="@../../images/panda2.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Button fx:id="buttonVs2" layoutX="218.0" layoutY="383.0" mnemonicParsing="false" onAction="#switchToMenuNiveau" prefHeight="92.0" prefWidth="423.0" text="Vs">
+      <Button fx:id="buttonVs2" layoutX="218.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#switchToMenuNiveau" prefHeight="92.0" prefWidth="423.0" text="Vs">
          <font>
             <Font name="MV Boli" size="24.0" />
          </font>
@@ -43,22 +54,28 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="99.0" fitWidth="119.0" layoutX="272.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="panda3" fitHeight="211.0" fitWidth="203.0" layoutX="217.0" layoutY="324.0" onMouseClicked="#switchToMenuNiveau" pickOnBounds="true">
          <image>
-            <Image url="@../../images/littlegirl.png" />
+            <Image url="@../../images/panda.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="66.0" fitWidth="65.0" layoutX="508.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="66.0" fitWidth="65.0" layoutX="508.0" layoutY="397.0" onMouseClicked="#switchToMenuNiveau" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/computer.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="186.0" fitWidth="157.0" layoutX="646.0" layoutY="429.0" pickOnBounds="true">
+      <ImageView fx:id="bamboo" fitHeight="186.0" fitWidth="157.0" layoutX="646.0" layoutY="429.0" pickOnBounds="true">
          <image>
             <Image url="@../../images/bamboo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="224.0" fitWidth="235.0" layoutX="642.0" layoutY="471.0" pickOnBounds="true">
+      <ImageView fx:id="panda4" fitHeight="224.0" fitWidth="235.0" layoutX="642.0" layoutY="471.0" pickOnBounds="true">
          <image>
             <Image url="@../../images/panda.png" />
          </image>
@@ -78,5 +95,78 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fx:id="panda5" fitHeight="239.0" fitWidth="217.0" layoutY="456.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../images/panda2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="soleil" fitHeight="175.0" fitWidth="182.0" layoutX="14.0" layoutY="28.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../images/soleil.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="renard" fitHeight="99.0" fitWidth="200.0" layoutX="251.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/renard.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="mouton" fitHeight="108.0" fitWidth="115.0" layoutX="487.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/mouton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="petitPrince1" fitHeight="92.0" fitWidth="99.0" layoutX="273.0" layoutY="383.0" onMouseClicked="#switchToMenuNiveau" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/petitprinceicon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="petitPrince2" fitHeight="248.0" fitWidth="217.0" layoutY="438.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/petitprince.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="petitPrince3" fitHeight="284.0" fitWidth="217.0" layoutX="642.0" layoutY="191.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/petitprince3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="marcus" fitHeight="92.0" fitWidth="162.0" layoutX="284.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/marcus.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="ruben" fitHeight="99.0" fitWidth="162.0" layoutX="479.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/ruben.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="stella" fitHeight="108.0" fitWidth="150.0" layoutX="274.0" layoutY="376.0" onMouseClicked="#switchToMenuNiveau" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../images/stella.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="pawPatrolIcon" fitHeight="194.0" fitWidth="337.0" layoutX="259.0" layoutY="11.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../images/pawpatrolicon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

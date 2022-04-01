@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import ai.Config;
@@ -70,7 +71,38 @@ public class ApprentissageController  extends Preloader implements Initializable
     
     private Thread th;
 
+    @FXML
+    private ImageView panda1;
+    
+    @FXML
+    private ImageView panda2;
+    
+    @FXML
+    private ImageView bamboo;
+    
+    @FXML
+    private ImageView soleil;
+    
+    @FXML
+    private ImageView petitPrince1;
+    
+    @FXML
+    private ImageView petitPrince2;
+    
+    @FXML
+    private ImageView pawPatrol;
+    
+    @FXML
+    private ImageView pawPatrolIcon;
+    
     private Config config;
+    
+    private List <ImageView> yellowTheme = new ArrayList<>();
+    
+    private List <ImageView> pinkTheme = new ArrayList<>();
+    
+    private List <ImageView> greenTheme = new ArrayList<>();
+
      
    //on click start of learning IA
     
@@ -194,6 +226,46 @@ public class ApprentissageController  extends Preloader implements Initializable
         };
     }
     
+    public void addImageToYellowTheme() {
+    	yellowTheme.add(panda1);
+		yellowTheme.add(panda2);
+		yellowTheme.add(bamboo);
+		yellowTheme.add(soleil);
+    }
+    
+    public void addImageToPinkTheme() {
+    	pinkTheme.add(petitPrince1);
+    	pinkTheme.add(petitPrince2);
+    }
+    public void addImageToGreenTheme() {
+    	greenTheme.add(pawPatrol);
+    	greenTheme.add(pawPatrolIcon);
+    }
+    
+    public void setTheme(Color color,boolean yellow,boolean pink,boolean green) {
+    	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
+    	if(color==Color.LIGHTYELLOW) {
+    		pgbar.setStyle("-fx-accent: gold;");
+		}
+		else if(color==Color.LIGHTPINK) {
+			pgbar.setStyle("-fx-accent: pink;");
+		}
+		else {
+			pgbar.setStyle("-fx-accent: green;");
+		}
+    	for(int i=0;i<yellowTheme.size();i++) {
+    		yellowTheme.get(i).setVisible(yellow);
+    	}
+    	
+    	for(int i=0;i<pinkTheme.size();i++) {
+    		pinkTheme.get(i).setVisible(pink);
+    	}
+    	
+    	for(int i=0;i<greenTheme.size();i++) {
+    		greenTheme.get(i).setVisible(green);
+    	}
+    }
+    
 	@Override
 	public void start(Stage arg0) throws Exception {
 			
@@ -202,6 +274,14 @@ public class ApprentissageController  extends Preloader implements Initializable
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		sc1.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
+		
+		start.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		start.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		cancel.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		cancel.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
+		addImageToYellowTheme();
+		addImageToPinkTheme();
+		addImageToGreenTheme(); 
 	}
 }
