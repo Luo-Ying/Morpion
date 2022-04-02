@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 
@@ -18,6 +19,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		Main.setPrimaryStage(primaryStage);
 		Main.getPrimaryStage().setTitle("Jeu de Morpion");
+		Main.getPrimaryStage().getIcons().add(new Image(Main.class.getResourceAsStream("/images/Icon.png")));
 		showMainView();
 	}
 

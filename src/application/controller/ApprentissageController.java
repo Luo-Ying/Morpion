@@ -2,6 +2,8 @@ package application.controller;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -16,6 +18,7 @@ import ai.ConfigFileLoader;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
+import application.PopupWindow;
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -31,9 +34,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -66,6 +72,9 @@ public class ApprentissageController  extends Preloader implements Initializable
     
     @FXML
     private Button btnMaison;
+    
+    @FXML
+    private MenuButton menu;
     
     @FXML
     private ProgressBar pgbar;
@@ -106,6 +115,9 @@ public class ApprentissageController  extends Preloader implements Initializable
     @FXML
     private ImageView maisonRose;
     
+    @FXML
+    private MenuItem about;
+    
     private Config config;
     
     private List <ImageView> yellowTheme = new ArrayList<>();
@@ -116,12 +128,13 @@ public class ApprentissageController  extends Preloader implements Initializable
     
     private Color color;
 
-     
-   //on click start of learning IA
-    
+   //Definir le config
     void setConfig(Config config) {
     	this.config=config;
     }
+    
+    
+    //on click start of learning IA
     @FXML
     void task(ActionEvent event) throws InterruptedException {
     	
@@ -239,6 +252,7 @@ public class ApprentissageController  extends Preloader implements Initializable
         };
     }
     
+    //ajout des images au thème jaune
     public void addImageToYellowTheme() {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
@@ -246,28 +260,32 @@ public class ApprentissageController  extends Preloader implements Initializable
 		yellowTheme.add(maisonJaune);
     }
     
+    //ajout des images au thème rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
     	pinkTheme.add(maisonRose);
     }
+    
+    //ajout des images au thème vert
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
     	greenTheme.add(maisonVert);
     }
     
-    public void setTheme(Color color,boolean yellow,boolean pink,boolean green) {
+    //définir un theme
+    public void setTheme(Color color,boolean yellow,boolean pink,boolean green) throws FileNotFoundException {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
     	if(color==Color.LIGHTYELLOW) {
-    		pgbar.setStyle("-fx-accent: gold;");
+    		setMenu("src/images/menu-jaune.png","-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: gold;");
 		}
 		else if(color==Color.LIGHTPINK) {
-			pgbar.setStyle("-fx-accent: pink;");
+			setMenu("src/images/menu-rose.png","-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: pink;");
 		}
 		else {
-			pgbar.setStyle("-fx-accent: green;");
+			setMenu("src/images/menu-vert.png","-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: green;");
 		}
     	for(int i=0;i<yellowTheme.size();i++) {
     		yellowTheme.get(i).setVisible(yellow);
@@ -282,16 +300,42 @@ public class ApprentissageController  extends Preloader implements Initializable
     	}
     }
     
+    //définir le bouton menu
+    public void setMenu(String path,String style,String pgbarStyle) throws FileNotFoundException {
+    	FileInputStream input = new FileInputStream(path);
+        Image image = new Image(input);
+        
+        ImageView menuCouleur = new ImageView(image);
+        menuCouleur.setFitWidth(32.5);
+        menuCouleur.setFitHeight(35);
+        menu.prefWidthProperty().bind(menuCouleur.fitWidthProperty());           
+        menu.prefHeightProperty().bind(menuCouleur.fitHeightProperty());           
+        menu.setGraphic(menuCouleur);
+        
+		about.setStyle(style);
+		pgbar.setStyle(pgbarStyle);
+    }
+    
+    //Appuie sur retour maison
     @FXML
     void returnHome(MouseEvent event) throws IOException {
     	SceneController sController = new SceneController();
 		sController.switchToMenuAdversaireController(event,getColor());
     }
     
+    
+    //Appuie sur l'item a propos du menu
+    @FXML
+    void popAbout(ActionEvent event) {
+    	PopupWindow.displayAbout(getColor());
+    }
+    
+    //récuperer couleur du thème
     public Color getColor() {
 		return color;
 	}
 
+    //définir couleur du thème
 	public void setColor(Color color) {
 		this.color = color;
 	}
@@ -300,17 +344,30 @@ public class ApprentissageController  extends Preloader implements Initializable
 	public void start(Stage arg0) throws Exception {
 			
 	}
-
-
+	
+	
+	//Définir un bouton de la scène
+	public void setButton(Button button,Color color,MenuButton menu) {
+		if(button!=null) {
+			button.setBackground(new Background(new BackgroundFill(color, null, null)));
+			button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+		if(menu!=null) {
+			menu.setBackground(new Background(new BackgroundFill(color, null, null)));
+			menu.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+	}
+	
+	
+	//Lors du chargement de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		start.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		start.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		cancel.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		cancel.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		btnMaison.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		btnMaison.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
+		setButton(start,Color.WHITE,null);
+		setButton(cancel,Color.WHITE,null);
+		setButton(btnMaison,Color.WHITE,null);
+		setButton(null,Color.WHITE,menu);
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();

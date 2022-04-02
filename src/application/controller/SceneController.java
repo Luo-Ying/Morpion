@@ -22,7 +22,7 @@ public class SceneController {
 	private Config config;
 	
 	
-
+	//changement de scene vers ApprentissageMenu
 	public void switchToApprentissageController(ActionEvent event,Config config,Color color) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Apprentissage.fxml"));
@@ -44,6 +44,7 @@ public class SceneController {
 		stage.show();
 	}
 	
+	//changement de scene vers MenuNiveau
 	public void switchToMenuNiveauController(MouseEvent event,Color color) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/MenuNiveau.fxml"));
@@ -65,6 +66,7 @@ public class SceneController {
 		
 	}
 	
+	//changement de scene vers MenuAdversaire
 	public void switchToMenuAdversaireController(MouseEvent event,Color color) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/MenuAdversaire.fxml"));
