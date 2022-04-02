@@ -267,6 +267,7 @@ public class PopupWindow {
 	      
 	popupWindow.initModality(Modality.APPLICATION_MODAL);
 	popupWindow.setTitle("Gestion IA");
+	popupWindow.getIcons().add(new Image(Main.class.getResourceAsStream("/images/IconGestionIA.png")));
 	
 	
 	VBox layout = new VBox(10);
