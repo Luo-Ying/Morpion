@@ -87,6 +87,7 @@ public class SceneController {
 		stage.show();
 	}
 	
+	//changement de scène vers Jeu
 	public void switchToJeuController(ActionEvent event,Color color) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));

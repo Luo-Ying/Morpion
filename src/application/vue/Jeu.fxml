@@ -102,5 +102,10 @@
          </image>
       </ImageView>
       <Line endX="-199.00001525878906" endY="136.33331298828125" layoutX="367.0" layoutY="327.0" startX="347.0" startY="136.33331298828125" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/iconMusiaue.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

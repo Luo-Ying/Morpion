@@ -19,6 +19,7 @@ import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
 import application.PopupWindow;
+import application.controller.MenuNiveauController.ToggleSwitch;
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -372,16 +373,65 @@ public class ApprentissageController  extends Preloader implements Initializable
 		}
 	}
 	
-	
+	//Création du switch musique
+    public class ToggleSwitch extends Parent {
+    	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
+    	public TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
+    	public FillTransition fillAnimation= new FillTransition(Duration.seconds(0.25));
+    	public ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
+    	
+    	
+    	public BooleanProperty switchedOnProperty() {
+    		return switchedOn;
+    	}
+    	
+    	
+    	
+    	ToggleSwitch() {
+    		Rectangle background = new Rectangle(50,25);
+    		background.setArcWidth(25);
+    		background.setArcHeight(25);
+    		background.setFill(Color.LIGHTBLUE);
+    		background.setStroke(Color.LIGHTGREY);
+    		
+    		Circle trigger = new Circle(12.5);
+    		trigger.setCenterX(40);
+    		trigger.setCenterY(12.5);
+    		trigger.setFill(Color.WHITE);
+    		trigger.setStroke(Color.LIGHTGREY);
+    		
+    		translateAnimation.setNode(trigger);
+    		fillAnimation.setShape(background);
+    	
+    		getChildren().addAll(background,trigger);
+    		
+    		switchedOn.addListener((observer, oldVal, newVal) -> {
+    			boolean isOn = newVal.booleanValue();
+    			translateAnimation.setToX(isOn ? -30 : 0);
+    			animation.play();
+    			fillAnimation.setFromValue(isOn ? Color.LIGHTBLUE : Color.WHITE);
+    			fillAnimation.setToValue(isOn ? Color.WHITE : Color.LIGHTBLUE);
+    			});
+    		setOnMouseClicked(event ->{
+    			switchedOn.set(!switchedOn.get());
+    		});	       
+    	}
+    }
+    
 	//Lors du chargement de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		ToggleSwitch toggle= new ToggleSwitch();
+		toggle.setTranslateY(68);
+		toggle.setTranslateX(770);
 		
 		setButton(start,Color.WHITE,null);
 		setButton(cancel,Color.WHITE,null);
 		setButton(btnMaison,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
+		
+		sc1.getChildren().add(toggle);
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
