@@ -166,6 +166,13 @@ public class MenuAdversaireController extends Preloader implements Initializable
     void popGestionIA(ActionEvent event) {
     	PopupWindow.displayGestionIA(getColor());
     }
+    
+    //vers jeu.fxml
+    @FXML
+    void goToJeu(MouseEvent event) throws IOException {
+    	SceneController sController = new SceneController();
+		sController.switchToJeuController(event,getColor());
+    }
    
     //ajout des images du thème jaune
     public void addImageToYellowTheme() {

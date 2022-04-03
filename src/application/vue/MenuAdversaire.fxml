@@ -24,7 +24,7 @@
             <Image url="@../../images/iconMusiaue.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttonVs" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="423.0" text="Vs">
+      <Button fx:id="buttonVs" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#goToJeu" prefHeight="92.0" prefWidth="423.0" text="Vs">
          <font>
             <Font name="MV Boli" size="24.0" />
          </font>
@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="panda1" fitHeight="205.0" fitWidth="203.0" layoutX="217.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="panda1" fitHeight="205.0" fitWidth="203.0" layoutX="217.0" layoutY="154.0" onMouseClicked="#goToJeu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/panda.png" />
          </image>
@@ -40,7 +40,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="panda2" fitHeight="99.0" fitWidth="116.0" layoutX="474.0" layoutY="211.0" pickOnBounds="true">
+      <ImageView fx:id="panda2" fitHeight="99.0" fitWidth="116.0" layoutX="474.0" layoutY="211.0" onMouseClicked="#goToJeu" pickOnBounds="true">
          <image>
             <Image url="@../../images/panda2.png" />
          </image>

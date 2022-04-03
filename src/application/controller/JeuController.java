@@ -11,11 +11,13 @@ import java.util.ResourceBundle;
 
 
 import application.PopupWindow;
+import application.animation.CircleDraw;
 import application.animation.ToggleSwitch;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -78,6 +80,9 @@ public class JeuController extends Preloader implements Initializable {
     
     @FXML
     private MenuItem about;
+    
+    @FXML
+    private Canvas canvas1;
     
     private List <ImageView> yellowTheme = new ArrayList<>();
     
@@ -193,6 +198,11 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	@FXML
+    void drawCircle(MouseEvent event) {
+		//CircleDraw circle = new CircleDraw(canvas1);
+		//sc1.getChildren().add(circle);
+    }
 	
 	//Lors du chargement de la scène
 	@Override
