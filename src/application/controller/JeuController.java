@@ -1,39 +1,24 @@
 package application.controller;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import ai.Config;
-import ai.Coup;
-import ai.MultiLayerPerceptron;
-import ai.SigmoidalTransferFunction;
+
 import application.PopupWindow;
-import application.controller.MenuNiveauController.ToggleSwitch;
-import javafx.animation.FillTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
+import application.animation.ToggleSwitch;
 import javafx.application.Preloader;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,10 +31,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class JeuController extends Preloader implements Initializable {
 	@FXML
@@ -211,50 +193,6 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
-	//Création du switch musique
-    public class ToggleSwitch extends Parent {
-    	public BooleanProperty switchedOn = new SimpleBooleanProperty(false);
-    	public TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
-    	public FillTransition fillAnimation= new FillTransition(Duration.seconds(0.25));
-    	public ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
-    	
-    	
-    	public BooleanProperty switchedOnProperty() {
-    		return switchedOn;
-    	}
-    	
-    	
-    	
-    	ToggleSwitch() {
-    		Rectangle background = new Rectangle(50,25);
-    		background.setArcWidth(25);
-    		background.setArcHeight(25);
-    		background.setFill(Color.LIGHTBLUE);
-    		background.setStroke(Color.LIGHTGREY);
-    		
-    		Circle trigger = new Circle(12.5);
-    		trigger.setCenterX(40);
-    		trigger.setCenterY(12.5);
-    		trigger.setFill(Color.WHITE);
-    		trigger.setStroke(Color.LIGHTGREY);
-    		
-    		translateAnimation.setNode(trigger);
-    		fillAnimation.setShape(background);
-    	
-    		getChildren().addAll(background,trigger);
-    		
-    		switchedOn.addListener((observer, oldVal, newVal) -> {
-    			boolean isOn = newVal.booleanValue();
-    			translateAnimation.setToX(isOn ? -30 : 0);
-    			animation.play();
-    			fillAnimation.setFromValue(isOn ? Color.LIGHTBLUE : Color.WHITE);
-    			fillAnimation.setToValue(isOn ? Color.WHITE : Color.LIGHTBLUE);
-    			});
-    		setOnMouseClicked(event ->{
-    			switchedOn.set(!switchedOn.get());
-    		});	       
-    	}
-    }
 	
 	//Lors du chargement de la scène
 	@Override
