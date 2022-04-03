@@ -86,4 +86,24 @@ public class SceneController {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	public void switchToJeuController(ActionEvent event,Color color) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
+		root =loader.load();
+		scene = new Scene(root);
+		JeuController controller= loader.getController();
+		if(color==Color.LIGHTYELLOW) {
+			controller.setTheme(color,true,false,false);
+		}
+		else if(color==Color.LIGHTPINK) {
+			controller.setTheme(color,false,true,false);
+		}
+		else {
+			controller.setTheme(color,false,false,true);
+		}
+		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
 }

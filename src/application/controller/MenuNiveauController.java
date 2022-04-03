@@ -2,6 +2,7 @@ package application.controller;
 
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,6 +43,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -164,24 +166,21 @@ public class MenuNiveauController extends Preloader implements Initializable {
     @FXML
     void setIADifficult(ActionEvent event) throws IOException {
     	setIALevel("D");
-    	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel(),getColor());
+    	verifyResult(event,"src/result/mlp_difficile.ser");
     }
 
   //appuie sur niveau facile
     @FXML
     void setIAEasy(ActionEvent event) throws IOException {
     	setIALevel("F");
-    	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel(),getColor());
+    	verifyResult(event,"src/result/mlp_facile.ser");
     }
 
   //appuie sur niveau moyen
     @FXML
     void setIANormal(ActionEvent event) throws IOException {
     	setIALevel("M");
-    	SceneController sController = new SceneController();
-		sController.switchToApprentissageController(event,getIALevel(),getColor());
+    	verifyResult(event,"src/result/mlp_moyen.ser");
     }
     
   //appuie sur retour maison
@@ -190,6 +189,21 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	SceneController sController = new SceneController();
 		sController.switchToMenuAdversaireController(event,getColor());
     }
+    
+    //Verifie si chemin du fichier d'apprentissage existe
+    //si oui alors on va sur jeu.fxml sinon on va sur Apprentissage.fxml
+    public void verifyResult(ActionEvent event,String path) throws IOException {
+		File f = new File(path) ;
+		if(f.exists() && f.isFile()) {
+			SceneController sController = new SceneController();
+			sController.switchToJeuController(event,getColor());
+		}
+		else {
+			SceneController sController = new SceneController();
+			sController.switchToApprentissageController(event,getIALevel(),getColor());
+		}
+		
+	}
     
     
     //appuie sur item a propos du menu
