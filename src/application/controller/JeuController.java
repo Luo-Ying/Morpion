@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import application.PopupWindow;
 import application.animation.CircleDraw;
 import application.animation.ToggleSwitch;
+import application.animation.XDraw;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -83,6 +84,30 @@ public class JeuController extends Preloader implements Initializable {
     
     @FXML
     private Canvas canvas1;
+    
+    @FXML
+    private Canvas canvas2;
+    
+    @FXML
+    private Canvas canvas3;
+    
+    @FXML
+    private Canvas canvas4;
+    
+    @FXML
+    private Canvas canvas5;
+    
+    @FXML
+    private Canvas canvas6;
+    
+    @FXML
+    private Canvas canvas7;
+    
+    @FXML
+    private Canvas canvas8;
+    
+    @FXML
+    private Canvas canvas9;
     
     private List <ImageView> yellowTheme = new ArrayList<>();
     
@@ -199,8 +224,58 @@ public class JeuController extends Preloader implements Initializable {
 	}
 	
 	@FXML
-    void drawCircle(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas1);
+    void drawCase1(MouseEvent event) {
+		//CircleDraw circle = new CircleDraw(canvas1);
+		//sc1.getChildren().add(circle);
+		XDraw x = new XDraw(canvas1);
+		sc1.getChildren().add(x);
+    }
+	
+	@FXML
+    void drawCase2(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas2);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase3(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas3);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase4(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas4);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase5(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas5);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase6(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas6);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase7(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas7);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase8(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas8);
+		sc1.getChildren().add(circle);
+    }
+	
+	@FXML
+    void drawCase9(MouseEvent event) {
+		CircleDraw circle = new CircleDraw(canvas9);
 		sc1.getChildren().add(circle);
     }
 	

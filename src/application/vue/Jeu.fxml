@@ -108,6 +108,14 @@
             <Image url="@../../images/iconMusiaue.png" />
          </image>
       </ImageView>
-      <Canvas fx:id="canvas1" height="158.0" layoutX="165.0" layoutY="135.0" onMouseClicked="#drawCircle" width="175.0" />
+      <Canvas fx:id="canvas1" height="158.0" layoutX="167.0" layoutY="135.0" onMouseClicked="#drawCase1" width="175.0" />
+      <Canvas fx:id="canvas2" height="158.0" layoutX="353.0" layoutY="135.0" onMouseClicked="#drawCase2" width="175.0" />
+      <Canvas fx:id="canvas3" height="158.0" layoutX="541.0" layoutY="135.0" onMouseClicked="#drawCase3" width="175.0" />
+      <Canvas fx:id="canvas7" height="151.0" layoutX="167.0" layoutY="472.0" onMouseClicked="#drawCase7" width="175.0" />
+      <Canvas fx:id="canvas8" height="158.0" layoutX="354.0" layoutY="468.0" onMouseClicked="#drawCase8" width="175.0" />
+      <Canvas fx:id="canvas9" height="158.0" layoutX="541.0" layoutY="468.0" onMouseClicked="#drawCase9" width="175.0" />
+      <Canvas fx:id="canvas4" height="151.0" layoutX="167.0" layoutY="305.0" onMouseClicked="#drawCase4" width="175.0" />
+      <Canvas fx:id="canvas5" height="151.0" layoutX="354.0" layoutY="305.0" onMouseClicked="#drawCase5" width="175.0" />
+      <Canvas fx:id="canvas6" height="151.0" layoutX="541.0" layoutY="305.0" onMouseClicked="#drawCase6" width="175.0" />
    </children>
 </Pane>

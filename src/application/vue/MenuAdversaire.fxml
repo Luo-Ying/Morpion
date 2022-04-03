@@ -102,7 +102,7 @@
             <Image url="@../../images/panda2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="renard" fitHeight="99.0" fitWidth="200.0" layoutX="251.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="renard" fitHeight="99.0" fitWidth="200.0" layoutX="251.0" layoutY="211.0" onMouseClicked="#goToJeu" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/renard.png" />
          </image>
@@ -110,7 +110,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="mouton" fitHeight="108.0" fitWidth="115.0" layoutX="487.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="mouton" fitHeight="108.0" fitWidth="115.0" layoutX="487.0" layoutY="207.0" onMouseClicked="#goToJeu" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/mouton.png" />
          </image>
@@ -136,7 +136,7 @@
             <Image url="@../../images/petitprince3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="marcus" fitHeight="92.0" fitWidth="162.0" layoutX="284.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="marcus" fitHeight="92.0" fitWidth="162.0" layoutX="284.0" layoutY="215.0" onMouseClicked="#goToJeu" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/marcus.png" />
          </image>
@@ -144,7 +144,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="ruben" fitHeight="99.0" fitWidth="162.0" layoutX="479.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="ruben" fitHeight="99.0" fitWidth="162.0" layoutX="479.0" layoutY="211.0" onMouseClicked="#goToJeu" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/ruben.png" />
          </image>

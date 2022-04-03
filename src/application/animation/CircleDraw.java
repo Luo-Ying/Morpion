@@ -1,21 +1,21 @@
 package application.animation;
 
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 public class CircleDraw extends Parent {
-	
-	   
 	    public CircleDraw(Canvas canvas) {
+	    	double centerX = canvas.getWidth()/2;
+	    	double centerY =canvas.getHeight()/2;
+	    	double radius = 60;
+	    	GraphicsContext gc = canvas.getGraphicsContext2D();
+	    	gc.setLineWidth(3);
+	    	gc.setStroke(Color.PURPLE);
+	    	gc.strokeOval(centerX-radius, centerY-radius, radius * 2, radius * 2);
 	    }
+	       
 }
 
