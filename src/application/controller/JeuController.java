@@ -200,8 +200,8 @@ public class JeuController extends Preloader implements Initializable {
 	
 	@FXML
     void drawCircle(MouseEvent event) {
-		//CircleDraw circle = new CircleDraw(canvas1);
-		//sc1.getChildren().add(circle);
+		CircleDraw circle = new CircleDraw(canvas1);
+		sc1.getChildren().add(circle);
     }
 	
 	//Lors du chargement de la scène

@@ -5,6 +5,9 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -21,21 +24,21 @@ public class ToggleSwitch extends Parent {
 	public static BooleanProperty switchedOnProperty() {
 		return switchedOn;
 	}
-	
-	
-	
+
 	public ToggleSwitch() {
 		Rectangle background = new Rectangle(50,25);
 		background.setArcWidth(25);
 		background.setArcHeight(25);
 		background.setFill(Color.LIGHTBLUE);
 		background.setStroke(Color.LIGHTGREY);
+		background.setStyle("-fx-cursor : hand");
 		
 		Circle trigger = new Circle(12.5);
 		trigger.setCenterX(40);
 		trigger.setCenterY(12.5);
 		trigger.setFill(Color.WHITE);
 		trigger.setStroke(Color.LIGHTGREY);
+		trigger.setStyle("-fx-cursor : hand");
 		
 		translateAnimation.setNode(trigger);
 		fillAnimation.setShape(background);

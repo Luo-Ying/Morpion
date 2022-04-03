@@ -14,4 +14,8 @@ import javafx.util.Duration;
 
 public class CircleDraw extends Parent {
 	
+	   
+	    public CircleDraw(Canvas canvas) {
+	    }
 }
+
