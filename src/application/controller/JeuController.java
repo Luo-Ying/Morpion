@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import application.Jeu;
 import application.PopupWindow;
 import application.animation.CircleDraw;
 import application.animation.ToggleSwitch;
@@ -115,7 +115,14 @@ public class JeuController extends Preloader implements Initializable {
     
     private List <ImageView> greenTheme = new ArrayList<>();
     
+    private List <Canvas> canvas = new ArrayList<>();
+    
     private Color color;
+    
+    private Jeu tableau = new Jeu();
+    
+    private int nb=1;
+    
     
     //ajout des images au thème jaune
     public void addImageToYellowTheme() {
@@ -138,6 +145,18 @@ public class JeuController extends Preloader implements Initializable {
     	greenTheme.add(marcus);
     	greenTheme.add(ruben);
     	greenTheme.add(maisonVert);
+    }
+    
+    public void addCanvasToList() {
+    	canvas.add(canvas1);
+    	canvas.add(canvas2);
+    	canvas.add(canvas3);
+    	canvas.add(canvas4);
+    	canvas.add(canvas5);
+    	canvas.add(canvas6);
+    	canvas.add(canvas7);
+    	canvas.add(canvas8);
+    	canvas.add(canvas9);	
     }
     
     //définir un theme
@@ -225,59 +244,77 @@ public class JeuController extends Preloader implements Initializable {
 	
 	@FXML
     void drawCase1(MouseEvent event) {
-		//CircleDraw circle = new CircleDraw(canvas1);
-		//sc1.getChildren().add(circle);
-		XDraw x = new XDraw(canvas1);
-		sc1.getChildren().add(x);
+		selectCase(canvas1,0,0);
     }
 	
 	@FXML
     void drawCase2(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas2);
-		sc1.getChildren().add(circle);
+		selectCase(canvas2,0,1);
     }
 	
 	@FXML
     void drawCase3(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas3);
-		sc1.getChildren().add(circle);
+		selectCase(canvas3,0,2);
     }
 	
 	@FXML
     void drawCase4(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas4);
-		sc1.getChildren().add(circle);
+		selectCase(canvas4,1,0);
     }
 	
 	@FXML
     void drawCase5(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas5);
-		sc1.getChildren().add(circle);
+		selectCase(canvas5,1,1);
     }
 	
 	@FXML
     void drawCase6(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas6);
-		sc1.getChildren().add(circle);
+		selectCase(canvas6,1,2);
     }
 	
 	@FXML
     void drawCase7(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas7);
-		sc1.getChildren().add(circle);
+		selectCase(canvas7,2,0);
     }
 	
 	@FXML
     void drawCase8(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas8);
-		sc1.getChildren().add(circle);
+		selectCase(canvas8,2,1);
     }
 	
 	@FXML
     void drawCase9(MouseEvent event) {
-		CircleDraw circle = new CircleDraw(canvas9);
-		sc1.getChildren().add(circle);
+		selectCase(canvas9,2,2);
     }
+	
+	void selectCase(Canvas canvas,int i, int j) {
+		if((!canvas.isDisable()) && ((nb%2)!=0)) {
+			XDraw x = new XDraw(canvas);
+			sc1.getChildren().add(x);
+			tableau.setCaseX(i, j);
+			if(tableau.verifieGagner(tableau.getTableauX(),sc1)) {
+				PopupWindow.displayWinner(getColor(),"1", this.canvas,sc1);
+			}
+			nb+=1;
+			if(nb==10) {
+				System.out.println("Draw");
+			}
+			canvas.setDisable(true);
+		}
+		else if((!canvas.isDisable()) && ((nb%2)==0)){
+			CircleDraw circle = new CircleDraw(canvas);
+			sc1.getChildren().add(circle);
+			tableau.setCaseY(i, j);
+			if(tableau.verifieGagner(tableau.getTableauO(),sc1)) {
+				PopupWindow.displayWinner(getColor(),"2", this.canvas,sc1);
+			}
+			nb+=1;
+			if(nb==10) {
+				System.out.println("Draw");
+			}
+			canvas.setDisable(true);
+		}
+	}
 	
 	//Lors du chargement de la scène
 	@Override
@@ -295,5 +332,6 @@ public class JeuController extends Preloader implements Initializable {
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
+		addCanvasToList();
 	}
 }

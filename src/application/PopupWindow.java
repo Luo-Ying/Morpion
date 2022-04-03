@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+
+import com.sun.glass.events.WindowEvent;
 
 import ai.Config;
 import ai.ConfigFileLoader;
@@ -12,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -359,4 +364,53 @@ public class PopupWindow {
 		}
 		return text;
 	}
+	
+	//item a propos
+		public static void displayWinner(Color color,String winner,List <Canvas> canvas,Pane pane)
+		{
+			
+		Stage popupWindow=new Stage();
+		      
+		popupWindow.initModality(Modality.APPLICATION_MODAL);
+		popupWindow.setTitle("Gagnant");
+		popupWindow.getIcons().add(new Image(Main.class.getResourceAsStream("/images/Icon.png")));
+		
+		//Set colorStyle to textarea 
+		String colorStyle;
+
+		if(color==Color.LIGHTYELLOW) {
+			colorStyle = "-fx-control-inner-background : lightyellow;";
+		}
+		else if(color==Color.LIGHTPINK) {
+			colorStyle = "-fx-control-inner-background : lightpink;";
+		}
+		else {
+			colorStyle = "-fx-control-inner-background : honeydew";
+		}
+		
+		
+		VBox layout= new VBox(20);       
+		layout.setAlignment(Pos.CENTER);
+		
+		
+		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
+		
+		
+		String gagnant = "\n\n\n\t     Félicitation !\n\n\tLe joueur "+winner+" a gagné!";
+		//textarea of the popup
+		TextArea textArea = new TextArea();
+		textArea.setText(gagnant);
+		textArea.setStyle(style);
+		textArea.setEditable(false);
+		
+		layout.getChildren().add(textArea);
+		
+		Scene scene1= new Scene(layout, 300, 250);
+		      
+		popupWindow.setScene(scene1);
+		      
+		popupWindow.showAndWait();
+		
+	}
+	
 }
