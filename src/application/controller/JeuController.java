@@ -304,12 +304,13 @@ public class JeuController extends Preloader implements Initializable {
 			XDraw x = new XDraw(canvas);
 			sc1.getChildren().add(x);
 			
+			double player = -1.0;
 			tableau.setCaseX(i);
 			
 //			System.out.println(tableau.verifieGagner(sc1));
 			System.out.println(Arrays.toString(tableau.getTableau()));
 			
-			if(tableau.verifieGagner(sc1)) {
+			if(tableau.verifieGagner(sc1, player)) {
 				gagne=true;
 				String playerWin;
 				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
@@ -338,9 +339,10 @@ public class JeuController extends Preloader implements Initializable {
 			CircleDraw circle = new CircleDraw(canvas);
 			sc1.getChildren().add(circle);
 			
+			double player = 1.0;
 			tableau.setCaseO(i);
 			
-			if(tableau.verifieGagner(sc1)) {
+			if(tableau.verifieGagner(sc1, player)) {
 				gagne=true;
 				String playerWin;
 				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
