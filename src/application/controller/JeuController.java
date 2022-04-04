@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -123,6 +124,10 @@ public class JeuController extends Preloader implements Initializable {
     private Color color;
     
     private Jeu tableau = new Jeu();
+    
+    private boolean isPlayerTurn = false;
+    
+    private boolean isIAgame = false;
     
     private int nb=1;
     
@@ -251,57 +256,64 @@ public class JeuController extends Preloader implements Initializable {
 	
 	@FXML
     void drawCase1(MouseEvent event) {
-		selectCase(canvas1,0,0);
+		selectCase(canvas1, 0);
     }
 	
 	@FXML
     void drawCase2(MouseEvent event) {
-		selectCase(canvas2,0,1);
+		selectCase(canvas2, 1);
     }
 	
 	@FXML
     void drawCase3(MouseEvent event) {
-		selectCase(canvas3,0,2);
+		selectCase(canvas3, 2);
     }
 	
 	@FXML
     void drawCase4(MouseEvent event) {
-		selectCase(canvas4,1,0);
+		selectCase(canvas4, 3);
     }
 	
 	@FXML
     void drawCase5(MouseEvent event) {
-		selectCase(canvas5,1,1);
+		selectCase(canvas5, 4);
     }
 	
 	@FXML
     void drawCase6(MouseEvent event) {
-		selectCase(canvas6,1,2);
+		selectCase(canvas6, 5);
     }
 	
 	@FXML
     void drawCase7(MouseEvent event) {
-		selectCase(canvas7,2,0);
+		selectCase(canvas7, 6);
     }
 	
 	@FXML
     void drawCase8(MouseEvent event) {
-		selectCase(canvas8,2,1);
+		selectCase(canvas8, 7);
     }
 	
 	@FXML
     void drawCase9(MouseEvent event) {
-		selectCase(canvas9,2,2);
+		selectCase(canvas9, 8);
     }
 	
-	void selectCase(Canvas canvas,int i, int j) {
+	void selectCase(Canvas canvas,int i) {
 		if((!canvas.isDisable()) && ((nb%2)!=0)) {
 			XDraw x = new XDraw(canvas);
 			sc1.getChildren().add(x);
-			tableau.setCaseX(i, j);
-			if(tableau.verifieGagner(tableau.getTableauX(),sc1)) {
+			
+			tableau.setCaseX(i);
+			
+//			System.out.println(tableau.verifieGagner(sc1));
+			System.out.println(Arrays.toString(tableau.getTableau()));
+			
+			if(tableau.verifieGagner(sc1)) {
 				gagne=true;
-				Stage window =PopupWindow.displayWinner(getColor(),"1");
+				String playerWin;
+				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
+				Stage window =PopupWindow.displayWinner(getColor(),playerWin);
 				if(window.onCloseRequestProperty()!=null) {
 					reinitialiserJeu(tableau.getLine());
 				}
@@ -325,10 +337,14 @@ public class JeuController extends Preloader implements Initializable {
 		else if((!canvas.isDisable()) && ((nb%2)==0)){
 			CircleDraw circle = new CircleDraw(canvas);
 			sc1.getChildren().add(circle);
-			tableau.setCaseY(i, j);
-			if(tableau.verifieGagner(tableau.getTableauO(),sc1)) {
+			
+			tableau.setCaseO(i);
+			
+			if(tableau.verifieGagner(sc1)) {
 				gagne=true;
-				Stage window =PopupWindow.displayWinner(getColor(),"2");
+				String playerWin;
+				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
+				Stage window = PopupWindow.displayWinner(getColor(),playerWin);
 				if(window.onCloseRequestProperty()!=null) {
 					reinitialiserJeu(tableau.getLine());
 				}
@@ -356,10 +372,11 @@ public class JeuController extends Preloader implements Initializable {
 			gc.clearRect(0, 0, canvas.get(i).getWidth(), canvas.get(i).getHeight());
 			canvas.get(i).setDisable(false);
 			sc1.getChildren().remove(line);
-			this.tableau = new Jeu();
-			nb=1;gagne=false;reinit=true;
 			
 		}
+		System.out.println("ok");
+		this.tableau = new Jeu();
+		nb=1;gagne=false;reinit=true;
 	}
 	
 	//Lors du chargement de la scène

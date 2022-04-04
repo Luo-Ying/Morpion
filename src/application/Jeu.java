@@ -5,116 +5,170 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Jeu {
-	public  int tableauX[][];
-	public  int tableauO[][];
+	private double tableau[];
+	
+	public boolean isWinPlayer1 = false;
+	public boolean isWinPlayer2 = false;
+	
+	public boolean top_Horizontal_Line = false;
+	public boolean middle_Horizontal_Line = false;
+	public boolean bottom_Line = false;
+	public boolean left_Vertical_Line = false;
+	public boolean middle_Vertical_Line = false;
+	public boolean right_Vertical_Line = false;
+	public boolean upper_Left_Diagonal = false;
+	public boolean upper_Right_Riagonal = false;
+	
 	public Line line;
 	
 	public Jeu() {
-		this.tableauX = new int [3][3];
-		this.tableauO = new int [3][3];
 		
-		for (int i=0;i<3;i++) {
-			for(int j=0;j<3;j++) {
-				this.tableauX[i][j]=0;
-				this.tableauO[i][j]=0;
+		this.tableau = new double[9];
+		
+		for(int i=0; i<this.tableau.length; i++) {
+			this.tableau[i] = 0.0;
+		}
+	}
+	
+	public void setCaseX(int i) {
+		this.tableau[i] = -1.0;
+	}
+	
+	public void setCaseO(int i) {
+		this.tableau[i] = 1.0;
+	}
+	
+	public void isWin() {
+		if (this.tableau[0] == this.tableau[1] && this.tableau[1] == this.tableau[2]) {
+			if(this.tableau[0] == -1.0 && this.tableau[1] == -1.0 && this.tableau[2] == -1.0) {
+				isWinPlayer1 = true; 
+				top_Horizontal_Line = true;
+			}
+			else if(this.tableau[0] == 1.0 && this.tableau[1] == 1.0 && this.tableau[2] == 1.0) {
+				isWinPlayer2 = true;
+				top_Horizontal_Line = true;
+			}
+		}
+		else if (this.tableau[3] == this.tableau[4] && this.tableau[4] == this.tableau[5]) {
+			if(this.tableau[3] == -1.0 && this.tableau[4] == -1.0 && this.tableau[5] == -1.0) {
+				isWinPlayer1 = true;
+				middle_Horizontal_Line = true;
+			}
+			else if(this.tableau[3] == 1.0 && this.tableau[4] == 1.0 && this.tableau[5] == 1.0) {
+				isWinPlayer2 = true;
+				middle_Horizontal_Line = true;
+			}
+		}
+		else if (this.tableau[6] == this.tableau[7] && this.tableau[7] == this.tableau[8]) {
+			if(this.tableau[6] == -1.0 && this.tableau[7] == -1.0 && this.tableau[8] == -1.0) {
+				isWinPlayer1 = true;
+				bottom_Line = true;
+			}
+			else if(this.tableau[6] == 1.0 && this.tableau[7] == 1.0 && this.tableau[8] == 1.0) {
+				isWinPlayer2 = true;
+				bottom_Line = true;
+			}
+		}
+		else if (this.tableau[0] == this.tableau[3] && this.tableau[3] == this.tableau[6]) {
+			if(this.tableau[0] == -1.0 && this.tableau[3] == -1.0 && this.tableau[6] == -1.0) {
+				isWinPlayer1 = true;
+				left_Vertical_Line = true;
+			}
+			else if(this.tableau[0] == 1.0 && this.tableau[3] == 1.0 && this.tableau[6] == 1.0) {
+				isWinPlayer2 = true;
+				left_Vertical_Line = true;
+			}
+		}
+		else if (this.tableau[1] == this.tableau[4] && this.tableau[4] == this.tableau[7]) {
+			if(this.tableau[1] == -1.0 && this.tableau[4] == -1.0 && this.tableau[7] == -1.0) {
+				isWinPlayer1 = true;
+				middle_Vertical_Line = true;
+			}
+			else if(this.tableau[1] == 1.0 && this.tableau[4] == 1.0 && this.tableau[7] == 1.0) {
+				isWinPlayer2 = true;
+				middle_Vertical_Line = true;
+			}
+		}
+		else if (this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]) {
+			if(this.tableau[2] == -1.0 && this.tableau[5] == -1.0 && this.tableau[8] == -1.0) {
+				isWinPlayer1 = true;
+				right_Vertical_Line = true;
+			}
+			else if(this.tableau[2] == 1.0 && this.tableau[5] == 1.0 && this.tableau[8] == 1.0) {
+				isWinPlayer2 = true;
+				right_Vertical_Line = true;
+			}
+		}
+		else if (this.tableau[0] == this.tableau[4] && this.tableau[4] == this.tableau[8]) {
+			if(this.tableau[0] == -1.0 && this.tableau[4] == -1.0 && this.tableau[8] == -1.0) {
+				isWinPlayer1 = true;
+				upper_Left_Diagonal = true;
+			}
+			else if(this.tableau[0] == 1.0 && this.tableau[4] == 1.0 && this.tableau[8] == 1.0) {
+				isWinPlayer2 = true;
+				upper_Left_Diagonal = true;
+			}
+		}
+		else if (this.tableau[2] == this.tableau[4] && this.tableau[4] == this.tableau[6]) {
+			if(this.tableau[2] == -1.0 && this.tableau[4] == -1.0 && this.tableau[6] == -1.0) {
+				isWinPlayer1 = true;
+				upper_Right_Riagonal = true;
+			}
+			else if(this.tableau[2] == 1.0 && this.tableau[4] == 1.0 && this.tableau[6] == 1.0) {
+				isWinPlayer2 = true;
+				upper_Right_Riagonal = true;
 			}
 		}
 	}
 	
-	public void setCaseX(int i, int j) {
-		this.tableauX[i][j]=1;
-	}
-	public void setCaseY(int i, int j) {
-		this.tableauO[i][j]=1;
-	}
-	
-	public int[][] getTableauX() {
-		return tableauX;
-	}
 
-	public int[][] getTableauO() {
-		return tableauO;
-	}
-	
-	
-
-	public Line getLine() {
-		return line;
-	}
-
-	public boolean verifieGagner(int choix[][],Pane pane) {
-		if(loopHorizontal(0,choix)==3) {
-			drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,135);
-			return true;
-		}
-		else if(loopHorizontal(1,choix)==3) {
-			drawLine(pane,-88.00001525878906,82,460.99993896484375,82,254,298);
-			return true;
-		}
-		else if(loopHorizontal(2,choix)==3) {
-			drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,461);
-			return true;
-		}
-		else if(loopVertical(0,choix)==3) {
-			drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,168,225);
-			return true;
-		}
-		else if(loopVertical(1,choix)==3) {
-			drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,355,217);
-			return true;
-		}
-		else if(loopVertical(2,choix)==3) {
-			drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,539,217);
-			return true;
-		}
-		else if(loopCrossLeftToRight(choix)==3) {
-			drawLine(pane,20.666641235351562,-24.666671752929688,523.3333129882812,426,167,178);
-			return true;
-		}
-		else if(loopCrossRightToLeft(choix)==3) {
-			drawLine(pane,-158.6666717529297,373,327.33331298828125,-62.33332824707031,357,225);
-			return true;
+	public boolean verifieGagner(Pane pane) {
+		
+		isWin();
+		if(isWinPlayer1 || isWinPlayer2) {
+//			System.out.println("win");
+//			System.out.println("Top_Horizontal_Line = " + Top_Horizontal_Line);
+//			System.out.println("Middle_Horizontal_Line = " + Middle_Horizontal_Line);
+//			System.out.println("Bottom_Line = " + Bottom_Line);
+//			System.out.println("Left_Vertical_Line = " + Left_Vertical_Line);
+//			System.out.println("Middle_Vertical_Line = " + Middle_Vertical_Line);
+//			System.out.println("Right_Vertical_Line = " + Right_Vertical_Line);
+//			System.out.println("Upper_Left_Diagonal = " + Upper_Left_Diagonal);
+//			System.out.println("Upper_Right_Riagonal = " + Upper_Right_Riagonal);
+			if(top_Horizontal_Line) {
+				drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,135);
+				return true;
+			}
+			else if(middle_Horizontal_Line) {
+				drawLine(pane,-88.00001525878906,82,460.99993896484375,82,254,298);
+				return true;
+			}
+			else if(bottom_Line) {
+				drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,461);
+				return true;
+			}
+			else if(left_Vertical_Line) {
+				drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,168,225);
+				return true;
+			}
+			else if(middle_Vertical_Line) {
+				drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,355,217);
+				return true;
+			}
+			else if(right_Vertical_Line) {
+				drawLine(pane,88.66665649414062,394.3333740234375,88.66665649414062,-83.99998474121094,539,217);
+				return true;
+			}
+			else if(upper_Left_Diagonal) {
+				drawLine(pane,20.666641235351562,-24.666671752929688,523.3333129882812,426,167,178);
+				return true;
+			}
+			else if(upper_Right_Riagonal) {
+				drawLine(pane,-158.6666717529297,373,327.33331298828125,-62.33332824707031,357,225);
+				return true;
+			}
 		}
 		return false;
-	}
-	
-	public int loopHorizontal(int position,int choix[][]) {
-		int gagne=0;
-		for(int i=0;i<3;i++) {
-			if (choix[position][i]==1) {
-				gagne+=1;
-			}
-		}
-		return gagne;
-	}
-	public int loopVertical(int position,int choix[][]) {
-		int gagne=0;
-		for(int i=0;i<3;i++) {
-			if (choix[i][position]==1) {
-				gagne+=1;
-			}
-		}
-		return gagne;
-	}
-	public int loopCrossLeftToRight(int choix[][]) {
-		int gagne=0;
-		for(int i=0;i<3;i++) {
-			if (choix[i][i]==1) {
-				gagne+=1;
-			}
-		}
-		return gagne;
-	}
-	public int loopCrossRightToLeft(int choix[][]) {
-		int gagne=0;
-		int j=2;
-		for(int i=0;i<3;i++) {
-			if (choix[i][j]==1) {
-				gagne+=1;
-			}
-			j-=1;
-		}
-		return gagne;
 	}
 	
 	public void drawLine(Pane pane,double x1,double y1,double x2, double y2,double x, double y){
@@ -124,6 +178,22 @@ public class Jeu {
 		line.setStroke(Color.NAVY);
 		line.setStrokeWidth(5);
 		pane.getChildren().add(line);
+	}
+
+	public double[] getTableau() {
+		return tableau;
+	}
+
+	public void setTableau(double[] tableau) {
+		this.tableau = tableau;
+	}
+
+	public Line getLine() {
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
 	}
 }
 
