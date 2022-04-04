@@ -16,9 +16,11 @@ import application.animation.ToggleSwitch;
 import application.animation.XDraw;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -34,6 +36,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class JeuController extends Preloader implements Initializable {
@@ -122,6 +125,10 @@ public class JeuController extends Preloader implements Initializable {
     private Jeu tableau = new Jeu();
     
     private int nb=1;
+    
+    private boolean gagne = false;
+    
+    boolean reinit =false;
     
     
     //ajout des images au thème jaune
@@ -293,26 +300,65 @@ public class JeuController extends Preloader implements Initializable {
 			sc1.getChildren().add(x);
 			tableau.setCaseX(i, j);
 			if(tableau.verifieGagner(tableau.getTableauX(),sc1)) {
-				PopupWindow.displayWinner(getColor(),"1", this.canvas,sc1);
+				gagne=true;
+				Stage window =PopupWindow.displayWinner(getColor(),"1");
+				if(window.onCloseRequestProperty()!=null) {
+					reinitialiserJeu(tableau.getLine());
+				}
+				else {
+					canvas.setDisable(true);
+				}
 			}
-			nb+=1;
-			if(nb==10) {
-				System.out.println("Draw");
+			else {
+			nb+=1;}
+			if(nb==10 && !gagne) {
+				Stage window =PopupWindow.displayDraw(getColor());
+				if(window.onCloseRequestProperty()!=null) {
+					reinitialiserJeu(tableau.getLine());
+				}
 			}
+			if(!reinit) {
 			canvas.setDisable(true);
+			reinit=false;
+			}
 		}
 		else if((!canvas.isDisable()) && ((nb%2)==0)){
 			CircleDraw circle = new CircleDraw(canvas);
 			sc1.getChildren().add(circle);
 			tableau.setCaseY(i, j);
 			if(tableau.verifieGagner(tableau.getTableauO(),sc1)) {
-				PopupWindow.displayWinner(getColor(),"2", this.canvas,sc1);
+				gagne=true;
+				Stage window =PopupWindow.displayWinner(getColor(),"2");
+				if(window.onCloseRequestProperty()!=null) {
+					reinitialiserJeu(tableau.getLine());
+				}
 			}
+			else {
 			nb+=1;
-			if(nb==10) {
-				System.out.println("Draw");
 			}
-			canvas.setDisable(true);
+			if(nb==10 && !gagne) {
+				Stage window =PopupWindow.displayDraw(getColor());
+				if(window.onCloseRequestProperty()!=null) {
+					reinitialiserJeu(tableau.getLine());
+				}
+			}
+			if(!reinit) {
+				canvas.setDisable(true);
+				reinit=false;
+				}
+		}
+	}
+	
+	public void reinitialiserJeu(Line line) {
+		GraphicsContext gc;
+		for (int i=0;i<this.canvas.size();i++) {
+			gc=canvas.get(i).getGraphicsContext2D();
+			gc.clearRect(0, 0, canvas.get(i).getWidth(), canvas.get(i).getHeight());
+			canvas.get(i).setDisable(false);
+			sc1.getChildren().remove(line);
+			this.tableau = new Jeu();
+			nb=1;gagne=false;reinit=true;
+			
 		}
 	}
 	

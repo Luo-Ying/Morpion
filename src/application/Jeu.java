@@ -7,6 +7,7 @@ import javafx.scene.shape.Line;
 public class Jeu {
 	public  int tableauX[][];
 	public  int tableauO[][];
+	public Line line;
 	
 	public Jeu() {
 		this.tableauX = new int [3][3];
@@ -33,6 +34,12 @@ public class Jeu {
 
 	public int[][] getTableauO() {
 		return tableauO;
+	}
+	
+	
+
+	public Line getLine() {
+		return line;
 	}
 
 	public boolean verifieGagner(int choix[][],Pane pane) {
@@ -111,7 +118,7 @@ public class Jeu {
 	}
 	
 	public void drawLine(Pane pane,double x1,double y1,double x2, double y2,double x, double y){
-		Line line = new Line(x1,y1,x2,y2);
+		this.line = new Line(x1,y1,x2,y2);
 		line.setLayoutX(x);
 		line.setLayoutY(y);
 		line.setStroke(Color.NAVY);

@@ -365,8 +365,8 @@ public class PopupWindow {
 		return text;
 	}
 	
-	//item a propos
-		public static void displayWinner(Color color,String winner,List <Canvas> canvas,Pane pane)
+	//item gagnant
+		public static Stage displayWinner(Color color,String winner)
 		{
 			
 		Stage popupWindow=new Stage();
@@ -385,7 +385,7 @@ public class PopupWindow {
 			colorStyle = "-fx-control-inner-background : lightpink;";
 		}
 		else {
-			colorStyle = "-fx-control-inner-background : honeydew";
+			colorStyle = "-fx-control-inner-background : honeydew;";
 		}
 		
 		
@@ -411,6 +411,55 @@ public class PopupWindow {
 		      
 		popupWindow.showAndWait();
 		
+		return popupWindow;
+	}
+	
+		public static Stage displayDraw(Color color)
+		{
+			
+		Stage popupWindow=new Stage();
+		      
+		popupWindow.initModality(Modality.APPLICATION_MODAL);
+		popupWindow.setTitle("Egalité");
+		popupWindow.getIcons().add(new Image(Main.class.getResourceAsStream("/images/Icon.png")));
+		
+		//Set colorStyle to textarea 
+		String colorStyle;
+
+		if(color==Color.LIGHTYELLOW) {
+			colorStyle = "-fx-control-inner-background : lightyellow;";
+		}
+		else if(color==Color.LIGHTPINK) {
+			colorStyle = "-fx-control-inner-background : lightpink;";
+		}
+		else {
+			colorStyle = "-fx-control-inner-background : honeydew;";
+		}
+		
+		
+		VBox layout= new VBox(20);       
+		layout.setAlignment(Pos.CENTER);
+		
+		
+		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
+		
+		
+		String gagnant = "\n\n\n\t     Egalité !";
+		//textarea of the popup
+		TextArea textArea = new TextArea();
+		textArea.setText(gagnant);
+		textArea.setStyle(style);
+		textArea.setEditable(false);
+		
+		layout.getChildren().add(textArea);
+		
+		Scene scene1= new Scene(layout, 300, 250);
+		      
+		popupWindow.setScene(scene1);
+		      
+		popupWindow.showAndWait();
+		
+		return popupWindow;
 	}
 	
 }
