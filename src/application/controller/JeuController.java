@@ -125,9 +125,11 @@ public class JeuController extends Preloader implements Initializable {
     
     private Jeu tableau = new Jeu();
     
+    private boolean isIAgame = false;
+    
     private boolean isPlayerTurn = false;
     
-    private boolean isIAgame = false;
+    private boolean isIATurn = false;
     
     private int nb=1;
     
@@ -256,48 +258,115 @@ public class JeuController extends Preloader implements Initializable {
 	
 	@FXML
     void drawCase1(MouseEvent event) {
-		selectCase(canvas1, 0);
+		if(!this.isIAgame) {			
+			selectCase(canvas1, 0);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase2(MouseEvent event) {
-		selectCase(canvas2, 1);
+		if(!this.isIAgame) {
+			selectCase(canvas2, 1);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase3(MouseEvent event) {
-		selectCase(canvas3, 2);
+		if(!this.isIAgame) {
+			selectCase(canvas3, 2);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase4(MouseEvent event) {
-		selectCase(canvas4, 3);
+		if(!isIAgame) {
+			selectCase(canvas4, 3);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase5(MouseEvent event) {
-		selectCase(canvas5, 4);
+		if(!this.isIAgame) {
+			selectCase(canvas5, 4);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase6(MouseEvent event) {
-		selectCase(canvas6, 5);
+		if(!this.isIAgame) {
+			selectCase(canvas6, 5);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase7(MouseEvent event) {
-		selectCase(canvas7, 6);
+		if(!this.isIAgame) {
+			selectCase(canvas7, 6);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase8(MouseEvent event) {
-		selectCase(canvas8, 7);
+		if(!this.isIAgame) {
+			selectCase(canvas8, 7);
+		}
+		else {
+			
+		}
     }
 	
 	@FXML
     void drawCase9(MouseEvent event) {
-		selectCase(canvas9, 8);
+		if(!this.isIAgame) {
+			selectCase(canvas9, 8);
+		}
+		else {
+			
+		}
     }
+	
+	public void displayResult(Canvas canvas) {
+		gagne=true;
+		String playerWin;
+		if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
+		Stage window = PopupWindow.displayWinner(getColor(),playerWin);
+		if(window.onCloseRequestProperty()!=null) {
+			reinitialiserJeu(tableau.getLine());
+		}
+		else {
+			canvas.setDisable(true);
+		}
+	}
+	
+	public void IAgame(Canvas canvas,int i) {
+		if(this.isIATurn) {
+			//TODO: function of IA turn
+		}
+		else {
+			
+		}
+	}
 	
 	void selectCase(Canvas canvas,int i) {
 		if((!canvas.isDisable()) && ((nb%2)!=0)) {
@@ -308,19 +377,10 @@ public class JeuController extends Preloader implements Initializable {
 			tableau.setCaseX(i);
 			
 //			System.out.println(tableau.verifieGagner(sc1));
-			System.out.println(Arrays.toString(tableau.getTableau()));
+			System.out.println("x");
 			
 			if(tableau.verifieGagner(sc1, player)) {
-				gagne=true;
-				String playerWin;
-				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
-				Stage window =PopupWindow.displayWinner(getColor(),playerWin);
-				if(window.onCloseRequestProperty()!=null) {
-					reinitialiserJeu(tableau.getLine());
-				}
-				else {
-					canvas.setDisable(true);
-				}
+				displayResult(canvas);
 			}
 			else {
 			nb+=1;}
@@ -342,14 +402,10 @@ public class JeuController extends Preloader implements Initializable {
 			double player = 1.0;
 			tableau.setCaseO(i);
 			
+			System.out.println("O");
+			
 			if(tableau.verifieGagner(sc1, player)) {
-				gagne=true;
-				String playerWin;
-				if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
-				Stage window = PopupWindow.displayWinner(getColor(),playerWin);
-				if(window.onCloseRequestProperty()!=null) {
-					reinitialiserJeu(tableau.getLine());
-				}
+				displayResult(canvas);
 			}
 			else {
 			nb+=1;

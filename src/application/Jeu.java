@@ -17,7 +17,7 @@ public class Jeu {
 	public boolean middle_Vertical_Line = false;
 	public boolean right_Vertical_Line = false;
 	public boolean upper_Left_Diagonal = false;
-	public boolean upper_Right_Riagonal = false;
+	public boolean upper_Right_Diagonal = false;
 	
 	public Line line;
 	
@@ -38,6 +38,11 @@ public class Jeu {
 		this.tableau[i] = 1.0;
 	}
 	
+	public boolean roundIA(boolean isIA) {
+		if(isIA) return true;
+		return false;
+	}
+	
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
 		if(this.tableau[index1] == player && this.tableau[index2] == player && this.tableau[index3] == player) {			
 			if(player == -1.0) isWinPlayer1 = true; else isWinPlayer2 = true;
@@ -47,29 +52,33 @@ public class Jeu {
 	}
 	
 	public void isWin(double player) {
+		
+		System.out.println(this.tableau[2]+""+this.tableau[5]+""+this.tableau[8]);
+		System.out.println(this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]);
+
 		if (this.tableau[0] == this.tableau[1] && this.tableau[1] == this.tableau[2]) {
 			if(defineParametres(player, 0, 1, 2)) top_Horizontal_Line = true;
 		}
-		else if (this.tableau[3] == this.tableau[4] && this.tableau[4] == this.tableau[5]) {
+		if (this.tableau[3] == this.tableau[4] && this.tableau[4] == this.tableau[5]) {
 			if(defineParametres(player, 3, 4, 5)) middle_Horizontal_Line = true;
 		}
-		else if (this.tableau[6] == this.tableau[7] && this.tableau[7] == this.tableau[8]) {
+		if (this.tableau[6] == this.tableau[7] && this.tableau[7] == this.tableau[8]) {
 			if(defineParametres(player, 6, 7, 8)) bottom_Line = true;
 		}
-		else if (this.tableau[0] == this.tableau[3] && this.tableau[3] == this.tableau[6]) {
+		if (this.tableau[0] == this.tableau[3] && this.tableau[3] == this.tableau[6]) {
 			if(defineParametres(player, 0, 3, 6)) left_Vertical_Line = true;
 		}
-		else if (this.tableau[1] == this.tableau[4] && this.tableau[4] == this.tableau[7]) {
+		if (this.tableau[1] == this.tableau[4] && this.tableau[4] == this.tableau[7]) {
 			if(defineParametres(player, 1, 4, 7)) middle_Vertical_Line = true;
 		}
-		else if (this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]) {
+		if (this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]) {
 			if(defineParametres(player, 2, 5, 8)) right_Vertical_Line = true;
 		}
-		else if (this.tableau[0] == this.tableau[4] && this.tableau[4] == this.tableau[8]) {
-			if(defineParametres(player, 0, 4, 8)) upper_Left_Diagonal = true;
+		if (this.tableau[0] == this.tableau[4] && this.tableau[4] == this.tableau[8]) {
+			upper_Left_Diagonal = defineParametres(player, 0, 4, 8);
 		}
-		else if (this.tableau[2] == this.tableau[4] && this.tableau[4] == this.tableau[6]) {
-			if(defineParametres(player, 2, 4, 6)) upper_Right_Riagonal = true;
+		if (this.tableau[2] == this.tableau[4] && this.tableau[4] == this.tableau[6]) {
+			if(defineParametres(player, 2, 4, 6)) upper_Right_Diagonal = true;
 		}
 	}
 	
@@ -78,15 +87,15 @@ public class Jeu {
 		
 		isWin(player);
 		if(isWinPlayer1 || isWinPlayer2) {
-//			System.out.println("win");
-//			System.out.println("Top_Horizontal_Line = " + Top_Horizontal_Line);
-//			System.out.println("Middle_Horizontal_Line = " + Middle_Horizontal_Line);
-//			System.out.println("Bottom_Line = " + Bottom_Line);
-//			System.out.println("Left_Vertical_Line = " + Left_Vertical_Line);
-//			System.out.println("Middle_Vertical_Line = " + Middle_Vertical_Line);
-//			System.out.println("Right_Vertical_Line = " + Right_Vertical_Line);
-//			System.out.println("Upper_Left_Diagonal = " + Upper_Left_Diagonal);
-//			System.out.println("Upper_Right_Riagonal = " + Upper_Right_Riagonal);
+			System.out.println("win");
+//			System.out.println("Top_Horizontal_Line = " + top_Horizontal_Line);
+//			System.out.println("Middle_Horizontal_Line = " + middle_Horizontal_Line);
+//			System.out.println("Bottom_Line = " + bottom_Line);
+//			System.out.println("Left_Vertical_Line = " + left_Vertical_Line);
+//			System.out.println("Middle_Vertical_Line = " + middle_Vertical_Line);
+//			System.out.println("Right_Vertical_Line = " + right_Vertical_Line);
+//			System.out.println("Upper_Left_Diagonal = " + upper_Left_Diagonal);
+//			System.out.println("Upper_Right_Riagonal = " + upper_Right_Diagonal);
 			if(top_Horizontal_Line) {
 				drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,135);
 				return true;
@@ -115,7 +124,7 @@ public class Jeu {
 				drawLine(pane,20.666641235351562,-24.666671752929688,523.3333129882812,426,167,178);
 				return true;
 			}
-			else if(upper_Right_Riagonal) {
+			else if(upper_Right_Diagonal) {
 				drawLine(pane,-158.6666717529297,373,327.33331298828125,-62.33332824707031,357,225);
 				return true;
 			}
