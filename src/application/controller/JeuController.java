@@ -310,7 +310,8 @@ public class JeuController extends Preloader implements Initializable {
 		}
 		else {
 			if(this.isIATurn) {
-				this.tableau.roundIA();
+				int index = this.tableau.roundIA();
+				selectCaseDrawO(getCanvas(index), index);
 				this.isIATurn = false;
 			}
 			else {
@@ -320,6 +321,31 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	public Canvas getCanvas(int i) {
+		switch (i) {
+			case 0:
+				return canvas1;
+			case 1:
+				return canvas2;
+			case 2:
+				return canvas3;
+			case 3:
+				return canvas4;
+			case 4:
+				return canvas5;
+			case 5:
+				return canvas6;
+			case 6:
+				return canvas7;
+			case 7:
+				return canvas8;
+			case 8:
+				return canvas9;
+			default:
+				break;
+		}
+		return null;
+	}
 	
 	public void getResulte(Canvas canvas, double player) {
 		if(tableau.verifieGagner(sc1, player)) {
