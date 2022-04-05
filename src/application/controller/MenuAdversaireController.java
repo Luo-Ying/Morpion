@@ -171,7 +171,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     @FXML
     void goToJeu(MouseEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToJeuController(event,getColor());
+		sController.switchToJeuController(event,getColor(),false);
     }
    
     //ajout des images du thème jaune

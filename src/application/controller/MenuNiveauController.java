@@ -182,7 +182,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		File f = new File(path) ;
 		if(f.exists() && f.isFile()) {
 			SceneController sController = new SceneController();
-			sController.switchToJeuController(event,getColor());
+			sController.switchToJeuController(event,getColor(),true);
 		}
 		else {
 			SceneController sController = new SceneController();

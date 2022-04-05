@@ -88,7 +88,7 @@ public class SceneController {
 	}
 	
 	//changement de scène vers Jeu via ActionEvent
-	public void switchToJeuController(ActionEvent event,Color color) throws IOException {
+	public void switchToJeuController(ActionEvent event,Color color,boolean isIA) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
 		root =loader.load();
@@ -103,13 +103,14 @@ public class SceneController {
 		else {
 			controller.setTheme(color,false,false,true);
 		}
+		controller.setIAGame(isIA);
 		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	//changement de scène vers Jeu via MouseEvent
-		public void switchToJeuController(MouseEvent event,Color color) throws IOException {
+		public void switchToJeuController(MouseEvent event,Color color,boolean isIA) throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
 			root =loader.load();
@@ -124,6 +125,7 @@ public class SceneController {
 			else {
 				controller.setTheme(color,false,false,true);
 			}
+			controller.setIAGame(isIA);
 			stage =(Stage)((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();

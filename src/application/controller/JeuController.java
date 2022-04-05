@@ -125,7 +125,7 @@ public class JeuController extends Preloader implements Initializable {
     
     private Jeu tableau = new Jeu();
     
-    private boolean isIAgame = false;
+    private boolean isIAgame;
     
     private boolean isPlayerTurn = false;
     
@@ -136,6 +136,10 @@ public class JeuController extends Preloader implements Initializable {
     private boolean gagne = false;
     
     boolean reinit =false;
+    
+    public void setIAGame(boolean isAI) {
+    	this.isIAgame=isAI;
+    }
     
     
     //ajout des images au thème jaune
@@ -262,7 +266,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas1, 0);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -272,7 +276,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas2, 1);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -282,7 +286,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas3, 2);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -292,7 +296,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas4, 3);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -302,7 +306,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas5, 4);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -322,7 +326,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas7, 6);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -332,7 +336,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas8, 7);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
@@ -342,7 +346,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas9, 8);
 		}
 		else {
-			
+			System.out.print("IS IA");
 		}
     }
 	
