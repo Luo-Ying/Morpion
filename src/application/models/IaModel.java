@@ -1,5 +1,11 @@
 package application.models;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
 import ai.Config;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
@@ -17,7 +23,14 @@ public class IaModel {
 	
 	private MultiLayerPerceptron net;
 	
+	private Coup coup;
+	
+	private double[] res;
+	
 	public static double Epochs = 100000 ;
+	
+	public static HashMap<Integer, Coup> mapTrain;
+	public static HashMap<Integer, Coup> mapDev;
 	
 
 	public IaModel(Config config) {
@@ -26,6 +39,59 @@ public class IaModel {
 		this.l = config.numberOfhiddenLayers;
 		this.h = config.hiddenLayerSize;
 		
+		mapTrain = loadCoupsFromFile("./resources/train_dev_test/train.txt");
+		mapDev = loadCoupsFromFile("./resources/train_dev_test/dev.txt");
+		
+		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+		
+	}
+	
+	public void play() {
+		
+	}
+	
+	public static HashMap<Integer, Coup> loadCoupsFromFile(String file){
+		System.out.println("loadCoupsFromFile from "+file+" ...");
+		HashMap<Integer, Coup> map = new HashMap<>();
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(file))));
+			String s = "";
+			while ((s = br.readLine()) != null) {
+				String[] sIn = s.split("\t")[0].split(" ");
+				String[] sOut = s.split("\t")[1].split(" ");
+
+				double[] in = new double[sIn.length];
+				double[] out = new double[sOut.length];
+
+				for (int i = 0; i < sIn.length; i++) {
+					in[i] = Double.parseDouble(sIn[i]);
+				}
+
+				for (int i = 0; i < sOut.length; i++) {
+					out[i] = Double.parseDouble(sOut[i]);
+				}
+
+				Coup c = new Coup(9, "");
+				c.in = in ;
+				c.out = out ;
+				map.put(map.size(), c);
+			}
+			br.close();
+		} 
+		catch (Exception e) {
+			System.out.println("Test.loadCoupsFromFile()");
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return map ;
+	}
+	
+	public Coup getCoup() {
+		return this.coup;
+	}
+	
+	public void setCoup(HashMap<Integer, Coup> mapTrain0) {
+		this.coup = mapTrain0.get((int)(Math.round(Math.random() * mapTrain0.size())));
 	}
 	
 	

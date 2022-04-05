@@ -231,7 +231,8 @@ public class ApprentissageController  extends Preloader implements Initializable
 
         			Coup c = null ;
         			while ( c == null )
-        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+//        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+        				c = iaModel.getCoup();
 
 //        			error += net.backPropagate(c.in, c.out);
         			iaModel.setError(c);
