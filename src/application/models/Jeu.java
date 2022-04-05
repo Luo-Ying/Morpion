@@ -1,4 +1,4 @@
-package application;
+package application.models;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -39,6 +39,8 @@ public class Jeu {
 	}
 	
 	public void roundIA() {
+//		double[] res = play(net, c);
+//		res = play(net, c);
 		
 	}
 	

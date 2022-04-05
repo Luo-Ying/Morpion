@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.Jeu;
 import application.PopupWindow;
 import application.animation.CircleDraw;
 import application.animation.ToggleSwitch;
 import application.animation.XDraw;
+import application.models.Jeu;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -258,6 +258,52 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	@FXML
+	void drawCase1(MouseEvent event) {
+		gameTurn(canvas1, 0);
+	}
+	
+	@FXML
+	void drawCase2(MouseEvent event) {
+		gameTurn(canvas2, 1);
+	}
+	
+	@FXML
+	void drawCase3(MouseEvent event) {
+		gameTurn(canvas3, 2);
+	}
+	
+	@FXML
+	void drawCase4(MouseEvent event) {
+		gameTurn(canvas4, 3);
+	}
+	
+	@FXML
+	void drawCase5(MouseEvent event) {
+		gameTurn(canvas5, 4);
+	}
+	
+	@FXML
+	void drawCase6(MouseEvent event) {
+		gameTurn(canvas6, 5);
+	}
+	
+	@FXML
+	void drawCase7(MouseEvent event) {
+		gameTurn(canvas7, 6);
+	}
+	
+	@FXML
+	void drawCase8(MouseEvent event) {
+		gameTurn(canvas8, 7);
+	}
+	
+	@FXML
+	void drawCase9(MouseEvent event) {
+		gameTurn(canvas9, 8);
+	}
+	
+	
 	public void gameTurn(Canvas canvas, int turn) {
 		if(!this.isIAgame) {			
 			selectCase(canvas, turn);
@@ -268,56 +314,12 @@ public class JeuController extends Preloader implements Initializable {
 				this.isIATurn = false;
 			}
 			else {
-				selectCase(canvas, turn);
+				selectCaseDrawX(canvas, turn);
 				this.isIATurn = true;
 			}
 		}
 	}
 	
-	@FXML
-    void drawCase1(MouseEvent event) {
-		gameTurn(canvas1, 0);
-    }
-	
-	@FXML
-    void drawCase2(MouseEvent event) {
-		gameTurn(canvas2, 1);
-    }
-	
-	@FXML
-    void drawCase3(MouseEvent event) {
-		gameTurn(canvas3, 2);
-    }
-	
-	@FXML
-    void drawCase4(MouseEvent event) {
-		gameTurn(canvas4, 3);
-    }
-	
-	@FXML
-    void drawCase5(MouseEvent event) {
-		gameTurn(canvas5, 4);
-    }
-	
-	@FXML
-    void drawCase6(MouseEvent event) {
-		gameTurn(canvas6, 5);
-    }
-	
-	@FXML
-    void drawCase7(MouseEvent event) {
-		gameTurn(canvas7, 6);
-    }
-	
-	@FXML
-    void drawCase8(MouseEvent event) {
-		gameTurn(canvas8, 7);
-    }
-	
-	@FXML
-    void drawCase9(MouseEvent event) {
-		gameTurn(canvas9, 8);
-    }
 	
 	public void getResulte(Canvas canvas, double player) {
 		if(tableau.verifieGagner(sc1, player)) {
