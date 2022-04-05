@@ -19,6 +19,7 @@ import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
 import application.PopupWindow;
 import application.animation.ToggleSwitch;
+import application.models.IaModel;
 import javafx.application.Preloader;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
@@ -115,9 +116,12 @@ public class ApprentissageController  extends Preloader implements Initializable
     private List <ImageView> greenTheme = new ArrayList<>();
     
     private Color color;
+    
+    private IaModel iaModel ;
 
    //Definir le config
     void setConfig(Config config) {
+    	this.iaModel = new IaModel(config);
     	this.config=config;
     }
     
@@ -132,14 +136,14 @@ public class ApprentissageController  extends Preloader implements Initializable
     	// Part for initialisation of the test
 		System.out.println(config.level);
     	int size =9;
-    	double lr=config.learningRate;
-    	int l=config.numberOfhiddenLayers;
-    	int h=config.hiddenLayerSize;
+//    	double lr=config.learningRate;
+//    	int l=config.numberOfhiddenLayers;
+//    	int h=config.hiddenLayerSize;
     	
-    	int[] layers = new int[l+2];
+    	int[] layers = new int[iaModel.getL()+2];
 		layers[0] = size ;
-		for (int i = 0; i < l; i++) {
-			layers[i+1] = h ;
+		for (int i = 0; i < iaModel.getL(); i++) {
+			layers[i+1] = iaModel.getH() ;
 		}
 		layers[layers.length-1] = size ;
 		
@@ -149,9 +153,9 @@ public class ApprentissageController  extends Preloader implements Initializable
 		HashMap<Integer, Coup> mapTest = ai.Test.loadCoupsFromFile("./resources/train_dev_test/test.txt");
 		
 		//Creation of a new task to display text progress and  progress bar
-		displayText=displayProgressText(mapTrain,layers,lr,config.level);
+		displayText=displayProgressText(mapTrain,layers,iaModel.getLr(),config.level);
 		
-		worker = displayProgressText(mapTrain,layers,lr,config.level);
+		worker = displayProgressText(mapTrain,layers,iaModel.getLr(),config.level);
     	pgbar.progressProperty().unbind();
     	pgbar.progressProperty().bind(worker.progressProperty());
     	
@@ -218,28 +222,30 @@ public class ApprentissageController  extends Preloader implements Initializable
         	
         	@Override
             protected Object call() throws Exception {
-        		double error = 0.0 ;
-        		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
+//        		double error = 0.0 ;
+//        		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
+        		iaModel.setNet(layers);
         		//changed the epochs so that it finishes earlier
-        		double epochs = 100000 ;
-        		for(int i = 0; i < epochs; i++){
+//        		double epochs = 100000 ;
+        		for(int i = 0; i < iaModel.Epochs; i++){
 
         			Coup c = null ;
         			while ( c == null )
         				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
 
-        			error += net.backPropagate(c.in, c.out);
+//        			error += net.backPropagate(c.in, c.out);
+        			iaModel.setError(c);
         			
         			if ( i % 1000 == 0 ) {
 //        				System.out.println("Error at step "+i+" is "+ (error/(double)i));
-        				updateMessage("Error at step "+i+" is "+ (error/(double)i)); //update message in texfield
-        				updateProgress((100/epochs)*i,100);//update progressbar
+        				updateMessage("Error at step "+i+" is "+ (iaModel.getError()/(double)i)); //update message in texfield
+        				updateProgress((100/iaModel.Epochs)*i,100);//update progressbar
         			}
         		}
         		
         		try {
         			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
-        			oos.writeObject(net) ;
+        			oos.writeObject(iaModel.getNet()) ;
         		} catch (Exception e) {
         			// TODO Auto-generated catch block
         			e.printStackTrace();
