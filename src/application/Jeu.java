@@ -38,9 +38,8 @@ public class Jeu {
 		this.tableau[i] = 1.0;
 	}
 	
-	public boolean roundIA(boolean isIA) {
-		if(isIA) return true;
-		return false;
+	public void roundIA() {
+		
 	}
 	
 	public boolean defineParametres(double player, int index1, int index2, int index3) {

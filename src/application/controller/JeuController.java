@@ -127,8 +127,6 @@ public class JeuController extends Preloader implements Initializable {
     
     private boolean isIAgame;
     
-    private boolean isPlayerTurn = false;
-    
     private boolean isIATurn = false;
     
     private int nb=1;
@@ -260,170 +258,121 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
-	@FXML
-    void drawCase1(MouseEvent event) {
+	public void gameTurn(Canvas canvas, int turn) {
 		if(!this.isIAgame) {			
-			selectCase(canvas1, 0);
+			selectCase(canvas, turn);
 		}
 		else {
-			System.out.print("IS IA");
+			if(this.isIATurn) {
+				this.tableau.roundIA();
+				this.isIATurn = false;
+			}
+			else {
+				selectCase(canvas, turn);
+				this.isIATurn = true;
+			}
 		}
+	}
+	
+	@FXML
+    void drawCase1(MouseEvent event) {
+		gameTurn(canvas1, 0);
     }
 	
 	@FXML
     void drawCase2(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas2, 1);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas2, 1);
     }
 	
 	@FXML
     void drawCase3(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas3, 2);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas3, 2);
     }
 	
 	@FXML
     void drawCase4(MouseEvent event) {
-		if(!isIAgame) {
-			selectCase(canvas4, 3);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas4, 3);
     }
 	
 	@FXML
     void drawCase5(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas5, 4);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas5, 4);
     }
 	
 	@FXML
     void drawCase6(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas6, 5);
-		}
-		else {
-			
-		}
+		gameTurn(canvas6, 5);
     }
 	
 	@FXML
     void drawCase7(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas7, 6);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas7, 6);
     }
 	
 	@FXML
     void drawCase8(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas8, 7);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas8, 7);
     }
 	
 	@FXML
     void drawCase9(MouseEvent event) {
-		if(!this.isIAgame) {
-			selectCase(canvas9, 8);
-		}
-		else {
-			System.out.print("IS IA");
-		}
+		gameTurn(canvas9, 8);
     }
 	
-	public void displayResult(Canvas canvas) {
-		gagne=true;
-		String playerWin;
-		if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
-		Stage window = PopupWindow.displayWinner(getColor(),playerWin);
-		if(window.onCloseRequestProperty()!=null) {
-			reinitialiserJeu(tableau.getLine());
-		}
-		else {
-			canvas.setDisable(true);
-		}
-	}
-	
-	public void IAgame(Canvas canvas,int i) {
-		if(this.isIATurn) {
-			//TODO: function of IA turn
-		}
-		else {
-			
-		}
-	}
-	
-	void selectCase(Canvas canvas,int i) {
-		if((!canvas.isDisable()) && ((nb%2)!=0)) {
-			XDraw x = new XDraw(canvas);
-			sc1.getChildren().add(x);
-			
-			double player = -1.0;
-			tableau.setCaseX(i);
-			
-//			System.out.println(tableau.verifieGagner(sc1));
-			System.out.println("x");
-			
-			if(tableau.verifieGagner(sc1, player)) {
-				displayResult(canvas);
+	public void getResulte(Canvas canvas, double player) {
+		if(tableau.verifieGagner(sc1, player)) {
+			gagne=true;
+			String playerWin;
+			if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
+			Stage window = PopupWindow.displayWinner(getColor(),playerWin);
+			if(window.onCloseRequestProperty()!=null) {
+				reinitialiserJeu(tableau.getLine());
 			}
 			else {
-			nb+=1;}
-			if(nb==10 && !gagne) {
-				Stage window =PopupWindow.displayDraw(getColor());
-				if(window.onCloseRequestProperty()!=null) {
-					reinitialiserJeu(tableau.getLine());
-				}
+				canvas.setDisable(true);
 			}
-			if(!reinit) {
-			canvas.setDisable(true);
-			reinit=false;
+		}
+		else {
+			nb+=1;
+		}
+		if(nb==10 && !gagne) {
+			Stage window =PopupWindow.displayDraw(getColor());
+			if(window.onCloseRequestProperty()!=null) {
+				reinitialiserJeu(tableau.getLine());
 			}
+		}
+		if(!reinit) {
+		canvas.setDisable(true);
+		reinit=false;
+		}
+	}
+	
+	public void selectCaseDrawX(Canvas canvas, int i) {
+		XDraw x = new XDraw(canvas);
+		sc1.getChildren().add(x);
+		
+		double player = -1.0;
+		tableau.setCaseX(i);
+		
+		getResulte(canvas, player);
+	}
+	
+	public void selectCaseDrawO(Canvas canvas, int i) {
+		CircleDraw circle = new CircleDraw(canvas);
+		sc1.getChildren().add(circle);
+		
+		double player = 1.0;
+		tableau.setCaseO(i);
+		
+		getResulte(canvas, player);
+	}
+	
+	public void selectCase(Canvas canvas,int i) {
+		if((!canvas.isDisable()) && ((nb%2)!=0)) {
+			selectCaseDrawX(canvas, i);
 		}
 		else if((!canvas.isDisable()) && ((nb%2)==0)){
-			CircleDraw circle = new CircleDraw(canvas);
-			sc1.getChildren().add(circle);
-			
-			double player = 1.0;
-			tableau.setCaseO(i);
-			
-			System.out.println("O");
-			
-			if(tableau.verifieGagner(sc1, player)) {
-				displayResult(canvas);
-			}
-			else {
-			nb+=1;
-			}
-			if(nb==10 && !gagne) {
-				Stage window =PopupWindow.displayDraw(getColor());
-				if(window.onCloseRequestProperty()!=null) {
-					reinitialiserJeu(tableau.getLine());
-				}
-			}
-			if(!reinit) {
-				canvas.setDisable(true);
-				reinit=false;
-				}
+			selectCaseDrawO(canvas, i);
 		}
 	}
 	
