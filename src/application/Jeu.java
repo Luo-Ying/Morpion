@@ -52,33 +52,30 @@ public class Jeu {
 	}
 	
 	public void isWin(double player) {
-		
-		System.out.println(this.tableau[2]+""+this.tableau[5]+""+this.tableau[8]);
-		System.out.println(this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]);
 
 		if (this.tableau[0] == this.tableau[1] && this.tableau[1] == this.tableau[2]) {
-			if(defineParametres(player, 0, 1, 2)) top_Horizontal_Line = true;
+			top_Horizontal_Line = defineParametres(player, 0, 1, 2);
 		}
 		if (this.tableau[3] == this.tableau[4] && this.tableau[4] == this.tableau[5]) {
-			if(defineParametres(player, 3, 4, 5)) middle_Horizontal_Line = true;
+			middle_Horizontal_Line = defineParametres(player, 3, 4, 5);
 		}
 		if (this.tableau[6] == this.tableau[7] && this.tableau[7] == this.tableau[8]) {
-			if(defineParametres(player, 6, 7, 8)) bottom_Line = true;
+			bottom_Line = defineParametres(player, 6, 7, 8);
 		}
 		if (this.tableau[0] == this.tableau[3] && this.tableau[3] == this.tableau[6]) {
-			if(defineParametres(player, 0, 3, 6)) left_Vertical_Line = true;
+			left_Vertical_Line = defineParametres(player, 0, 3, 6);
 		}
 		if (this.tableau[1] == this.tableau[4] && this.tableau[4] == this.tableau[7]) {
-			if(defineParametres(player, 1, 4, 7)) middle_Vertical_Line = true;
+			middle_Vertical_Line = defineParametres(player, 1, 4, 7);
 		}
 		if (this.tableau[2] == this.tableau[5] && this.tableau[5] == this.tableau[8]) {
-			if(defineParametres(player, 2, 5, 8)) right_Vertical_Line = true;
+			right_Vertical_Line = defineParametres(player, 2, 5, 8);
 		}
 		if (this.tableau[0] == this.tableau[4] && this.tableau[4] == this.tableau[8]) {
 			upper_Left_Diagonal = defineParametres(player, 0, 4, 8);
 		}
 		if (this.tableau[2] == this.tableau[4] && this.tableau[4] == this.tableau[6]) {
-			if(defineParametres(player, 2, 4, 6)) upper_Right_Diagonal = true;
+			upper_Right_Diagonal = defineParametres(player, 2, 4, 6);
 		}
 	}
 	
