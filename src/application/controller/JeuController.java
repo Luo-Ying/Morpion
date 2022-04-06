@@ -16,6 +16,7 @@ import application.PopupWindow;
 import application.animation.CircleDraw;
 import application.animation.ToggleSwitch;
 import application.animation.XDraw;
+import application.models.IaModel;
 import application.models.Jeu;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
@@ -129,6 +130,8 @@ public class JeuController extends Preloader implements Initializable {
     
     private boolean isIAgame;
     
+    private IaModel iaModel;
+    
     private boolean isIATurn = false;
     
     private int nb=1;
@@ -139,6 +142,10 @@ public class JeuController extends Preloader implements Initializable {
     
     public void setIAGame(boolean isAI) {
     	this.isIAgame=isAI;
+    }
+    
+    public void setIaModel(IaModel iaModel) {
+    	this.iaModel = iaModel;
     }
     
     
@@ -327,7 +334,7 @@ public class JeuController extends Preloader implements Initializable {
 	public void IAplay() {
 		//TODO: function for IA play
 		//test...
-		int index = this.tableau.roundIA();
+		int index = this.tableau.roundIA(this.iaModel);
 		Canvas canvas = getCanvas(index);
 		selectCaseDrawO(canvas, index);
 		canvas.setDisable(true);

@@ -38,7 +38,8 @@ public class Jeu {
 		this.tableau[i] = 1.0;
 	}
 	
-	public int roundIA() {
+	public int roundIA(IaModel iaModel) {
+//		IaModel iaModel = new IaModel(null)
 		int caseEmpty = (int) (Math.random() * this.tableau.length);
 		while(this.tableau[caseEmpty] != 0.0) {
 			caseEmpty = (int) (Math.random() * this.tableau.length);

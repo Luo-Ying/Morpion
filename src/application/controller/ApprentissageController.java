@@ -176,7 +176,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     		if(Worker.State.SUCCEEDED == newVal) {
     			SceneController sController = new SceneController();
     			try {
-					sController.switchToJeuController(event,getColor(),true);
+					sController.switchToJeuController(event,getColor(),true, this.iaModel);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

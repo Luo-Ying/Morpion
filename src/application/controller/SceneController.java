@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import ai.Config;
 import application.Main;
+import application.models.IaModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -88,7 +89,7 @@ public class SceneController {
 	}
 	
 	//changement de scène vers Jeu via ActionEvent
-	public void switchToJeuController(ActionEvent event,Color color,boolean isIA) throws IOException {
+	public void switchToJeuController(ActionEvent event,Color color,boolean isIA, IaModel iaModel) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
 		root =loader.load();
@@ -104,6 +105,7 @@ public class SceneController {
 			controller.setTheme(color,false,false,true);
 		}
 		controller.setIAGame(isIA);
+		controller.setIaModel(iaModel);
 		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
