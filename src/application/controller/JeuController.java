@@ -310,15 +310,26 @@ public class JeuController extends Preloader implements Initializable {
 		}
 		else {
 			if(this.isIATurn) {
-				int index = this.tableau.roundIA();
-				selectCaseDrawO(getCanvas(index), index);
-				this.isIATurn = false;
+				IAplay();
 			}
 			else {
 				selectCaseDrawX(canvas, turn);
-				this.isIATurn = true;
+				if(this.nb != 1) {
+					this.isIATurn = true;
+					gameTurn(canvas, turn);
+				}
 			}
 		}
+	}
+	
+	public void IAplay() {
+		//TODO: function for IA play
+		//test...
+		int index = this.tableau.roundIA();
+		Canvas canvas = getCanvas(index);
+		selectCaseDrawO(canvas, index);
+		canvas.setDisable(true);
+		this.isIATurn = false;
 	}
 	
 	public Canvas getCanvas(int i) {
@@ -415,7 +426,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 		System.out.println("ok");
 		this.tableau = new Jeu();
-		nb=1;gagne=false;reinit=true;
+		nb=1;gagne=false;reinit=true;isIATurn=false;
 	}
 	
 	//Lors du chargement de la scène
