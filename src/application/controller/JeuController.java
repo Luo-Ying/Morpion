@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import application.PopupWindow;
 import application.animation.CircleDraw;
@@ -140,7 +142,7 @@ public class JeuController extends Preloader implements Initializable {
     }
     
     
-    //ajout des images au thème jaune
+    //ajout des images au thÃ¨me jaune
     public void addImageToYellowTheme() {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
@@ -148,14 +150,14 @@ public class JeuController extends Preloader implements Initializable {
 		yellowTheme.add(maisonJaune);
     }
     
-    //ajout des images au thème rose
+    //ajout des images au thÃ¨me rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
     	pinkTheme.add(maisonRose);
     }
     
-    //ajout des images au thème vert
+    //ajout des images au thÃ¨me vert
     public void addImageToGreenTheme() {
     	greenTheme.add(stella);
     	greenTheme.add(marcus);
@@ -175,7 +177,7 @@ public class JeuController extends Preloader implements Initializable {
     	canvas.add(canvas9);	
     }
     
-    //définir un theme
+    //dÃ©finir un theme
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) throws FileNotFoundException {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
@@ -201,7 +203,7 @@ public class JeuController extends Preloader implements Initializable {
     	}
     }
     
-    //définir le bouton menu
+    //dÃ©finir le bouton menu
     public void setMenu(String path,String style,String pgbarStyle) throws FileNotFoundException {
     	FileInputStream input = new FileInputStream(path);
         Image image = new Image(input);
@@ -230,12 +232,12 @@ public class JeuController extends Preloader implements Initializable {
     	PopupWindow.displayAbout(getColor());
     }
     
-    //récuperer couleur du thème
+    //rÃ©cuperer couleur du thÃ¨me
     public Color getColor() {
 		return color;
 	}
 
-    //définir couleur du thème
+    //dÃ©finir couleur du thÃ¨me
 	public void setColor(Color color) {
 		this.color = color;
 	}
@@ -246,7 +248,7 @@ public class JeuController extends Preloader implements Initializable {
 	}
 	
 	
-	//Définir un bouton de la scène
+	//DÃ©finir un bouton de la scÃ¨ne
 	public void setButton(Button button,Color color,MenuButton menu) {
 		if(button!=null) {
 			button.setBackground(new Background(new BackgroundFill(color, null, null)));
@@ -429,7 +431,7 @@ public class JeuController extends Preloader implements Initializable {
 		nb=1;gagne=false;reinit=true;isIATurn=false;
 	}
 	
-	//Lors du chargement de la scène
+	//Lors du chargement de la scÃ¨ne
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ToggleSwitch toggle= new ToggleSwitch();

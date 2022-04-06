@@ -21,7 +21,7 @@ public class IaModel {
 	
 	private double error = 0.0;
 	
-	private MultiLayerPerceptron net;
+	private  MultiLayerPerceptron net;
 	
 	private Coup coup;
 	
@@ -42,12 +42,22 @@ public class IaModel {
 		mapTrain = loadCoupsFromFile("./resources/train_dev_test/train.txt");
 		mapDev = loadCoupsFromFile("./resources/train_dev_test/dev.txt");
 		
-		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+//		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
 		
 	}
 	
-	public void play() {
-		
+	public double[] play(MultiLayerPerceptron net, Coup c) {
+		try {
+			double[] res = net.forwardPropagation(c.in);
+			return res ;
+		} 
+		catch (Exception e) {
+			System.out.println("Test.play()");
+			e.printStackTrace();
+			System.exit(-1);
+		}
+
+		return null ;
 	}
 	
 	public static HashMap<Integer, Coup> loadCoupsFromFile(String file){
@@ -90,8 +100,8 @@ public class IaModel {
 		return this.coup;
 	}
 	
-	public void setCoup(HashMap<Integer, Coup> mapTrain0) {
-		this.coup = mapTrain0.get((int)(Math.round(Math.random() * mapTrain0.size())));
+	public void setCoup() {
+		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
 	}
 	
 	

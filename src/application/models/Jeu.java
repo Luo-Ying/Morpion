@@ -44,13 +44,6 @@ public class Jeu {
 			caseEmpty = (int) (Math.random() * this.tableau.length);
 		}
 		return caseEmpty;
-//		boolean caseEmpty = false;
-//		int index;
-//		while(!caseEmpty) {
-//			index = (int) (Math.random() * this.tableau.length);
-//			if(this.tableau[index] == 0.0) caseEmpty = true;
-//		}
-//		return 
 	}
 	
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
