@@ -130,7 +130,7 @@ public class JeuController extends Preloader implements Initializable {
     
     private boolean isIAgame;
     
-    private IaModel iaModel;
+    private String level;
     
     private boolean isIATurn = false;
     
@@ -144,9 +144,10 @@ public class JeuController extends Preloader implements Initializable {
     	this.isIAgame=isAI;
     }
     
-    public void setIaModel(IaModel iaModel) {
-    	this.iaModel = iaModel;
+    public void setIaLevel(String level) {
+    	this.level = level;
     }
+    
     
     
     //ajout des images au thème jaune
@@ -334,7 +335,7 @@ public class JeuController extends Preloader implements Initializable {
 	public void IAplay() {
 		//TODO: function for IA play
 		//test...
-		int index = this.tableau.roundIA(this.iaModel);
+		int index = this.tableau.roundIA(this.level);
 		Canvas canvas = getCanvas(index);
 		selectCaseDrawO(canvas, index);
 		canvas.setDisable(true);

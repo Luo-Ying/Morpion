@@ -32,6 +32,8 @@ public class IaModel {
 	public static HashMap<Integer, Coup> mapTrain;
 	public static HashMap<Integer, Coup> mapDev;
 	
+	private String level;
+	
 
 	public IaModel(Config config) {
 		this.config = config;
@@ -42,7 +44,7 @@ public class IaModel {
 		mapTrain = loadCoupsFromFile("./resources/train_dev_test/train.txt");
 		mapDev = loadCoupsFromFile("./resources/train_dev_test/dev.txt");
 		
-//		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
 		
 	}
 	
@@ -96,6 +98,16 @@ public class IaModel {
 		return map ;
 	}
 	
+	
+	
+	public String getLevel() {
+		return level;
+	}
+	
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 	public Coup getCoup() {
 		return this.coup;
 	}

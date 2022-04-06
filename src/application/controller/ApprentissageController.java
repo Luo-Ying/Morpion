@@ -176,7 +176,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     		if(Worker.State.SUCCEEDED == newVal) {
     			SceneController sController = new SceneController();
     			try {
-					sController.switchToJeuController(event,getColor(),true, this.iaModel);
+					sController.switchToJeuController(event,getColor(),true, iaModel.getLevel());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -207,12 +207,15 @@ public class ApprentissageController  extends Preloader implements Initializable
     public Task<?> displayProgressText(HashMap<Integer, Coup> mapTrain,int[] layers,double lr,String level) {
     	File fichier;
     	if (level.equals("F")) {
+    		this.iaModel.setLevel("F");
     		fichier =  new File("./src/result/mlp_facile.ser") ;
     	}
     	else if (level.equals("M")) {
+    		this.iaModel.setLevel("M");
     		fichier =  new File("./src/result/mlp_moyen.ser") ;
     	}
     	else {
+    		this.iaModel.setLevel("D");
     		fichier =  new File("./src/result/mlp_difficile.ser") ;
     	}
     	
@@ -232,7 +235,6 @@ public class ApprentissageController  extends Preloader implements Initializable
         			Coup c = null ;
         			while ( c == null )
 //        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
-        				iaModel.setCoup();
         				c = iaModel.getCoup();
 
 //        			error += net.backPropagate(c.in, c.out);

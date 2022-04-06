@@ -152,21 +152,21 @@ public class MenuNiveauController extends Preloader implements Initializable {
     @FXML
     void setIADifficult(ActionEvent event) throws IOException {
     	setIALevel("D");
-    	verifyResult(event,"src/result/mlp_difficile.ser");
+    	verifyResult(event,"src/result/mlp_difficile.ser", "D");
     }
 
   //appuie sur niveau facile
     @FXML
     void setIAEasy(ActionEvent event) throws IOException {
     	setIALevel("F");
-    	verifyResult(event,"src/result/mlp_facile.ser");
+    	verifyResult(event,"src/result/mlp_facile.ser", "F");
     }
 
   //appuie sur niveau moyen
     @FXML
     void setIANormal(ActionEvent event) throws IOException {
     	setIALevel("M");
-    	verifyResult(event,"src/result/mlp_moyen.ser");
+    	verifyResult(event,"src/result/mlp_moyen.ser", "M");
     }
     
   //appuie sur retour maison
@@ -178,11 +178,11 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
     //Verifie si chemin du fichier d'apprentissage existe
     //si oui alors on va sur jeu.fxml sinon on va sur Apprentissage.fxml
-    public void verifyResult(ActionEvent event,String path) throws IOException {
+    public void verifyResult(ActionEvent event,String path, String level) throws IOException {
 		File f = new File(path) ;
 		if(f.exists() && f.isFile()) {
 			SceneController sController = new SceneController();
-			sController.switchToJeuController(event,getColor(),true);
+			sController.switchToJeuController(event,getColor(),true, level);
 		}
 		else {
 			SceneController sController = new SceneController();
