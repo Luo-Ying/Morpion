@@ -3,7 +3,9 @@ package application.models;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 
 import ai.Config;
@@ -35,6 +37,10 @@ public class IaModel {
 	private String level;
 	
 
+	public IaModel() {
+		
+	}
+	
 	public IaModel(Config config) {
 		this.config = config;
 		this.lr = config.learningRate;
@@ -48,9 +54,10 @@ public class IaModel {
 		
 	}
 	
-	public double[] play(MultiLayerPerceptron net, Coup c) {
+	public double[] play(double[] in) {
 		try {
-			double[] res = net.forwardPropagation(c.in);
+			MultiLayerPerceptron net = deserialzeNet(this.level);
+			double[] res = net.forwardPropagation(in);
 			return res ;
 		} 
 		catch (Exception e) {
@@ -59,8 +66,56 @@ public class IaModel {
 			System.exit(-1);
 		}
 
-		return null ;
+		return res ;
 	}
+	
+	public MultiLayerPerceptron deserialzeNet (String level) {
+		
+		String fileName = null;
+		
+		if(this.level == "F") fileName = "./src/result/mlp_facile.ser";
+		else if(this.level == "M") fileName = "./src/result/mlp_moyen.ser";
+		else if(this.level == "D") fileName = "./src/result/mlp_difficile.ser";
+		 
+		System.out.println(fileName);
+		
+		MultiLayerPerceptron net = null;
+ 
+		FileInputStream fin = null;
+		ObjectInputStream ois = null;
+ 
+		try {
+ 
+			fin = new FileInputStream(fileName);
+			ois = new ObjectInputStream(fin);
+			net = (MultiLayerPerceptron) ois.readObject();
+ 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+ 
+			if (fin != null) {
+				try {
+					fin.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+ 
+			if (ois != null) {
+				try {
+					ois.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+ 
+		}
+ 
+		return net;
+ 
+	}
+
 	
 	public static HashMap<Integer, Coup> loadCoupsFromFile(String file){
 		System.out.println("loadCoupsFromFile from "+file+" ...");

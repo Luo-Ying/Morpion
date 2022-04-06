@@ -1,5 +1,7 @@
 package application.models;
 
+import java.util.Arrays;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -40,11 +42,16 @@ public class Jeu {
 	
 	public int roundIA(String level) {
 		System.out.println(level);
-		int caseEmpty = (int) (Math.random() * this.tableau.length);
-		while(this.tableau[caseEmpty] != 0.0) {
-			caseEmpty = (int) (Math.random() * this.tableau.length);
-		}
-		return caseEmpty;
+//		int caseEmpty = (int) (Math.random() * this.tableau.length);
+//		while(this.tableau[caseEmpty] != 0.0) {
+//			caseEmpty = (int) (Math.random() * this.tableau.length);
+//		}
+//		return caseEmpty;
+		IaModel iaModel = new IaModel();
+		iaModel.setLevel(level);
+		double[] res = iaModel.play(tableau);
+		System.out.println(Arrays.toString(res));
+		return 0;
 	}
 	
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
