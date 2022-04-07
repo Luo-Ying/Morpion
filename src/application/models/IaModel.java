@@ -29,7 +29,7 @@ public class IaModel {
 	
 	private double[] res;
 	
-	public static double Epochs = 100000 ;
+	public static double Epochs = 10000000 ;
 	
 	public static HashMap<Integer, Coup> mapTrain;
 	public static HashMap<Integer, Coup> mapDev;

@@ -49,9 +49,19 @@ public class Jeu {
 //		return caseEmpty;
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
-		double[] res = iaModel.play(tableau);
+		double[] res = iaModel.play(this.tableau);
 		System.out.println(Arrays.toString(res));
-		return 0;
+		double max = 0.0;
+		int index = 0;
+		for(int i=0; i<res.length; i++) {
+			if(res[i] > max) {
+				max = res[i];
+				index = i;
+				System.out.println("max: " + max + " index: " + index);
+			}
+		}
+		System.out.println("tableau: " + Arrays.toString(this.tableau));
+		return index;
 	}
 	
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
