@@ -1,5 +1,6 @@
 package application.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.scene.layout.Pane;
@@ -23,6 +24,8 @@ public class Jeu {
 	
 	public Line line;
 	
+	ArrayList<Integer> listIndexNoEmptty = new ArrayList<>();
+	
 	public Jeu() {
 		
 		this.tableau = new double[9];
@@ -41,23 +44,22 @@ public class Jeu {
 	}
 	
 	public int roundIA(String level) {
+		for(int i=0; i<this.tableau.length; i++) {
+			if(this.tableau[i] != 0.0) {
+				this.listIndexNoEmptty.add(i);
+			}
+		}
 		System.out.println(level);
-//		int caseEmpty = (int) (Math.random() * this.tableau.length);
-//		while(this.tableau[caseEmpty] != 0.0) {
-//			caseEmpty = (int) (Math.random() * this.tableau.length);
-//		}
-//		return caseEmpty;
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
 		double[] res = iaModel.play(this.tableau);
 		System.out.println(Arrays.toString(res));
-		double max = 0.0;
 		int index = 0;
+		double max = 0.0;
 		for(int i=0; i<res.length; i++) {
-			if(res[i] > max) {
+			if(res[i] > max && !this.listIndexNoEmptty.contains(i)) {
 				max = res[i];
 				index = i;
-				System.out.println("max: " + max + " index: " + index);
 			}
 		}
 		System.out.println("tableau: " + Arrays.toString(this.tableau));
