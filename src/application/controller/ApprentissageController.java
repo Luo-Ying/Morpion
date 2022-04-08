@@ -230,22 +230,18 @@ public class ApprentissageController  extends Preloader implements Initializable
         		iaModel.setNet(layers);
         		//changed the epochs so that it finishes earlier
 //        		double epochs = 100000 ;
-        		System.out.println("salut");
         		for(int i = 0; i < iaModel.Epochs; i++){
 
         			Coup c = null ;
-        			while ( c == null ) {
+        			while ( c == null )
 //        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
-        				iaModel.setCoup();
         				c = iaModel.getCoup();
-        			}
+
 //        			error += net.backPropagate(c.in, c.out);
         			iaModel.setError(c);
         			
         			if ( i % 1000 == 0 ) {
 //        				System.out.println("Error at step "+i+" is "+ (error/(double)i));
-//        				System.out.println("ok");
-        				System.out.println("Error at step "+i+" is "+ (iaModel.getError()/(double)i));
         				updateMessage("Error at step "+i+" is "+ (iaModel.getError()/(double)i)); //update message in texfield
         				updateProgress((100/iaModel.Epochs)*i,100);//update progressbar
         			}
