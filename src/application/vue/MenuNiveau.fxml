@@ -2,9 +2,9 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -94,51 +94,25 @@
             <Image url="@../../images/pawpatrolicon.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnMaison" layoutX="118.0" layoutY="49.0" mnemonicParsing="false" onMouseClicked="#returnHome" prefHeight="65.0" prefWidth="66.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <ImageView fx:id="maisonVert" fitHeight="79.0" fitWidth="52.0" layoutX="125.0" layoutY="56.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../../images/maison-verte.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <Glow />
-         </effect>
-      </ImageView>
-      <ImageView fx:id="maisonRose" fitHeight="79.0" fitWidth="52.0" layoutX="125.0" layoutY="56.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../../images/maison-rose.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <Glow />
-         </effect>
-      </ImageView>
-      <ImageView fx:id="maisonJaune" fitHeight="52.0" fitWidth="52.0" layoutX="125.0" layoutY="55.0" onMouseClicked="#returnHome" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../../images/maison-jaune.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <Glow />
-         </effect></ImageView>
-      <MenuButton fx:id="menu" contentDisplay="TOP" layoutX="27.0" layoutY="48.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="66.0">
-        <items>
-          <MenuItem fx:id="configuration" mnemonicParsing="false" onAction="#popConfig" text="Modifier Configurations" />
-          <MenuItem fx:id="gestionIA" mnemonicParsing="false" onAction="#popGestionIA" text="Gerer L'IA" />
-            <MenuItem fx:id="about" mnemonicParsing="false" onAction="#popAbout" text="A propos" />
-        </items>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </MenuButton>
+      <MenuBar fx:id="menu" layoutX="46.0" layoutY="14.0" prefHeight="35.0" prefWidth="217.0">
+         <menus>
+            <Menu fx:id="fichier" mnemonicParsing="false" text="Fichier">
+               <items>
+                  <MenuItem fx:id="maison" mnemonicParsing="false" onAction="#returnHome" text="Retour maison" />
+               </items>
+            </Menu>
+            <Menu fx:id="modifier" mnemonicParsing="false" text="Modifier">
+               <items>
+                  <MenuItem fx:id="configuration" mnemonicParsing="false" onAction="#popConfig" text="Modifier Configurations" />
+                  <MenuItem fx:id="gestionIA" mnemonicParsing="false" onAction="#popGestionIA" text="Gerer L'IA" />
+               </items>
+            </Menu>
+            <Menu fx:id="aide" mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem fx:id="about" mnemonicParsing="false" onAction="#popAbout" text="A propos" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </Pane>

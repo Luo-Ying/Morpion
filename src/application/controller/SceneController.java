@@ -68,7 +68,7 @@ public class SceneController {
 	}
 	
 	//changement de scene vers MenuAdversaire
-	public void switchToMenuAdversaireController(MouseEvent event,Color color) throws IOException {
+	public void switchToMenuAdversaireController(ActionEvent event,Color color) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/MenuAdversaire.fxml"));
 		root =loader.load();
@@ -83,7 +83,7 @@ public class SceneController {
 		else {
 			controller.setTheme(color,false,false,true);
 		}
-		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage stage = (Stage) Main.getPrimaryStage().getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
 	}

@@ -20,7 +20,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,18 +55,12 @@ public class MenuNiveauController extends Preloader implements Initializable {
 
     @FXML
     private Button moyen;
-    
-    @FXML
-    private Button maison;
 
     @FXML
     private Button difficile;
     
     @FXML
     private Button btnMaison;
-    
-    @FXML
-    private MenuButton menu;
     
     @FXML
     private ImageView panda1;
@@ -89,19 +84,26 @@ public class MenuNiveauController extends Preloader implements Initializable {
     private ImageView pawPatrolIcon;
     
     @FXML
-    private ImageView maisonJaune;
+    private MenuBar menu;
 
     @FXML
-    private ImageView maisonVert;
+    private Menu fichier;
 
     @FXML
-    private ImageView maisonRose;
-    
+    private MenuItem maison;
+
+    @FXML
+    private Menu modifier;
+
     @FXML
     private MenuItem configuration;
 
     @FXML
     private MenuItem gestionIA;
+    
+    @FXML
+    private Menu aide;
+
 
     @FXML
     private MenuItem about;
@@ -171,7 +173,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
   //appuie sur retour maison
     @FXML
-    void returnHome(MouseEvent event) throws IOException {
+    void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
 		sController.switchToMenuAdversaireController(event,getColor());
     }
@@ -215,21 +217,18 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
-		yellowTheme.add(maisonJaune);
     }
     
   //ajout des images du thème rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
-    	pinkTheme.add(maisonRose);
     }
     
   //ajout des images du thème vert
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
-    	greenTheme.add(maisonVert);
     }
     
     //définition d'un thème
@@ -238,13 +237,13 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	setColor(color);
     	
     	if(color==Color.LIGHTYELLOW) {
-    		setMenu("src/images/menu-jaune.png","-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';");
+    		setMenu("-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';");
 		}
 		else if(color==Color.LIGHTPINK) {
-			setMenu("src/images/menu-rose.png","-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';");
+			setMenu("-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';");
 		}
 		else {
-			setMenu("src/images/menu-vert.png","-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';");
+			setMenu("-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';");
 		}
     	
     	for(int i=0;i<yellowTheme.size();i++) {
@@ -261,17 +260,11 @@ public class MenuNiveauController extends Preloader implements Initializable {
     }
     
   //définition du menu
-    public void setMenu(String path,String style) throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream(path);
-        Image image = new Image(input);
-        
-        ImageView menuCouleur = new ImageView(image);
-        menuCouleur.setFitWidth(32.5);
-        menuCouleur.setFitHeight(35);
-        menu.prefWidthProperty().bind(menuCouleur.fitWidthProperty());           
-        menu.prefHeightProperty().bind(menuCouleur.fitHeightProperty());           
-        menu.setGraphic(menuCouleur);
-        
+    public void setMenu(String style) throws FileNotFoundException {
+    	aide.setStyle(style);
+        modifier.setStyle(style);
+        fichier.setStyle(style);
+        maison.setStyle(style);
         configuration.setStyle(style);
 		gestionIA.setStyle(style);
 		about.setStyle(style);
@@ -293,7 +286,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
 	}
 	
 	//définition d'un bouton
-	public void setButton(Button button,Color color,MenuButton menu) {
+	public void setButton(Button button,Color color,MenuBar menu) {
 		if(button!=null) {
 			button.setBackground(new Background(new BackgroundFill(color, null, null)));
 			button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

@@ -26,6 +26,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -46,12 +48,6 @@ import javafx.stage.Stage;
 public class JeuController extends Preloader implements Initializable {
 	@FXML
     private Pane sc1;
-    
-    @FXML
-    private Button btnMaison;
-    
-    @FXML
-    private MenuButton menu;
     
     @FXML
     private ImageView panda1;
@@ -78,14 +74,17 @@ public class JeuController extends Preloader implements Initializable {
     private ImageView ruben;
     
     @FXML
-    private ImageView maisonJaune;
+    private MenuBar menu;
 
     @FXML
-    private ImageView maisonVert;
+    private Menu fichier;
 
     @FXML
-    private ImageView maisonRose;
-    
+    private MenuItem maison;
+
+    @FXML
+    private Menu aide;
+
     @FXML
     private MenuItem about;
     
@@ -140,10 +139,13 @@ public class JeuController extends Preloader implements Initializable {
     
     boolean reinit =false;
     
+    
+    //mettre le booleen si le jeu est contre IA
     public void setIAGame(boolean isAI) {
     	this.isIAgame=isAI;
     }
     
+    //Mettre le niveau de difficultÈ
     public void setIaLevel(String level) {
     	this.level = level;
     }
@@ -155,14 +157,12 @@ public class JeuController extends Preloader implements Initializable {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
-		yellowTheme.add(maisonJaune);
     }
     
     //ajout des images au th√®me rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
-    	pinkTheme.add(maisonRose);
     }
     
     //ajout des images au th√®me vert
@@ -170,9 +170,9 @@ public class JeuController extends Preloader implements Initializable {
     	greenTheme.add(stella);
     	greenTheme.add(marcus);
     	greenTheme.add(ruben);
-    	greenTheme.add(maisonVert);
     }
     
+    //ajout de toutes les cases dans une liste
     public void addCanvasToList() {
     	canvas.add(canvas1);
     	canvas.add(canvas2);
@@ -185,18 +185,18 @@ public class JeuController extends Preloader implements Initializable {
     	canvas.add(canvas9);	
     }
     
-    //d√©finir un theme
+    //dÈfinir un theme
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) throws FileNotFoundException {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
     	if(color==Color.LIGHTYELLOW) {
-    		setMenu("src/images/menu-jaune.png","-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: gold;");
+    		setMenu("-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: gold;");
 		}
 		else if(color==Color.LIGHTPINK) {
-			setMenu("src/images/menu-rose.png","-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: pink;");
+			setMenu("-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: pink;");
 		}
 		else {
-			setMenu("src/images/menu-vert.png","-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: green;");
+			setMenu("-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: green;");
 		}
     	for(int i=0;i<yellowTheme.size();i++) {
     		yellowTheme.get(i).setVisible(yellow);
@@ -212,23 +212,16 @@ public class JeuController extends Preloader implements Initializable {
     }
     
     //d√©finir le bouton menu
-    public void setMenu(String path,String style,String pgbarStyle) throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream(path);
-        Image image = new Image(input);
-        
-        ImageView menuCouleur = new ImageView(image);
-        menuCouleur.setFitWidth(32.5);
-        menuCouleur.setFitHeight(35);
-        menu.prefWidthProperty().bind(menuCouleur.fitWidthProperty());           
-        menu.prefHeightProperty().bind(menuCouleur.fitHeightProperty());           
-        menu.setGraphic(menuCouleur);
-        
+    public void setMenu(String style,String pgbarStyle) throws FileNotFoundException {
+    	aide.setStyle(style);
+        fichier.setStyle(style);
+        maison.setStyle(style);
 		about.setStyle(style);
     }
     
     //Appuie sur retour maison
     @FXML
-    void returnHome(MouseEvent event) throws IOException {
+    void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
 		sController.switchToMenuAdversaireController(event,getColor());
     }
@@ -257,7 +250,7 @@ public class JeuController extends Preloader implements Initializable {
 	
 	
 	//D√©finir un bouton de la sc√®ne
-	public void setButton(Button button,Color color,MenuButton menu) {
+	public void setButton(Button button,Color color,MenuBar menu) {
 		if(button!=null) {
 			button.setBackground(new Background(new BackgroundFill(color, null, null)));
 			button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -268,6 +261,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	//Dessiner sur une case 
 	@FXML
 	void drawCase1(MouseEvent event) {
 		gameTurn(canvas1, 0);
@@ -312,8 +306,11 @@ public class JeuController extends Preloader implements Initializable {
 	void drawCase9(MouseEvent event) {
 		gameTurn(canvas9, 8);
 	}
+	//fin dessiner sur une case
 	
 	
+	
+	//Si le jeu c'est humain vs humain/IA
 	public void gameTurn(Canvas canvas, int turn) {
 		if(!this.isIAgame) {			
 			selectCase(canvas, turn);
@@ -332,9 +329,8 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	//Quand l'IA joue
 	public void IAplay() {
-		//TODO: function for IA play
-		//test...
 		int index = this.tableau.roundIA(this.level);
 		Canvas canvas = getCanvas(index);
 		selectCaseDrawO(canvas, index);
@@ -342,6 +338,8 @@ public class JeuController extends Preloader implements Initializable {
 		this.isIATurn = false;
 	}
 	
+	
+	//recupÈrer les cases
 	public Canvas getCanvas(int i) {
 		switch (i) {
 			case 0:
@@ -368,7 +366,9 @@ public class JeuController extends Preloader implements Initializable {
 		return null;
 	}
 	
-	public void getResulte(Canvas canvas, double player) {
+	
+	//rÈcupÈration de rÈsultat
+	public void getResult(Canvas canvas, double player) {
 		if(tableau.verifieGagner(sc1, player)) {
 			gagne=true;
 			String playerWin;
@@ -396,6 +396,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	//Cas o˘ on selecte la case X
 	public void selectCaseDrawX(Canvas canvas, int i) {
 		XDraw x = new XDraw(canvas);
 		sc1.getChildren().add(x);
@@ -403,9 +404,10 @@ public class JeuController extends Preloader implements Initializable {
 		double player = -1.0;
 		tableau.setCaseX(i);
 		
-		getResulte(canvas, player);
+		getResult(canvas, player);
 	}
 	
+	//cas o˘ on selecte la case Y
 	public void selectCaseDrawO(Canvas canvas, int i) {
 		CircleDraw circle = new CircleDraw(canvas);
 		sc1.getChildren().add(circle);
@@ -413,9 +415,10 @@ public class JeuController extends Preloader implements Initializable {
 		double player = 1.0;
 		tableau.setCaseO(i);
 		
-		getResulte(canvas, player);
+		getResult(canvas, player);
 	}
 	
+	//Selection d'une case
 	public void selectCase(Canvas canvas,int i) {
 		if((!canvas.isDisable()) && ((nb%2)!=0)) {
 			selectCaseDrawX(canvas, i);
@@ -425,6 +428,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
+	//rÈinitialiser le jeu
 	public void reinitialiserJeu(Line line) {
 		GraphicsContext gc;
 		for (int i=0;i<this.canvas.size();i++) {
@@ -439,15 +443,13 @@ public class JeuController extends Preloader implements Initializable {
 		nb=1;gagne=false;reinit=true;isIATurn=false;
 	}
 	
-	//Lors du chargement de la sc√®ne
+	//Lors du chargement de la scËne
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ToggleSwitch toggle= new ToggleSwitch();
 		toggle.setTranslateY(68);
 		toggle.setTranslateX(770);
 	
-		
-		setButton(btnMaison,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
 		
 		sc1.getChildren().add(toggle);

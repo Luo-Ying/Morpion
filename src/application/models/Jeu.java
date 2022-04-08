@@ -23,6 +23,7 @@ public class Jeu {
 	
 	public Line line;
 	
+	//création d'un tableau de jeu
 	public Jeu() {
 		
 		this.tableau = new double[9];
@@ -32,21 +33,19 @@ public class Jeu {
 		}
 	}
 	
+	//définir la caseX
 	public void setCaseX(int i) {
 		this.tableau[i] = -1.0;
 	}
 	
+	//définir la caseO
 	public void setCaseO(int i) {
 		this.tableau[i] = 1.0;
 	}
 	
+	//définition case IA donc O
 	public int roundIA(String level) {
 		System.out.println(level);
-//		int caseEmpty = (int) (Math.random() * this.tableau.length);
-//		while(this.tableau[caseEmpty] != 0.0) {
-//			caseEmpty = (int) (Math.random() * this.tableau.length);
-//		}
-//		return caseEmpty;
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
 		double[] res = iaModel.play(this.tableau);
@@ -64,6 +63,7 @@ public class Jeu {
 		return index;
 	}
 	
+	//On définit les parametres
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
 		if(this.tableau[index1] == player && this.tableau[index2] == player && this.tableau[index3] == player) {			
 			if(player == -1.0) isWinPlayer1 = true; else isWinPlayer2 = true;
@@ -72,6 +72,7 @@ public class Jeu {
 		return false;
 	}
 	
+	//Definir les parametres les  si on a gagné
 	public void isWin(double player) {
 
 		if (this.tableau[0] == this.tableau[1] && this.tableau[1] == this.tableau[2]) {
@@ -100,20 +101,12 @@ public class Jeu {
 		}
 	}
 	
-
+	//verifie si on a gagné
 	public boolean verifieGagner(Pane pane, double player) {
 		
 		isWin(player);
 		if(isWinPlayer1 || isWinPlayer2) {
 			System.out.println("win");
-//			System.out.println("Top_Horizontal_Line = " + top_Horizontal_Line);
-//			System.out.println("Middle_Horizontal_Line = " + middle_Horizontal_Line);
-//			System.out.println("Bottom_Line = " + bottom_Line);
-//			System.out.println("Left_Vertical_Line = " + left_Vertical_Line);
-//			System.out.println("Middle_Vertical_Line = " + middle_Vertical_Line);
-//			System.out.println("Right_Vertical_Line = " + right_Vertical_Line);
-//			System.out.println("Upper_Left_Diagonal = " + upper_Left_Diagonal);
-//			System.out.println("Upper_Right_Riagonal = " + upper_Right_Diagonal);
 			if(top_Horizontal_Line) {
 				drawLine(pane,-88.00001525878906,82,460.99993896484375,82,242,135);
 				return true;
@@ -150,6 +143,7 @@ public class Jeu {
 		return false;
 	}
 	
+	//dessiner une ligne si on a gagné
 	public void drawLine(Pane pane,double x1,double y1,double x2, double y2,double x, double y){
 		this.line = new Line(x1,y1,x2,y2);
 		line.setLayoutX(x);
@@ -159,18 +153,22 @@ public class Jeu {
 		pane.getChildren().add(line);
 	}
 
+	//récupérer tableau
 	public double[] getTableau() {
 		return tableau;
 	}
 
+	//définir tableau
 	public void setTableau(double[] tableau) {
 		this.tableau = tableau;
 	}
-
+	
+	//récuperer line à dessiner lors d'un win
 	public Line getLine() {
 		return line;
 	}
 
+	//définir ligne à dessiner lors d'un win
 	public void setLine(Line line) {
 		this.line = line;
 	}

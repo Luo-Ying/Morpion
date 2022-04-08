@@ -14,6 +14,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+
+//bouton de musique
 public class ToggleSwitch extends Parent {
 	public static BooleanProperty switchedOn = new SimpleBooleanProperty(false);
 	public static TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));

@@ -36,7 +36,7 @@ public class IaModel {
 	
 	private String level;
 	
-
+	
 	public IaModel() {
 		
 	}

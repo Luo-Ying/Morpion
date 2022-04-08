@@ -2,7 +2,8 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -165,15 +166,20 @@
             <Image url="@../../images/pawpatrolicon.png" />
          </image>
       </ImageView>
-      <MenuButton fx:id="menu" contentDisplay="TOP" layoutX="37.0" layoutY="58.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="66.0">
-         <items>
-            <MenuItem fx:id="configuration" mnemonicParsing="false" onAction="#popConfig" text="Modifier Configurations" />
-            <MenuItem fx:id="gestionIA" mnemonicParsing="false" onAction="#popGestionIA" text="Gerer L'IA" />
-            <MenuItem fx:id="about" mnemonicParsing="false" onAction="#popAbout" text="A propos" />
-         </items>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </MenuButton>
+      <MenuBar fx:id="menu" layoutX="46.0" layoutY="14.0" prefHeight="35.0" prefWidth="157.0">
+         <menus>
+            <Menu fx:id="modifier" mnemonicParsing="false" text="Modifier">
+               <items>
+                  <MenuItem fx:id="configuration" mnemonicParsing="false" onAction="#popConfig" text="Modifier Configurations" />
+                  <MenuItem fx:id="gestionIA" mnemonicParsing="false" onAction="#popGestionIA" text="Gerer L'IA" />
+               </items>
+            </Menu>
+            <Menu fx:id="aide" mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem fx:id="about" mnemonicParsing="false" onAction="#popAbout" text="A propos" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </Pane>

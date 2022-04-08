@@ -69,7 +69,7 @@ public class PopupWindow {
 	
 	//textarea of the popup
 	TextArea textArea = new TextArea();
-	textArea.setText("\n\n\n Version du jeu : 1.0.0\n Crée par : Marie ZEPHIR & Yingqi LUO\n IA présentée par : Mohammed Morchid");
+	textArea.setText("\n\n\n Version du jeu : 1.0.0\n Crée par : Marie ZEPHIR & Yingqi LUO\n IA présentée par : Mohammed MORCHID");
 	textArea.setStyle(style);
 	textArea.setEditable(false);
 	

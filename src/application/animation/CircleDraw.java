@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+//dessiner le rond dans une case 
 public class CircleDraw extends Parent {
 	    public CircleDraw(Canvas canvas) {
 	    	double centerX = canvas.getWidth()/2;

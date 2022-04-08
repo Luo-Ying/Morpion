@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+//dessiner x dans une case
 public class XDraw extends Parent {
 	 public XDraw(Canvas canvas) {
 	    	double beginX1 = canvas.getWidth()-25;

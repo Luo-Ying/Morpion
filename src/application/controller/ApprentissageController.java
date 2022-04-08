@@ -27,6 +27,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -58,12 +60,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 
     @FXML
     private Button cancel;
-    
-    @FXML
-    private Button btnMaison;
-    
-    @FXML
-    private MenuButton menu;
+
     
     @FXML
     private ProgressBar pgbar;
@@ -96,16 +93,20 @@ public class ApprentissageController  extends Preloader implements Initializable
     private ImageView pawPatrolIcon;
     
     @FXML
-    private ImageView maisonJaune;
+    private MenuBar menu;
 
     @FXML
-    private ImageView maisonVert;
+    private Menu fichier;
 
     @FXML
-    private ImageView maisonRose;
-    
+    private MenuItem maison;
+
+    @FXML
+    private Menu aide;
+
     @FXML
     private MenuItem about;
+    
     
     private Config config;
     
@@ -136,9 +137,6 @@ public class ApprentissageController  extends Preloader implements Initializable
     	// Part for initialisation of the test
 		System.out.println(config.level);
     	int size =9;
-//    	double lr=config.learningRate;
-//    	int l=config.numberOfhiddenLayers;
-//    	int h=config.hiddenLayerSize;
     	
     	int[] layers = new int[iaModel.getL()+2];
 		layers[0] = size ;
@@ -225,23 +223,17 @@ public class ApprentissageController  extends Preloader implements Initializable
         	
         	@Override
             protected Object call() throws Exception {
-//        		double error = 0.0 ;
-//        		MultiLayerPerceptron net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
         		iaModel.setNet(layers);
         		//changed the epochs so that it finishes earlier
-//        		double epochs = 100000 ;
         		for(int i = 0; i < iaModel.Epochs; i++){
 
         			Coup c = null ;
         			while ( c == null )
-//        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
         				c = iaModel.getCoup();
 
-//        			error += net.backPropagate(c.in, c.out);
         			iaModel.setError(c);
         			
         			if ( i % 1000 == 0 ) {
-//        				System.out.println("Error at step "+i+" is "+ (error/(double)i));
         				updateMessage("Error at step "+i+" is "+ (iaModel.getError()/(double)i)); //update message in texfield
         				updateProgress((100/iaModel.Epochs)*i,100);//update progressbar
         			}
@@ -268,21 +260,18 @@ public class ApprentissageController  extends Preloader implements Initializable
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
-		yellowTheme.add(maisonJaune);
     }
     
     //ajout des images au thème rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
-    	pinkTheme.add(maisonRose);
     }
     
     //ajout des images au thème vert
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
-    	greenTheme.add(maisonVert);
     }
     
     //définir un theme
@@ -290,13 +279,13 @@ public class ApprentissageController  extends Preloader implements Initializable
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
     	if(color==Color.LIGHTYELLOW) {
-    		setMenu("src/images/menu-jaune.png","-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: gold;");
+    		setMenu("-fx-text-fill: goldenrod;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: gold;");
 		}
 		else if(color==Color.LIGHTPINK) {
-			setMenu("src/images/menu-rose.png","-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: pink;");
+			setMenu("-fx-text-fill: pink;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: pink;");
 		}
 		else {
-			setMenu("src/images/menu-vert.png","-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: green;");
+			setMenu("-fx-text-fill: green;-fx-font: normal bold 14px 'MV Boli';","-fx-accent: green;");
 		}
     	for(int i=0;i<yellowTheme.size();i++) {
     		yellowTheme.get(i).setVisible(yellow);
@@ -312,24 +301,17 @@ public class ApprentissageController  extends Preloader implements Initializable
     }
     
     //définir le bouton menu
-    public void setMenu(String path,String style,String pgbarStyle) throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream(path);
-        Image image = new Image(input);
-        
-        ImageView menuCouleur = new ImageView(image);
-        menuCouleur.setFitWidth(32.5);
-        menuCouleur.setFitHeight(35);
-        menu.prefWidthProperty().bind(menuCouleur.fitWidthProperty());           
-        menu.prefHeightProperty().bind(menuCouleur.fitHeightProperty());           
-        menu.setGraphic(menuCouleur);
-        
+    public void setMenu(String style,String pgbarStyle) throws FileNotFoundException {
+    	aide.setStyle(style);
+        fichier.setStyle(style);
+    	maison.setStyle(style);
 		about.setStyle(style);
 		pgbar.setStyle(pgbarStyle);
     }
     
     //Appuie sur retour maison
     @FXML
-    void returnHome(MouseEvent event) throws IOException {
+    void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
 		sController.switchToMenuAdversaireController(event,getColor());
     }
@@ -358,7 +340,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 	
 	
 	//Définir un bouton de la scène
-	public void setButton(Button button,Color color,MenuButton menu) {
+	public void setButton(Button button,Color color,MenuBar menu) {
 		if(button!=null) {
 			button.setBackground(new Background(new BackgroundFill(color, null, null)));
 			button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -379,7 +361,6 @@ public class ApprentissageController  extends Preloader implements Initializable
 		
 		setButton(start,Color.WHITE,null);
 		setButton(cancel,Color.WHITE,null);
-		setButton(btnMaison,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
 		
 		sc1.getChildren().add(toggle);
