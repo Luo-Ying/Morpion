@@ -119,6 +119,9 @@ public class JeuController extends Preloader implements Initializable {
     @FXML
     private Canvas canvas9;
     
+    @FXML
+    private Button btnRecommencer;
+    
     private List <ImageView> yellowTheme = new ArrayList<>();
     
     private List <ImageView> pinkTheme = new ArrayList<>();
@@ -469,8 +472,13 @@ public class JeuController extends Preloader implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setButton(null,Color.WHITE,menu);
-		
-		
+		setButton(btnRecommencer,Color.WHITE,null);
+		btnRecommencer.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				reinitialiserJeu(tableau.getLine());
+			}	
+		});
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 

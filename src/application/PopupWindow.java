@@ -210,7 +210,7 @@ public class PopupWindow {
 	modifier.setLayoutY(300);
 	modifier.setPrefWidth(100);
 	modifier.setPrefHeight(30);
-	modifier.setStyle("-fx-font: normal bold 14px 'MV Boli';");
+	modifier.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-cursor: hand;");
 	modifier.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 	modifier.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	
@@ -354,7 +354,7 @@ public class PopupWindow {
 			button.setText(message);
 			button.setPrefWidth(300);
 			button.setPrefHeight(100);
-			String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; -fx-text-fill: "+color+";";
+			String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; -fx-text-fill: "+color+"; -fx-cursor: hand;";
 			button.setStyle(style);
 			button.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 			button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -500,7 +500,7 @@ public class PopupWindow {
 		//Bouton Rejouer
 		Button rejouer = new Button();
 		rejouer.setText("Rejouer");
-		rejouer.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: green;");
+		rejouer.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: green; -fx-cursor: hand;");
 		rejouer.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		rejouer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
@@ -517,7 +517,7 @@ public class PopupWindow {
 		//BoutonRetour
 		Button retour = new Button();
 		retour.setText("Retour accueil");
-		retour.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: red;");
+		retour.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: red; -fx-cursor: hand;");
 		retour.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		retour.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		

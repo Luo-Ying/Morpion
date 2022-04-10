@@ -180,6 +180,9 @@
                </items>
             </Menu>
          </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </MenuBar>
    </children>
 </Pane>
