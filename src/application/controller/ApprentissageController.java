@@ -252,9 +252,12 @@ public class ApprentissageController  extends Preloader implements Initializable
         		for(int i = 0; i < iaModel.Epochs; i++){
 
         			Coup c = null ;
-        			while ( c == null )
+        			while ( c == null ) {
+//        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+        				iaModel.setCoup();
         				c = iaModel.getCoup();
-
+        			}
+//        			error += net.backPropagate(c.in, c.out);
         			iaModel.setError(c);
         			
         			if ( i % 1000 == 0 ) {
@@ -279,26 +282,26 @@ public class ApprentissageController  extends Preloader implements Initializable
         };
     }
     
-    //ajout des images au thème jaune
+    //ajout des images au thï¿½me jaune
     public void addImageToYellowTheme() {
     	yellowTheme.add(panda1);
 		yellowTheme.add(panda2);
 		yellowTheme.add(bamboo);
     }
     
-    //ajout des images au thème rose
+    //ajout des images au thï¿½me rose
     public void addImageToPinkTheme() {
     	pinkTheme.add(petitPrince1);
     	pinkTheme.add(petitPrince2);
     }
     
-    //ajout des images au thème vert
+    //ajout des images au thï¿½me vert
     public void addImageToGreenTheme() {
     	greenTheme.add(pawPatrol);
     	greenTheme.add(pawPatrolIcon);
     }
     
-    //définir un theme
+    //dï¿½finir un theme
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) throws FileNotFoundException {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
@@ -324,7 +327,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     	}
     }
     
-    //définir le bouton menu
+    //dï¿½finir le bouton menu
     public void setMenu(String style,String pgbarStyle) throws FileNotFoundException {
     	aide.setStyle(style);
         fichier.setStyle(style);
@@ -347,12 +350,12 @@ public class ApprentissageController  extends Preloader implements Initializable
     	PopupWindow.displayAbout(getColor());
     }
     
-    //récuperer couleur du thème
+    //rï¿½cuperer couleur du thï¿½me
     public Color getColor() {
 		return color;
 	}
 
-    //définir couleur du thème
+    //dï¿½finir couleur du thï¿½me
 	public void setColor(Color color) {
 		this.color = color;
 	}
@@ -363,7 +366,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 	}
 	
 	
-	//Définir un bouton de la scène
+	//Dï¿½finir un bouton de la scï¿½ne
 	public void setButton(Button button,Color color,MenuBar menu) {
 		if(button!=null) {
 			button.setBackground(new Background(new BackgroundFill(color, null, null)));
@@ -375,7 +378,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 		}
 	}
     
-	//Lors du chargement de la scène
+	//Lors du chargement de la scï¿½ne
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setButton(start,Color.WHITE,null);

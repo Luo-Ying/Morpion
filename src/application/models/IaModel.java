@@ -12,6 +12,7 @@ import ai.Config;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
+import ai.TanHyperbolicTransferFunction;
 
 public class IaModel {
 	
@@ -29,7 +30,7 @@ public class IaModel {
 	
 	private double[] res;
 	
-	public static double Epochs = 10000000 ;
+	public static double Epochs = 1000000 ;
 	
 	public static HashMap<Integer, Coup> mapTrain;
 	public static HashMap<Integer, Coup> mapDev;
@@ -50,6 +51,8 @@ public class IaModel {
 		mapTrain = loadCoupsFromFile("./resources/train_dev_test/train.txt");
 		mapDev = loadCoupsFromFile("./resources/train_dev_test/dev.txt");
 		
+		
+		
 		this.coup = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
 		
 	}
@@ -57,6 +60,7 @@ public class IaModel {
 	public double[] play(double[] in) {
 		try {
 			MultiLayerPerceptron net = deserialzeNet(this.level);
+			System.out.println(net.toString());
 			double[] res = net.forwardPropagation(in);
 			return res ;
 		} 
@@ -223,7 +227,7 @@ public class IaModel {
 	}
 	
 	public void setNet(int[] layers) {
-		this.net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
+		this.net = new MultiLayerPerceptron(layers, lr, new TanHyperbolicTransferFunction());
 		
 	}
 	

@@ -1,5 +1,6 @@
 package application.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.scene.layout.Pane;
@@ -23,7 +24,8 @@ public class Jeu {
 	
 	public Line line;
 	
-	//création d'un tableau de jeu
+	ArrayList<Integer> listIndexNoEmptty = new ArrayList<>();
+	
 	public Jeu() {
 		
 		this.tableau = new double[9];
@@ -33,37 +35,41 @@ public class Jeu {
 		}
 	}
 	
-	//définir la caseX
+	//dï¿½finir la caseX
 	public void setCaseX(int i) {
 		this.tableau[i] = -1.0;
 	}
 	
-	//définir la caseO
+	//dï¿½finir la caseO
 	public void setCaseO(int i) {
 		this.tableau[i] = 1.0;
 	}
 	
-	//définition case IA donc O
+	//dï¿½finition case IA donc O
 	public int roundIA(String level) {
+		System.out.println("tableau: " + Arrays.toString(this.tableau));
+		for(int i=0; i<this.tableau.length; i++) {
+			if(this.tableau[i] != 0.0 && !this.listIndexNoEmptty.contains(i)) {
+				this.listIndexNoEmptty.add(i);
+			}
+		}
 		System.out.println(level);
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
 		double[] res = iaModel.play(this.tableau);
 		System.out.println(Arrays.toString(res));
-		double max = 0.0;
 		int index = 0;
+		double max = 0.0;
 		for(int i=0; i<res.length; i++) {
-			if(res[i] > max) {
+			if(res[i] > max && !this.listIndexNoEmptty.contains(i)) {
 				max = res[i];
 				index = i;
-				System.out.println("max: " + max + " index: " + index);
 			}
 		}
-		System.out.println("tableau: " + Arrays.toString(this.tableau));
 		return index;
 	}
 	
-	//On définit les parametres
+	//On dï¿½finit les parametres
 	public boolean defineParametres(double player, int index1, int index2, int index3) {
 		if(this.tableau[index1] == player && this.tableau[index2] == player && this.tableau[index3] == player) {			
 			if(player == -1.0) isWinPlayer1 = true; else isWinPlayer2 = true;
@@ -72,7 +78,7 @@ public class Jeu {
 		return false;
 	}
 	
-	//Definir les parametres les  si on a gagné
+	//Definir les parametres les  si on a gagnï¿½
 	public void isWin(double player) {
 
 		if (this.tableau[0] == this.tableau[1] && this.tableau[1] == this.tableau[2]) {
@@ -101,7 +107,7 @@ public class Jeu {
 		}
 	}
 	
-	//verifie si on a gagné
+	//verifie si on a gagnï¿½
 	public boolean verifieGagner(Pane pane, double player) {
 		
 		isWin(player);
@@ -143,7 +149,7 @@ public class Jeu {
 		return false;
 	}
 	
-	//dessiner une ligne si on a gagné
+	//dessiner une ligne si on a gagnï¿½
 	public void drawLine(Pane pane,double x1,double y1,double x2, double y2,double x, double y){
 		this.line = new Line(x1,y1,x2,y2);
 		line.setLayoutX(x);
@@ -153,22 +159,22 @@ public class Jeu {
 		pane.getChildren().add(line);
 	}
 
-	//récupérer tableau
+	//rï¿½cupï¿½rer tableau
 	public double[] getTableau() {
 		return tableau;
 	}
 
-	//définir tableau
+	//dï¿½finir tableau
 	public void setTableau(double[] tableau) {
 		this.tableau = tableau;
 	}
 	
-	//récuperer line à dessiner lors d'un win
+	//rï¿½cuperer line ï¿½ dessiner lors d'un win
 	public Line getLine() {
 		return line;
 	}
 
-	//définir ligne à dessiner lors d'un win
+	//dï¿½finir ligne ï¿½ dessiner lors d'un win
 	public void setLine(Line line) {
 		this.line = line;
 	}
