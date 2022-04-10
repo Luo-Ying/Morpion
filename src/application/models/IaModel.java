@@ -30,7 +30,7 @@ public class IaModel {
 	
 	private double[] res;
 	
-	public static double Epochs = 1000000 ;
+	public static double Epochs = 8000000 ;
 	
 	public static HashMap<Integer, Coup> mapTrain;
 	public static HashMap<Integer, Coup> mapDev;
@@ -60,7 +60,7 @@ public class IaModel {
 	public double[] play(double[] in) {
 		try {
 			MultiLayerPerceptron net = deserialzeNet(this.level);
-			System.out.println(net.toString());
+//			System.out.println(net.toString());
 			double[] res = net.forwardPropagation(in);
 			return res ;
 		} 
@@ -81,7 +81,7 @@ public class IaModel {
 		else if(this.level == "M") fileName = "./src/result/mlp_moyen.ser";
 		else if(this.level == "D") fileName = "./src/result/mlp_difficile.ser";
 		 
-		System.out.println(fileName);
+//		System.out.println(fileName);
 		
 		MultiLayerPerceptron net = null;
  
@@ -227,7 +227,7 @@ public class IaModel {
 	}
 	
 	public void setNet(int[] layers) {
-		this.net = new MultiLayerPerceptron(layers, lr, new TanHyperbolicTransferFunction());
+		this.net = new MultiLayerPerceptron(layers, lr, new SigmoidalTransferFunction());
 		
 	}
 	
