@@ -24,8 +24,8 @@ public class ToggleSwitch extends Parent {
 	public static FillTransition fillAnimation= new FillTransition(Duration.seconds(0.25));
 	public static ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
 	public boolean music=true;
-	MenuAdversaireController controller = new MenuAdversaireController();
-	MusicNoteAnimate musicNode = new MusicNoteAnimate(controller.getMusicNote());
+	public MenuAdversaireController controller = new MenuAdversaireController();
+	public MusicNoteAnimate musicNode = new MusicNoteAnimate(controller.getMusicNote());
 	
 	
 	public static BooleanProperty switchedOnProperty() {
@@ -33,7 +33,7 @@ public class ToggleSwitch extends Parent {
 	}
 
 	public ToggleSwitch() {
-		//musicNode.rotate();
+		//draw the switch
 		Rectangle background = new Rectangle(50,25);
 		background.setArcWidth(25);
 		background.setArcHeight(25);
@@ -48,6 +48,7 @@ public class ToggleSwitch extends Parent {
 		trigger.setStroke(Color.LIGHTGREY);
 		trigger.setStyle("-fx-cursor : hand");
 		
+		//animate it
 		translateAnimation.setNode(trigger);
 		fillAnimation.setShape(background);
 	
@@ -59,6 +60,7 @@ public class ToggleSwitch extends Parent {
 			animation.play();
 			fillAnimation.setFromValue(isOn ? Color.LIGHTBLUE : Color.WHITE);
 			fillAnimation.setToValue(isOn ? Color.WHITE : Color.LIGHTBLUE);
+			//controller la musique dépendant de si le switch est on ou pas
 			if(music) {
 				Music.stopMusic();
 				music=false;

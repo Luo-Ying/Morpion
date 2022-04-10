@@ -177,6 +177,7 @@
             <Menu fx:id="aide" mnemonicParsing="false" text="Aide">
                <items>
                   <MenuItem fx:id="about" mnemonicParsing="false" onAction="#popAbout" text="A propos" />
+                  <MenuItem fx:id="rules" mnemonicParsing="false" onAction="#popRules" text="Règles du jeu" />
                </items>
             </Menu>
          </menus>

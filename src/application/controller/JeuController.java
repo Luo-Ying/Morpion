@@ -93,6 +93,9 @@ public class JeuController extends Preloader implements Initializable {
     private MenuItem about;
     
     @FXML
+    private MenuItem rules;
+    
+    @FXML
     private Canvas canvas1;
     
     @FXML
@@ -148,6 +151,7 @@ public class JeuController extends Preloader implements Initializable {
     
     private ToggleSwitch toggle;
     
+    //définir le switch et la note de musique
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc1.getChildren().add(toggle);
@@ -161,6 +165,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
     }
     
+    //récupérer le switch
     ToggleSwitch getToggleSwitch() {
     	return this.toggle;
     }
@@ -242,6 +247,7 @@ public class JeuController extends Preloader implements Initializable {
         fichier.setStyle(style);
         maison.setStyle(style);
 		about.setStyle(style);
+		rules.setStyle(style);
     }
     
     //Appuie sur retour maison
@@ -256,6 +262,12 @@ public class JeuController extends Preloader implements Initializable {
     @FXML
     void popAbout(ActionEvent event) {
     	PopupWindow.displayAbout(getColor());
+    }
+    
+  //Appuie sur l'item a propos du menu
+    @FXML
+    void popRules(ActionEvent event) {
+    	PopupWindow.displayRules(getColor());
     }
     
     //rÃ©cuperer couleur du thÃ¨me

@@ -108,9 +108,11 @@ public class MenuNiveauController extends Preloader implements Initializable {
     @FXML
     private Menu aide;
 
-
     @FXML
     private MenuItem about;
+    
+    @FXML
+    private MenuItem rules;
     
     
     private Config config;
@@ -127,6 +129,8 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
     MusicNoteAnimate musicNode;
     
+    
+    //définir la note de musiue et le switch
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc2.getChildren().add(toggle);
@@ -141,6 +145,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		
     }
     
+    //récuperer le switch
     ToggleSwitch getToggleSwitch() {
     	return this.toggle;
     }
@@ -226,6 +231,12 @@ public class MenuNiveauController extends Preloader implements Initializable {
     	PopupWindow.displayAbout(getColor());
     }
     
+  //appuie sur item a propos du menu
+    @FXML
+    void popRules(ActionEvent event) {
+    	PopupWindow.displayRules(getColor());
+    }
+    
     //appuie sur item configuration du menu
     @FXML
     void popConfig(ActionEvent event) {
@@ -294,6 +305,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
         configuration.setStyle(style);
 		gestionIA.setStyle(style);
 		about.setStyle(style);
+		rules.setStyle(style);
     }
     
     //récupération de la couleur du thème

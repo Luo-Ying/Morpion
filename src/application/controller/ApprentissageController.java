@@ -112,6 +112,9 @@ public class ApprentissageController  extends Preloader implements Initializable
     @FXML
     private MenuItem about;
     
+    @FXML
+    private MenuItem rules;
+    
     
     private Config config;
     
@@ -127,6 +130,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     
     private ToggleSwitch toggle;
     
+    //définir le switch de la musique et la transition de la note de musique
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc1.getChildren().add(toggle);
@@ -140,6 +144,7 @@ public class ApprentissageController  extends Preloader implements Initializable
 		}
     }
     
+    //récupérer le switch
     ToggleSwitch getToggleSwitch() {
     	return this.toggle;
     }
@@ -331,6 +336,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     	maison.setStyle(style);
 		about.setStyle(style);
 		pgbar.setStyle(pgbarStyle);
+		rules.setStyle(style);
     }
     
     //Appuie sur retour maison
@@ -347,7 +353,13 @@ public class ApprentissageController  extends Preloader implements Initializable
     	PopupWindow.displayAbout(getColor());
     }
     
-    //récuperer couleur du thème
+    //Appuie sur l'item a propos du menu
+    @FXML
+    void popRules(ActionEvent event) {
+    	PopupWindow.displayRules(getColor());
+    }
+    
+    //récupérer couleur du thème
     public Color getColor() {
 		return color;
 	}

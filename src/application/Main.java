@@ -30,16 +30,17 @@ public class Main extends Application {
 
 	private void showMainView() throws IOException {
 	
-	FXMLLoader loader = new FXMLLoader();
+		FXMLLoader loader = new FXMLLoader();
 	
-	loader.setLocation(Main.class.getResource("./vue/MenuAdversaire.fxml"));
-	mainLayout = loader.load();
-	Scene scene = new Scene(mainLayout);
-	MenuAdversaireController controller= loader.getController();
-	controller.firstSet(toggle);
-	controller.setMusicNote();
-	getPrimaryStage().setScene(scene);
-	getPrimaryStage().show();
+		loader.setLocation(Main.class.getResource("./vue/MenuAdversaire.fxml"));
+		mainLayout = loader.load();
+		Scene scene = new Scene(mainLayout);
+		MenuAdversaireController controller= loader.getController();
+		//mettre le switch de la musique et la note de musique en transition
+		controller.firstSet(toggle);
+		controller.setMusicNote();
+		getPrimaryStage().setScene(scene);
+		getPrimaryStage().show();
 	}
 	public static void main(String[] args) {
 		launch(args);

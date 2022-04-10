@@ -9,27 +9,30 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class MusicNoteAnimate extends Parent {
-	 static RotateTransition rt;
-	 static ImageView musicImage;
+	static RotateTransition rt;
+	static ImageView musicImage;
+	
+	//set transition on imageview music note
+    public MusicNoteAnimate(ImageView image) {
+    	musicImage=image;
+    	rt= new RotateTransition();
+    	rt.setNode(image);
+    	rt.setDuration(Duration.millis(1250));
+        rt.setFromAngle(30);
+        rt.setToAngle(-30);
+        rt.setAxis(new Point3D(100, 100, 50));
+        rt.setCycleCount(Timeline.INDEFINITE);;
+        rt.setAutoReverse(true);
 
-	    public MusicNoteAnimate(ImageView image) {
-	    	musicImage=image;
-	    	rt= new RotateTransition();
-	    	rt.setNode(image);
-	    	rt.setDuration(Duration.millis(1250));
-	        rt.setFromAngle(30);
-	        rt.setToAngle(-30);
-	        rt.setAxis(new Point3D(100, 100, 50));
-	        rt.setCycleCount(Timeline.INDEFINITE);;
-	        rt.setAutoReverse(true);
-
-	    }
-
-	    public void rotate(){
-	        rt.play();
-	    }
-	    
-	    public void stop() {
-	    	rt.stop();
-	    }
+    }
+    
+    //play transition
+    public void rotate(){
+        rt.play();
+    }
+    
+    //stop transition
+    public void stop() {
+    	rt.stop();
+    }
 }

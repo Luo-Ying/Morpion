@@ -123,9 +123,11 @@ public class MenuAdversaireController extends Preloader implements Initializable
     @FXML
     private Menu aide;
 
-
     @FXML
     private MenuItem about;
+    
+    @FXML
+    private MenuItem rules;
     
     private List <ImageView> yellowTheme = new ArrayList<>();
     
@@ -140,6 +142,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     public static MusicNoteAnimate musicNode;
     
     
+    //définir le switch
     public void setToggleSwitch(ToggleSwitch toggle) {
     	if (toggle==null) {
     		this.toggle= new ToggleSwitch();
@@ -152,6 +155,8 @@ public class MenuAdversaireController extends Preloader implements Initializable
     		sc2.getChildren().add(toggle);
     	}
     }
+    
+    //définir la transition de la note de musique 
     public void setMusicNote() {
     	if(this.toggle.music) {
 			MusicNoteAnimate musicNode = new MusicNoteAnimate(getMusicNote());
@@ -162,6 +167,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
 			musicNode.stop();
 		}
     }
+    
     //appuie sur bouton thème rose
     @FXML
     void colorPink(ActionEvent event) throws FileNotFoundException {
@@ -192,6 +198,12 @@ public class MenuAdversaireController extends Preloader implements Initializable
     @FXML
     void popAbout(ActionEvent event) {
     	PopupWindow.displayAbout(getColor());
+    }
+    
+  //appuie sur item a propos du menu
+    @FXML
+    void popRules(ActionEvent event) {
+    	PopupWindow.displayRules(getColor());
     }
     
   //appuie sur item configuration du menu
@@ -275,6 +287,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
         configuration.setStyle(style);
 		gestionIA.setStyle(style);
 		about.setStyle(style);
+		rules.setStyle(style);
     }
     
     //récupération de la couleur du thème
@@ -312,6 +325,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
 		}
 	}
 
+	//récupérer le switch
 	public ToggleSwitch getToggleSwitch() {
 		return this.toggle;
 	}
@@ -340,9 +354,13 @@ public class MenuAdversaireController extends Preloader implements Initializable
 			e.printStackTrace();
 		}
 	}
+	
+	//récuperer la note de muisque
 	public ImageView getMusicNote() {
 		return musicNote;
 	}
+	
+	//définir la note de musique
 	public void setMusicNote(ImageView musicNote) {
 		this.musicNote = musicNote;
 	}
