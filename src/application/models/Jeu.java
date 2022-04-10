@@ -47,13 +47,13 @@ public class Jeu {
 	
 	//d�finition case IA donc O
 	public int roundIA(String level) {
-		System.out.println("tableau: " + Arrays.toString(this.tableau));
+//		System.out.println("tableau: " + Arrays.toString(this.tableau));
 		for(int i=0; i<this.tableau.length; i++) {
 			if(this.tableau[i] != 0.0 && !this.listIndexNoEmptty.contains(i)) {
 				this.listIndexNoEmptty.add(i);
 			}
 		}
-		System.out.println(level);
+//		System.out.println(level);
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
 		double[] res = iaModel.play(this.tableau);

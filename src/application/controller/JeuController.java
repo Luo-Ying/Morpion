@@ -175,7 +175,7 @@ public class JeuController extends Preloader implements Initializable {
     	this.isIAgame=isAI;
     }
     
-    //Mettre le niveau de difficulté
+    //Mettre le niveau de difficultï¿½
     public void setIaLevel(String level) {
     	this.level = level;
     }
@@ -215,7 +215,7 @@ public class JeuController extends Preloader implements Initializable {
     	canvas.add(canvas9);	
     }
     
-    //définir un theme
+    //dï¿½finir un theme
     public void setTheme(Color color,boolean yellow,boolean pink,boolean green) throws FileNotFoundException {
     	sc1.setBackground(new Background(new BackgroundFill(color, null, null)));
     	setColor(color);
@@ -353,12 +353,15 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas, turn);
 		}
 		else {
-			System.out.println("hello");
 			if(this.isIATurn) {
 				IAplay();
 			}
 			else {
 				selectCaseDrawX(canvas, turn);
+				System.out.println(Arrays.toString(this.tableau.getTableau()));
+				System.out.println("********************************");
+				System.out.println("********************************");
+				System.out.println("********************************");
 				if(this.nb != 1) {
 					this.isIATurn = true;
 					gameTurn(canvas, turn);
@@ -372,13 +375,13 @@ public class JeuController extends Preloader implements Initializable {
 		int index = this.tableau.roundIA(this.level);
 		Canvas canvas = getCanvas(index);
 		selectCaseDrawO(canvas, index);
-		canvas.setDisable(true);
+//		canvas.setDisable(true);
 		this.isIATurn = false;
 		System.out.println(Arrays.toString(this.tableau.getTableau()));
 	}
 	
 	
-	//recupérer les cases
+	//recupï¿½rer les cases
 	public Canvas getCanvas(int i) {
 		switch (i) {
 			case 0:
@@ -406,7 +409,7 @@ public class JeuController extends Preloader implements Initializable {
 	}
 	
 	
-	//récupération de résultat
+	//rï¿½cupï¿½ration de rï¿½sultat
 	public void getResult(Canvas canvas, double player) {
 		if(tableau.verifieGagner(sc1, player)) {
 			gagne=true;
@@ -422,6 +425,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 		else {
 			nb+=1;
+			canvas.setDisable(true);
 		}
 		if(nb==10 && !gagne) {
 			Stage window =PopupWindow.displayDraw(getColor(),getToggleSwitch());
@@ -429,13 +433,20 @@ public class JeuController extends Preloader implements Initializable {
 				reinitialiserJeu(tableau.getLine());
 			}
 		}
-		if(!reinit) {
-		canvas.setDisable(true);
-		reinit=false;
-		}
+//		if(!reinit) {
+//			canvas.setDisable(true);
+//			reinit=false;
+//		}
+		
+		//print for test
+		//*********************canvas is desable******************
+//		for(int i=0; i<this.canvas.size(); i++) {
+//			System.out.println(this.canvas.get(i).isDisable());
+//		}
+		//********************************************************
 	}
 	
-	//Cas où on selecte la case X
+	//Cas oï¿½ on selecte la case X
 	public void selectCaseDrawX(Canvas canvas, int i) {
 		XDraw x = new XDraw(canvas);
 		sc1.getChildren().add(x);
@@ -446,7 +457,7 @@ public class JeuController extends Preloader implements Initializable {
 		getResult(canvas, player);
 	}
 	
-	//cas où on selecte la case Y
+	//cas oï¿½ on selecte la case Y
 	public void selectCaseDrawO(Canvas canvas, int i) {
 		CircleDraw circle = new CircleDraw(canvas);
 		sc1.getChildren().add(circle);
@@ -467,7 +478,7 @@ public class JeuController extends Preloader implements Initializable {
 		}
 	}
 	
-	//réinitialiser le jeu
+	//rï¿½initialiser le jeu
 	public void reinitialiserJeu(Line line) {
 		GraphicsContext gc;
 		for (int i=0;i<this.canvas.size();i++) {
@@ -478,10 +489,10 @@ public class JeuController extends Preloader implements Initializable {
 			
 		}
 		this.tableau = new Jeu();
-		nb=1;gagne=false;reinit=true;isIATurn=false;
+		nb=1;gagne=false;isIATurn=false;
 	}
 	
-	//Lors du chargement de la scène
+	//Lors du chargement de la scï¿½ne
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setButton(null,Color.WHITE,menu);
