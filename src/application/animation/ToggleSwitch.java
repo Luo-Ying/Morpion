@@ -25,6 +25,7 @@ public class ToggleSwitch extends Parent {
 	public static ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
 	public boolean music=true;
 	MenuAdversaireController controller = new MenuAdversaireController();
+	MusicNoteAnimate musicNode = new MusicNoteAnimate(controller.getMusicNote());
 	
 	
 	public static BooleanProperty switchedOnProperty() {
@@ -32,6 +33,7 @@ public class ToggleSwitch extends Parent {
 	}
 
 	public ToggleSwitch() {
+		//musicNode.rotate();
 		Rectangle background = new Rectangle(50,25);
 		background.setArcWidth(25);
 		background.setArcHeight(25);
@@ -60,12 +62,12 @@ public class ToggleSwitch extends Parent {
 			if(music) {
 				Music.stopMusic();
 				music=false;
-				controller.musicNode.stop();
+				musicNode.stop();
 			}
 			else {
 				Music.playMusic();
 				music=true;
-				controller.musicNode.rotate();
+				musicNode.rotate();
 			}
 			
 			});

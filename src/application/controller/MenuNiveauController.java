@@ -125,9 +125,20 @@ public class MenuNiveauController extends Preloader implements Initializable {
     
     private ToggleSwitch toggle;
     
+    MusicNoteAnimate musicNode;
+    
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc2.getChildren().add(toggle);
+    	if(toggle.music) {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.rotate();
+		}
+		else {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.stop();
+		}
+		
     }
     
     ToggleSwitch getToggleSwitch() {
@@ -329,9 +340,6 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme();
-		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
-		musicNode.rotate();
-		
 	}
 
 }

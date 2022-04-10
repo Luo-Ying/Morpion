@@ -73,7 +73,7 @@
         <menus>
           <Menu fx:id="fichier" mnemonicParsing="false" text="Retour">
             <items>
-              <MenuItem fx:id="maison" mnemonicParsing="false" onAction="#returnHome" text="Retour maison" />
+              <MenuItem fx:id="maison" mnemonicParsing="false" onAction="#returnHome" text="Retour accueil" />
             </items>
           </Menu>
           <Menu fx:id="aide" mnemonicParsing="false" text="Aide">

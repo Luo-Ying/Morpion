@@ -37,6 +37,7 @@ public class Main extends Application {
 	Scene scene = new Scene(mainLayout);
 	MenuAdversaireController controller= loader.getController();
 	controller.firstSet(toggle);
+	controller.setMusicNote();
 	getPrimaryStage().setScene(scene);
 	getPrimaryStage().show();
 	}

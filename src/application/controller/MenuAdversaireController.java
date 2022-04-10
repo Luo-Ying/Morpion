@@ -90,7 +90,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     private ImageView pawPatrolIcon;
     
     @FXML
-    private ImageView musicNote;
+	private ImageView musicNote;
 	 
 	@FXML
     private Button pink;
@@ -151,6 +151,16 @@ public class MenuAdversaireController extends Preloader implements Initializable
     		this.toggle=toggle;
     		sc2.getChildren().add(toggle);
     	}
+    }
+    public void setMusicNote() {
+    	if(this.toggle.music) {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(getMusicNote());
+			musicNode.rotate();
+		}
+		else {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(getMusicNote());
+			musicNode.stop();
+		}
     }
     //appuie sur bouton thème rose
     @FXML
@@ -329,9 +339,12 @@ public class MenuAdversaireController extends Preloader implements Initializable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		musicNode = new MusicNoteAnimate(musicNote);
-		musicNode.rotate();
-		
+	}
+	public ImageView getMusicNote() {
+		return musicNote;
+	}
+	public void setMusicNote(ImageView musicNote) {
+		this.musicNote = musicNote;
 	}
 
 }

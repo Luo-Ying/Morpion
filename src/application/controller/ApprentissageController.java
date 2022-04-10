@@ -130,6 +130,14 @@ public class ApprentissageController  extends Preloader implements Initializable
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc1.getChildren().add(toggle);
+    	if(toggle.music) {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.rotate();
+		}
+		else {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.stop();
+		}
     }
     
     ToggleSwitch getToggleSwitch() {
@@ -377,8 +385,5 @@ public class ApprentissageController  extends Preloader implements Initializable
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
-		
-		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
-		musicNode.rotate();
 	}
 }

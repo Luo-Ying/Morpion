@@ -78,6 +78,7 @@ public class SceneController {
 		scene = new Scene(root);
 		MenuAdversaireController controller= loader.getController();
 		controller.setToggleSwitch(toggle);
+		controller.setMusicNote();
 		if(color==Color.LIGHTYELLOW) {
 			controller.setTheme(color,true,false,false);
 		}

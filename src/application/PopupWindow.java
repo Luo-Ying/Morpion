@@ -11,6 +11,12 @@ import com.sun.glass.events.WindowEvent;
 
 import ai.Config;
 import ai.ConfigFileLoader;
+import application.animation.ToggleSwitch;
+import application.controller.SceneController;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -34,6 +40,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class PopupWindow {
 	
@@ -366,7 +373,7 @@ public class PopupWindow {
 	}
 	
 	//item gagnant
-		public static Stage displayWinner(Color color,String winner)
+		public static Stage displayWinner(Color color,String winner,ToggleSwitch toggleSwitch)
 		{
 			
 		Stage popupWindow=new Stage();
@@ -396,13 +403,24 @@ public class PopupWindow {
 		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
 		
 		
-		String gagnant = "\n\n\n\t     Félicitation !\n\n\tLe joueur "+winner+" a gagné!";
+		String gagnant = "\n\n\t     Félicitation !\n\n\tLe joueur "+winner+" a gagné!";
 		//textarea of the popup
 		TextArea textArea = new TextArea();
 		textArea.setText(gagnant);
 		textArea.setStyle(style);
 		textArea.setEditable(false);
 		
+		//transition
+		SequentialTransition sequentialTransition =transitions(textArea,0.5f);
+	    
+	    //bouton rejouer ou retour une fois les transitions finis
+	    sequentialTransition.setOnFinished(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				replayOption(popupWindow,layout,textArea,color,toggleSwitch);
+			}
+	    });
+
 		layout.getChildren().add(textArea);
 		
 		Scene scene1= new Scene(layout, 300, 250);
@@ -414,7 +432,7 @@ public class PopupWindow {
 		return popupWindow;
 	}
 	
-		public static Stage displayDraw(Color color)
+		public static Stage displayDraw(Color color,ToggleSwitch toggleSwitch)
 		{
 			
 		Stage popupWindow=new Stage();
@@ -444,12 +462,24 @@ public class PopupWindow {
 		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
 		
 		
-		String gagnant = "\n\n\n\t     Egalité !";
+		String gagnant = "\n\n\n\t      Egalité !";
 		//textarea of the popup
 		TextArea textArea = new TextArea();
 		textArea.setText(gagnant);
 		textArea.setStyle(style);
 		textArea.setEditable(false);
+		
+		
+		//transition
+		SequentialTransition sequentialTransition =transitions(textArea,1.5f);
+			    
+		//bouton rejouer ou retour une fois les transitions finis
+		sequentialTransition.setOnFinished(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				replayOption(popupWindow,layout,textArea,color,toggleSwitch);
+			}	    	
+		});
 		
 		layout.getChildren().add(textArea);
 		
@@ -460,6 +490,81 @@ public class PopupWindow {
 		popupWindow.showAndWait();
 		
 		return popupWindow;
+	}
+		
+	public static void replayOption(Stage popupWindow,VBox layout,TextArea textArea,Color color,ToggleSwitch toggleSwitch) {
+		//enleve le textArea pour afiicher les boutons
+		layout.getChildren().remove(textArea);
+		layout.setBackground(new Background(new BackgroundFill(color, null, null)));
+		
+		//Bouton Rejouer
+		Button rejouer = new Button();
+		rejouer.setText("Rejouer");
+		rejouer.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: green;");
+		rejouer.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		rejouer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
+		//Action rejouer réinitialise le tableau de jeu
+		rejouer.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				popupWindow.close();	
+			}
+		});
+		
+		
+		
+		//BoutonRetour
+		Button retour = new Button();
+		retour.setText("Retour accueil");
+		retour.setStyle("-fx-font: normal bold 14px 'MV Boli'; -fx-text-fill: red;");
+		retour.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		retour.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
+		//Action retourne à l'accueil
+		retour.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				popupWindow.close();
+				SceneController sController = new SceneController();
+				try {
+					sController.switchToMenuAdversaireController(arg0,color,toggleSwitch);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		layout.getChildren().addAll(rejouer,retour);
+	}
+	
+	public static SequentialTransition transitions(TextArea textArea,double scaleTransition) {
+		//transitions pour agrandir et apparition
+		ScaleTransition st = new ScaleTransition(Duration.millis(3000), textArea);
+		st.setByX(scaleTransition);
+		st.setByY(scaleTransition);
+		st.setAutoReverse(true);
+			 
+		FadeTransition appear= new FadeTransition(Duration.millis(3000), textArea);
+		appear.setFromValue(0);
+		appear.setToValue(1.0);
+			    
+		FadeTransition disappear= new FadeTransition(Duration.millis(3000), textArea);
+	    disappear.setFromValue(1.0);
+	    disappear.setToValue(0);
+			    
+	    //transtion pour que l'agrandissement et l'appartion se fassent en meme temps
+	    ParallelTransition parallelTransition = new ParallelTransition();
+	    parallelTransition.getChildren().addAll(appear,st);
+			    
+			    
+	    //transition pour que l'agrandissement et l'appartion se fassent en meme temps puis séquentiellement la disparition
+	    SequentialTransition sequentialTransition = new SequentialTransition();
+	    sequentialTransition.getChildren().addAll(parallelTransition,disappear);
+	    sequentialTransition.play();	
+	    
+	    return sequentialTransition;
 	}
 	
 }

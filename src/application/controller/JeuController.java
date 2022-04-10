@@ -148,6 +148,14 @@ public class JeuController extends Preloader implements Initializable {
     void setToggleSwitch(ToggleSwitch toggle) {
     	this.toggle=toggle;
     	sc1.getChildren().add(toggle);
+    	if(toggle.music) {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.rotate();
+		}
+		else {
+			MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+			musicNode.stop();
+		}
     }
     
     ToggleSwitch getToggleSwitch() {
@@ -387,7 +395,7 @@ public class JeuController extends Preloader implements Initializable {
 			gagne=true;
 			String playerWin;
 			if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
-			Stage window = PopupWindow.displayWinner(getColor(),playerWin);
+			Stage window = PopupWindow.displayWinner(getColor(),playerWin,getToggleSwitch());
 			if(window.onCloseRequestProperty()!=null) {
 				reinitialiserJeu(tableau.getLine());
 			}
@@ -399,7 +407,7 @@ public class JeuController extends Preloader implements Initializable {
 			nb+=1;
 		}
 		if(nb==10 && !gagne) {
-			Stage window =PopupWindow.displayDraw(getColor());
+			Stage window =PopupWindow.displayDraw(getColor(),getToggleSwitch());
 			if(window.onCloseRequestProperty()!=null) {
 				reinitialiserJeu(tableau.getLine());
 			}
@@ -467,8 +475,5 @@ public class JeuController extends Preloader implements Initializable {
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
 		addCanvasToList();
-		
-		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
-		musicNode.rotate();
 	}
 }
