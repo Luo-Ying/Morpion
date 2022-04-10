@@ -44,12 +44,14 @@ public class Jeu {
 	}
 	
 	public int roundIA(String level) {
+		System.out.println("tableau: " + Arrays.toString(this.tableau));
 		for(int i=0; i<this.tableau.length; i++) {
-			if(this.tableau[i] != 0.0) {
+			if(this.tableau[i] != 0.0 && !this.listIndexNoEmptty.contains(i)) {
 				this.listIndexNoEmptty.add(i);
 			}
 		}
 		System.out.println(level);
+		System.out.println(this.listIndexNoEmptty.toString());
 		IaModel iaModel = new IaModel();
 		iaModel.setLevel(level);
 		double[] res = iaModel.play(this.tableau);
@@ -62,7 +64,6 @@ public class Jeu {
 				index = i;
 			}
 		}
-		System.out.println("tableau: " + Arrays.toString(this.tableau));
 		return index;
 	}
 	

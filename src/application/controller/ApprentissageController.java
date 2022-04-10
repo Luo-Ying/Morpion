@@ -233,10 +233,11 @@ public class ApprentissageController  extends Preloader implements Initializable
         		for(int i = 0; i < iaModel.Epochs; i++){
 
         			Coup c = null ;
-        			while ( c == null )
+        			while ( c == null ) {
 //        				c = mapTrain.get((int)(Math.round(Math.random() * mapTrain.size())));
+        				iaModel.setCoup();
         				c = iaModel.getCoup();
-
+        			}
 //        			error += net.backPropagate(c.in, c.out);
         			iaModel.setError(c);
         			

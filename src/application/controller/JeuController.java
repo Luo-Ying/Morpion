@@ -319,6 +319,7 @@ public class JeuController extends Preloader implements Initializable {
 			selectCase(canvas, turn);
 		}
 		else {
+			System.out.println("hello");
 			if(this.isIATurn) {
 				IAplay();
 			}
@@ -340,6 +341,7 @@ public class JeuController extends Preloader implements Initializable {
 		selectCaseDrawO(canvas, index);
 		canvas.setDisable(true);
 		this.isIATurn = false;
+		System.out.println(Arrays.toString(this.tableau.getTableau()));
 	}
 	
 	public Canvas getCanvas(int i) {
