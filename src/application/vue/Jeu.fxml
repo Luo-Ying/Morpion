@@ -55,7 +55,7 @@
          </image>
       </ImageView>
       <Line endX="-199.00001525878906" endY="136.33331298828125" layoutX="367.0" layoutY="327.0" startX="347.0" startY="136.33331298828125" strokeLineCap="ROUND" strokeWidth="3.0" />
-      <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="musicNote" fitHeight="54.0" fitWidth="52.0" layoutX="716.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/iconMusiaue.png" />
          </image>
@@ -71,7 +71,7 @@
       <Canvas fx:id="canvas6" height="151.0" layoutX="541.0" layoutY="305.0" onMouseClicked="#drawCase6" width="175.0" />
       <MenuBar fx:id="menu" layoutX="46.0" layoutY="14.0" prefHeight="35.0" prefWidth="157.0">
          <menus>
-            <Menu fx:id="fichier" mnemonicParsing="false" text="Fichier">
+            <Menu fx:id="fichier" mnemonicParsing="false" text="Retour">
                <items>
                   <MenuItem fx:id="maison" mnemonicParsing="false" onAction="#returnHome" text="Retour maison" />
                </items>

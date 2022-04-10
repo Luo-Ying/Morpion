@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import ai.Config;
 import application.Main;
+import application.animation.ToggleSwitch;
 import application.models.IaModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +25,13 @@ public class SceneController {
 	
 	
 	//changement de scene vers ApprentissageMenu
-	public void switchToApprentissageController(ActionEvent event,Config config,Color color) throws IOException {
+	public void switchToApprentissageController(ActionEvent event,Config config,Color color,ToggleSwitch toggle) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Apprentissage.fxml"));
 		root =loader.load();
 		scene = new Scene(root);
 		ApprentissageController controller= loader.getController();
+		controller.setToggleSwitch(toggle);
 		controller.setConfig(config);
 		if(color==Color.LIGHTYELLOW) {
 			controller.setTheme(color,true,false,false);
@@ -46,12 +48,13 @@ public class SceneController {
 	}
 	
 	//changement de scene vers MenuNiveau
-	public void switchToMenuNiveauController(MouseEvent event,Color color) throws IOException {
+	public void switchToMenuNiveauController(MouseEvent event,Color color,ToggleSwitch toggle) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/MenuNiveau.fxml"));
 		root =loader.load();
 		scene = new Scene(root);
 		MenuNiveauController controller= loader.getController();
+		controller.setToggleSwitch(toggle);
 		if(color==Color.LIGHTYELLOW) {
 			controller.setTheme(color,true,false,false);
 		}
@@ -68,12 +71,13 @@ public class SceneController {
 	}
 	
 	//changement de scene vers MenuAdversaire
-	public void switchToMenuAdversaireController(ActionEvent event,Color color) throws IOException {
+	public void switchToMenuAdversaireController(ActionEvent event,Color color,ToggleSwitch toggle) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/MenuAdversaire.fxml"));
 		root =loader.load();
 		scene = new Scene(root);
 		MenuAdversaireController controller= loader.getController();
+		controller.setToggleSwitch(toggle);
 		if(color==Color.LIGHTYELLOW) {
 			controller.setTheme(color,true,false,false);
 		}
@@ -89,12 +93,13 @@ public class SceneController {
 	}
 	
 	//changement de scène vers Jeu via ActionEvent
-	public void switchToJeuController(ActionEvent event,Color color,boolean isIA, String level) throws IOException {
+	public void switchToJeuController(ActionEvent event,Color color,boolean isIA, String level,ToggleSwitch toggle) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
 		root =loader.load();
 		scene = new Scene(root);
 		JeuController controller= loader.getController();
+		controller.setToggleSwitch(toggle);
 		if(color==Color.LIGHTYELLOW) {
 			controller.setTheme(color,true,false,false);
 		}
@@ -112,12 +117,13 @@ public class SceneController {
 	}
 	
 	//changement de scène vers Jeu via MouseEvent
-		public void switchToJeuController(MouseEvent event,Color color,boolean isIA) throws IOException {
+		public void switchToJeuController(MouseEvent event,Color color,boolean isIA,ToggleSwitch toggle) throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getClassLoader().getResource("application/./vue/Jeu.fxml"));
 			root =loader.load();
 			scene = new Scene(root);
 			JeuController controller= loader.getController();
+			controller.setToggleSwitch(toggle);
 			if(color==Color.LIGHTYELLOW) {
 				controller.setTheme(color,true,false,false);
 			}

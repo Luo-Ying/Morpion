@@ -18,8 +18,10 @@ import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
 import application.PopupWindow;
+import application.animation.MusicNoteAnimate;
 import application.animation.ToggleSwitch;
 import application.models.IaModel;
+import application.models.Music;
 import javafx.application.Preloader;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
@@ -93,6 +95,9 @@ public class ApprentissageController  extends Preloader implements Initializable
     private ImageView pawPatrolIcon;
     
     @FXML
+    private ImageView musicNote;
+    
+    @FXML
     private MenuBar menu;
 
     @FXML
@@ -119,6 +124,17 @@ public class ApprentissageController  extends Preloader implements Initializable
     private Color color;
     
     private IaModel iaModel ;
+    
+    private ToggleSwitch toggle;
+    
+    void setToggleSwitch(ToggleSwitch toggle) {
+    	this.toggle=toggle;
+    	sc1.getChildren().add(toggle);
+    }
+    
+    ToggleSwitch getToggleSwitch() {
+    	return this.toggle;
+    }
 
    //Definir le config
     void setConfig(Config config) {
@@ -174,7 +190,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     		if(Worker.State.SUCCEEDED == newVal) {
     			SceneController sController = new SceneController();
     			try {
-					sController.switchToJeuController(event,getColor(),true, iaModel.getLevel());
+					sController.switchToJeuController(event,getColor(),true, iaModel.getLevel(),getToggleSwitch());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -313,7 +329,7 @@ public class ApprentissageController  extends Preloader implements Initializable
     @FXML
     void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToMenuAdversaireController(event,getColor());
+		sController.switchToMenuAdversaireController(event,getColor(),getToggleSwitch());
     }
     
     
@@ -354,19 +370,15 @@ public class ApprentissageController  extends Preloader implements Initializable
 	//Lors du chargement de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		ToggleSwitch toggle= new ToggleSwitch();
-		toggle.setTranslateY(68);
-		toggle.setTranslateX(770);
-		
 		setButton(start,Color.WHITE,null);
 		setButton(cancel,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
 		
-		sc1.getChildren().add(toggle);
-		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
+		
+		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+		musicNode.rotate();
 	}
 }

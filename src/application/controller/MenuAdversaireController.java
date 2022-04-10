@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.PopupWindow;
+import application.animation.MusicNoteAnimate;
 import application.animation.ToggleSwitch;
 
 import javafx.application.Preloader;
@@ -87,6 +88,9 @@ public class MenuAdversaireController extends Preloader implements Initializable
 
     @FXML
     private ImageView pawPatrolIcon;
+    
+    @FXML
+    private ImageView musicNote;
 	 
 	@FXML
     private Button pink;
@@ -130,8 +134,24 @@ public class MenuAdversaireController extends Preloader implements Initializable
     private List <ImageView> greenTheme = new ArrayList<>();
     
     private Color color;
-
     
+    private ToggleSwitch toggle;
+    
+    public static MusicNoteAnimate musicNode;
+    
+    
+    public void setToggleSwitch(ToggleSwitch toggle) {
+    	if (toggle==null) {
+    		this.toggle= new ToggleSwitch();
+			this.toggle.setTranslateY(68);
+			this.toggle.setTranslateX(770);
+			sc2.getChildren().add(this.toggle);
+    	}
+    	else {
+    		this.toggle=toggle;
+    		sc2.getChildren().add(toggle);
+    	}
+    }
     //appuie sur bouton thème rose
     @FXML
     void colorPink(ActionEvent event) throws FileNotFoundException {
@@ -154,7 +174,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     @FXML
     void switchToMenuNiveau(MouseEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToMenuNiveauController(event,getColor());
+		sController.switchToMenuNiveauController(event,getColor(),getToggleSwitch());
     }
     
     
@@ -180,7 +200,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
     @FXML
     void goToJeu(MouseEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToJeuController(event,getColor(),false);
+		sController.switchToJeuController(event,getColor(),false,getToggleSwitch());
     }
    
     //ajout des images du thème jaune
@@ -263,6 +283,13 @@ public class MenuAdversaireController extends Preloader implements Initializable
 	}
 	
 	
+	public void firstSet(ToggleSwitch toogle) {
+		toggle= new ToggleSwitch();
+		toggle.setTranslateY(68);
+		toggle.setTranslateX(770);
+		sc2.getChildren().add(this.toggle);
+	}
+	
 	//définition d'un bouton
 	public void setButton(Button button,Color color,MenuBar menu) {
 		if(button!=null) {
@@ -275,16 +302,14 @@ public class MenuAdversaireController extends Preloader implements Initializable
 		}
 	}
 
+	public ToggleSwitch getToggleSwitch() {
+		return this.toggle;
+	}
 	
 	//phase de génération de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		sc2.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
-		
-		
-		ToggleSwitch toggle= new ToggleSwitch();
-		toggle.setTranslateY(68);
-		toggle.setTranslateX(770);
 		
 		setButton(green,Color.rgb(210,252,209),null);
 		setButton(pink,Color.LIGHTPINK,null);
@@ -292,10 +317,7 @@ public class MenuAdversaireController extends Preloader implements Initializable
 		setButton(buttonVs,Color.WHITE,null);
 		setButton(buttonVs2,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
-		
-		
-	
-		sc2.getChildren().add(toggle);
+
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
@@ -307,8 +329,8 @@ public class MenuAdversaireController extends Preloader implements Initializable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		musicNode = new MusicNoteAnimate(musicNote);
+		musicNode.rotate();
 		
 	}
 

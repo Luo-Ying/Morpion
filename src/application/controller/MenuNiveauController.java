@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import ai.Config;
 import ai.ConfigFileLoader;
 import application.PopupWindow;
+import application.animation.MusicNoteAnimate;
 import application.animation.ToggleSwitch;
 import javafx.application.Preloader;
 import javafx.event.ActionEvent;
@@ -84,6 +85,9 @@ public class MenuNiveauController extends Preloader implements Initializable {
     private ImageView pawPatrolIcon;
     
     @FXML
+    private ImageView musicNote;
+    
+    @FXML
     private MenuBar menu;
 
     @FXML
@@ -118,6 +122,17 @@ public class MenuNiveauController extends Preloader implements Initializable {
     private List <ImageView> greenTheme = new ArrayList<>();
     
     private Color color;
+    
+    private ToggleSwitch toggle;
+    
+    void setToggleSwitch(ToggleSwitch toggle) {
+    	this.toggle=toggle;
+    	sc2.getChildren().add(toggle);
+    }
+    
+    ToggleSwitch getToggleSwitch() {
+    	return this.toggle;
+    }
 
   //appuie sur bouton thème rose
     @FXML
@@ -175,7 +190,7 @@ public class MenuNiveauController extends Preloader implements Initializable {
     @FXML
     void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToMenuAdversaireController(event,getColor());
+		sController.switchToMenuAdversaireController(event,getColor(),getToggleSwitch());
     }
     
     //Verifie si chemin du fichier d'apprentissage existe
@@ -184,11 +199,11 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		File f = new File(path) ;
 		if(f.exists() && f.isFile()) {
 			SceneController sController = new SceneController();
-			sController.switchToJeuController(event,getColor(),true, level);
+			sController.switchToJeuController(event,getColor(),true, level,getToggleSwitch());
 		}
 		else {
 			SceneController sController = new SceneController();
-			sController.switchToApprentissageController(event,getIALevel(),getColor());
+			sController.switchToApprentissageController(event,getIALevel(),getColor(),getToggleSwitch());
 		}
 		
 	}
@@ -300,11 +315,6 @@ public class MenuNiveauController extends Preloader implements Initializable {
 	//phase de génération de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		ToggleSwitch toggle= new ToggleSwitch();
-		toggle.setTranslateY(68);
-		toggle.setTranslateX(770);
-		
 		setButton(green,Color.rgb(210,252,209),null);
 		setButton(pink,Color.LIGHTPINK,null);
 		setButton(yellow,Color.LIGHTYELLOW,null);
@@ -314,11 +324,13 @@ public class MenuNiveauController extends Preloader implements Initializable {
 		setButton(btnMaison,Color.WHITE,null);
 		setButton(null,Color.WHITE,menu);
 		
-		sc2.getChildren().add(toggle);
+		
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme();
+		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+		musicNode.rotate();
 		
 	}
 

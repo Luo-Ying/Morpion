@@ -1,5 +1,7 @@
 package application.animation;
 
+import application.controller.MenuAdversaireController;
+import application.models.Music;
 import javafx.animation.FillTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -21,6 +23,8 @@ public class ToggleSwitch extends Parent {
 	public static TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
 	public static FillTransition fillAnimation= new FillTransition(Duration.seconds(0.25));
 	public static ParallelTransition animation = new ParallelTransition(translateAnimation,fillAnimation);
+	public boolean music=true;
+	MenuAdversaireController controller = new MenuAdversaireController();
 	
 	
 	public static BooleanProperty switchedOnProperty() {
@@ -53,9 +57,22 @@ public class ToggleSwitch extends Parent {
 			animation.play();
 			fillAnimation.setFromValue(isOn ? Color.LIGHTBLUE : Color.WHITE);
 			fillAnimation.setToValue(isOn ? Color.WHITE : Color.LIGHTBLUE);
+			if(music) {
+				Music.stopMusic();
+				music=false;
+				controller.musicNode.stop();
+			}
+			else {
+				Music.playMusic();
+				music=true;
+				controller.musicNode.rotate();
+			}
+			
 			});
 		setOnMouseClicked(event ->{
 			switchedOn.set(!switchedOn.get());
+			
+			
 		});	       
 	}
 }

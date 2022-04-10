@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 import application.PopupWindow;
 import application.animation.CircleDraw;
+import application.animation.MusicNoteAnimate;
 import application.animation.ToggleSwitch;
 import application.animation.XDraw;
 import application.models.IaModel;
@@ -72,6 +73,9 @@ public class JeuController extends Preloader implements Initializable {
     
     @FXML
     private ImageView ruben;
+    
+    @FXML
+    private ImageView musicNote;
     
     @FXML
     private MenuBar menu;
@@ -139,6 +143,16 @@ public class JeuController extends Preloader implements Initializable {
     
     boolean reinit =false;
     
+    private ToggleSwitch toggle;
+    
+    void setToggleSwitch(ToggleSwitch toggle) {
+    	this.toggle=toggle;
+    	sc1.getChildren().add(toggle);
+    }
+    
+    ToggleSwitch getToggleSwitch() {
+    	return this.toggle;
+    }
     
     //mettre le booleen si le jeu est contre IA
     public void setIAGame(boolean isAI) {
@@ -223,7 +237,7 @@ public class JeuController extends Preloader implements Initializable {
     @FXML
     void returnHome(ActionEvent event) throws IOException {
     	SceneController sController = new SceneController();
-		sController.switchToMenuAdversaireController(event,getColor());
+		sController.switchToMenuAdversaireController(event,getColor(),getToggleSwitch());
     }
     
     
@@ -446,17 +460,15 @@ public class JeuController extends Preloader implements Initializable {
 	//Lors du chargement de la scène
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ToggleSwitch toggle= new ToggleSwitch();
-		toggle.setTranslateY(68);
-		toggle.setTranslateX(770);
-	
 		setButton(null,Color.WHITE,menu);
 		
-		sc1.getChildren().add(toggle);
 		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
 		addCanvasToList();
+		
+		MusicNoteAnimate musicNode = new MusicNoteAnimate(musicNote);
+		musicNode.rotate();
 	}
 }
