@@ -398,7 +398,7 @@ public class JeuController extends Preloader implements Initializable {
 			gagne=true;
 			String playerWin;
 			if(tableau.isWinPlayer1) playerWin = "1"; else playerWin = "2";
-			Stage window = PopupWindow.displayWinner(getColor(),playerWin,getToggleSwitch());
+			Stage window = PopupWindow.displayWinner(getColor(),playerWin,getToggleSwitch(),isIAgame);
 			if(window.onCloseRequestProperty()!=null) {
 				reinitialiserJeu(tableau.getLine());
 			}

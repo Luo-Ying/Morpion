@@ -373,7 +373,7 @@ public class PopupWindow {
 	}
 	
 	//item gagnant
-		public static Stage displayWinner(Color color,String winner,ToggleSwitch toggleSwitch)
+		public static Stage displayWinner(Color color,String winner,ToggleSwitch toggleSwitch,Boolean isIAgame)
 		{
 			
 		Stage popupWindow=new Stage();
@@ -401,18 +401,37 @@ public class PopupWindow {
 		
 		
 		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
-		
+		String style2 = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : purple";
+		String style3 = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : silver";
 		
 		String gagnant = "\n\n\t     Félicitation !\n\n\tLe joueur "+winner+" a gagné!";
+		String gagnerHumain ="\n\n\n\t      Gagner !";  
+		String gagnerMachine ="\n\n\n\t      PERDU !";  
+		
+		//transition
+		SequentialTransition sequentialTransition = null;
+		
 		//textarea of the popup
 		TextArea textArea = new TextArea();
-		textArea.setText(gagnant);
-		textArea.setStyle(style);
+		if(!isIAgame) {
+			textArea.setText(gagnant);
+			textArea.setStyle(style);
+			sequentialTransition =transitions(textArea,0.5f);
+		}
+		else if(isIAgame && winner.equals("1")) {
+			textArea.setText(gagnerHumain);
+			textArea.setStyle(style2);
+			sequentialTransition =transitions(textArea,1.5f);
+		}
+		else if(isIAgame && winner.equals("2")) {
+			textArea.setText(gagnerMachine);
+			textArea.setStyle(style3);
+			sequentialTransition =transitions(textArea,1.5f);
+		}
 		textArea.setEditable(false);
 		
 		//transition
-		SequentialTransition sequentialTransition =transitions(textArea,0.5f);
-	    
+		
 	    //bouton rejouer ou retour une fois les transitions finis
 	    sequentialTransition.setOnFinished(new EventHandler<ActionEvent>(){
 			@Override
@@ -460,7 +479,6 @@ public class PopupWindow {
 		
 		
 		String style = "-fx-font: normal bold 16px 'MV Boli'; -fx-line-spacing :10px; " + colorStyle +" -fx-text-fill : navy";
-		
 		
 		String gagnant = "\n\n\n\t      Egalité !";
 		//textarea of the popup
