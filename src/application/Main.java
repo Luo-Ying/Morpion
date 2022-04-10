@@ -24,6 +24,7 @@ public class Main extends Application {
 		Main.setPrimaryStage(primaryStage);
 		Main.getPrimaryStage().setTitle("Jeu de Morpion");
 		Main.getPrimaryStage().getIcons().add(new Image(Main.class.getResourceAsStream("/images/Icon.png")));
+		Main.getPrimaryStage().setResizable(false);
 		Music.playMusic();
 		showMainView();
 	}
