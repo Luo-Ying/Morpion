@@ -463,7 +463,6 @@ public class JeuController extends Preloader implements Initializable {
 			sc1.getChildren().remove(line);
 			
 		}
-		System.out.println("ok");
 		this.tableau = new Jeu();
 		nb=1;gagne=false;reinit=true;isIATurn=false;
 	}
@@ -479,6 +478,7 @@ public class JeuController extends Preloader implements Initializable {
 				reinitialiserJeu(tableau.getLine());
 			}	
 		});
+		
 		addImageToYellowTheme();
 		addImageToPinkTheme();
 		addImageToGreenTheme(); 
