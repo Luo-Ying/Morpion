@@ -379,7 +379,7 @@ public class PopupWindow {
 		
 		//définir les textes dépendant du gagnant et du type de jeu
 		String gagnant = "\n\n\t     Félicitation !\n\n\tLe joueur "+winner+" a gagné!";
-		String gagnerHumain ="\n\n\n\t      Gagner !";  
+		String gagnerHumain ="\n\n\n\t      Gagné !";  
 		String gagnerMachine ="\n\n\n\t      PERDU !";  
 		
 		//transition

@@ -11,7 +11,7 @@ public class Music {
 	
 	//ajout de la musique de fond et faire jouer
 	public static void playMusic() {
-		String path="resources/music/Musique.mp3";
+		String path="src/music/Musique.mp3";
 		Media play = new Media(Paths.get(path).toUri().toString());
 		music=new MediaPlayer(play);
 		music.setCycleCount(Timeline.INDEFINITE);
